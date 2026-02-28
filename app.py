@@ -57,8 +57,16 @@ def load_data():
         ctx.verify_mode = ssl.CERT_NONE
         opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ctx))
         urllib.request.install_opener(opener)
-        urllib.request.urlretrieve("https://www.propertypriceregister.ie/website/npsra/pprweb.nsf/PPR-ALL.csv", cached)
-        print("Downloaded to:", cached)
+import requests
+
+url = "https://github.com/diouri7/Irish-property-insights/releases/download/v1.0/PPR-ALL.csv"
+r = requests.get(url, allow_redirects=True)
+
+if r.status_code != 200:
+    raise Exception(f"Failed to download data: {r.status_code}")
+
+with open(cached, "wb") as f:
+    f.write(r.content)
         return pd.read_csv(cached, encoding="latin-1", low_memory=False)
     except Exception as e:
         print("Download failed:", e)
