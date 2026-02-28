@@ -45,32 +45,23 @@ def load_data():
     if os.path.exists(DATA_PATH):
         print("Loading from local file:", DATA_PATH)
         return pd.read_csv(DATA_PATH, encoding="latin-1", low_memory=False)
+
     cached = os.path.join(TMP_DIR, "PPR-ALL.csv")
     if os.path.exists(cached):
         print("Loading from cache:", cached)
         return pd.read_csv(cached, encoding="latin-1", low_memory=False)
-    print("Downloading PPR data...")
-    try:
-        import ssl
-        ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
-        opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ctx))
-        urllib.request.install_opener(opener)
-import requests
 
-url = "https://github.com/diouri7/Irish-property-insights/releases/download/v1.0/PPR-ALL.csv"
-r = requests.get(url, allow_redirects=True)
+    print("Downloading PPR data from GitHub release...")
 
-if r.status_code != 200:
-    raise Exception(f"Failed to download data: {r.status_code}")
+    url = "https://github.com/diouri7/Irish-property-insights/releases/download/v1.0/PPR-ALL.csv"
 
-with open(cached, "wb") as f:
-    f.write(r.content)
-        return pd.read_csv(cached, encoding="latin-1", low_memory=False)
-    except Exception as e:
-        print("Download failed:", e)
-        raise
+    response = requests.get(url)
+    response.raise_for_status()
+
+    with open(cached, "wb") as f:
+        f.write(response.content)
+
+    return pd.read_csv(cached, encoding="latin-1", low_memory=False)
 
 print("Loading property data...")
 df = load_data()
