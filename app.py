@@ -610,19 +610,31 @@ def generate():
     data = request.json
     county = data.get("county")
     email = data.get("email")
+
     print("Order:", county, "for", email)
+
     try:
         pdf_path = generate_report(county)
+
         if pdf_path is None:
-            return jsonify({"status": "error", "message": "Not enough data for " + county})
+            return jsonify({
+                "status": "error",
+                "message": "Not enough data for " + county
+            })
+
         fname = os.path.basename(pdf_path)
-        return jsonify({"status": "success", "download_url": "/download/" + fname})
+
+        return jsonify({
+            "status": "success",
+            "download_url": "/download/" + fname
+        })
+
     except Exception as e:
         print("Error generating report:", str(e))
-        return jsonify({"status": "error", "message": "Report generation failed"})
-
-
-@app.route("/download/<filename>")
+        return jsonify({
+            "status": "error",
+            "message": "Report generation failed"
+        })
 def download(filename):
     path = os.path.join(TMP_DIR, filename)
     if not os.path.exists(path):
