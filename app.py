@@ -64,31 +64,14 @@ def load_data():
     return pd.read_csv(cached, encoding="latin-1", low_memory=False)
 
 print("Loading property data...")
+df = None
+
+def get_data():
+    global df
+
+    if df is None:
+        print("Loading property data...")
 df = load_data()
-df.columns = df.columns.str.strip()
-df.columns = [
-    "date", "address", "county", "eircode", "price",
-    "not_full_market", "vat_exclusive", "description", "size"
-]
-df["price"] = df["price"].str.replace("\x80", "").str.replace(",", "").astype(float)
-df["date"] = pd.to_datetime(df["date"], dayfirst=True)
-df["year"] = df["date"].dt.year
-df = df[df["not_full_market"] == "No"]
-df = df[df["price"].between(20000, 3000000)]
-df = df.dropna(subset=["price"])
-
-
-def extract_area(row):
-    if pd.notna(row["eircode"]) and str(row["eircode"]).strip() != "":
-        return str(row["eircode"]).strip()[:3].upper()
-    address = str(row["address"]).upper()
-    m = re.search(r"DUBLIN\s*(\d+)", address)
-    if m:
-        return "D" + m.group(1)
-    return str(row["county"]).strip()
-
-
-df["area_code"] = df.apply(extract_area, axis=1)
 print("Loaded:", len(df), "records |", df["area_code"].nunique(), "areas")
 
 # ─── NATIONAL METRICS ─────────────────────────────────────────
@@ -113,7 +96,8 @@ print("National median yield:", NATIONAL_MEDIAN_YIELD, "% | Vol threshold:", VOL
 
 # ─── AREA METRICS WITH YIELD ──────────────────────────────────
 def build_county_metrics(county_name):
-    cdf = df[df["county"] == county_name].copy()
+    data = get_data()
+cdf = data[data["county"] == county_name].copy()
     if len(cdf) < 50:
         return None
 
