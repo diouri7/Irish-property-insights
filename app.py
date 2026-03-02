@@ -70,7 +70,7 @@ def load_data():
     cached = os.path.join(TMP_DIR, "PPR-ALL.csv")
     if os.path.exists(cached):
         return pd.read_csv(cached, encoding="latin-1", low_memory=False)
-    url = "https://www.propertypriceregister.ie/website/npsra/pprweb.nsf/PPR-ALL.csv"
+    url = "https://github.com/diouri7/Irish-property-insights/releases/download/v1.0/PPR-ALL.csv"
     r = requests.get(url, timeout=180, verify=False)
     r.raise_for_status()
     with open(cached, "wb") as f:
