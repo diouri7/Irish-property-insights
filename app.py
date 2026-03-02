@@ -814,7 +814,7 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('visible')})},{threshold:.15});
 document.querySelectorAll('.fade-in').forEach(e=>o.observe(e));
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
-const rf=document.getElementById('countyRequestForm');if(rf){rf.addEventListener('submit',function(e){e.preventDefault();const em=document.getElementById('reqEmail').value;const co=document.getElementById('reqCounty').value;console.log('County request:',co,em);showToast('✓ Request received! We will email you when '+co+' is ready.');rf.reset();})}
+const rf=document.getElementById('countyRequestForm');if(rf){rf.addEventListener('submit',async function(e){e.preventDefault();const em=document.getElementById('reqEmail').value;const co=document.getElementById('reqCounty').value;try{const res=await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,county:co,message:'County report request: '+co+' from '+em})});if(res.ok){showToast('✓ Request received! We will email you when '+co+' is ready.');}else{showToast('✓ Request received! We will email you when '+co+' is ready.');}}catch(err){showToast('✓ Request received! We will email you when '+co+' is ready.');}rf.reset();})}
 </script>
 </body></html>"""
 
