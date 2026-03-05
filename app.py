@@ -793,12 +793,93 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}.fade-in.visible{opacity:1;transform:translateY(0)}
 @media(max-width:768px){.nk{display:none}.cbi{grid-template-columns:repeat(2,1fr)}.pg,.ig,.mg,.ag{grid-template-columns:1fr}.ef,.csw{flex-direction:column}.eb{padding:2.5rem 1.5rem}.sr{gap:1.25rem}.sn{font-size:2.2rem;min-width:40px}}
+
+/* Sample Report Preview */
+.rp-wrap{display:flex;justify-content:center;padding:0 1rem}
+.rp-browser{width:100%;max-width:750px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08)}
+.rp-bar{background:#f1f3f5;padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center}
+.rp-bar span{width:12px;height:12px;border-radius:50%;background:#e5e7eb}
+.rp-bar span:nth-child(1){background:#ef4444}.rp-bar span:nth-child(2){background:#f59e0b}.rp-bar span:nth-child(3){background:#10b981}
+.rp-doc{background:#fff;padding:2rem 2.5rem;color:#1e293b;font-family:'DM Sans',sans-serif;position:relative}
+.rp-header h2{font-size:1.4rem;font-weight:700;color:#0b1120;margin-bottom:.3rem}
+.rp-header p{font-size:.78rem;color:#64748b;margin-bottom:1rem}
+.rp-rule{height:2px;background:linear-gradient(90deg,#10b981,#3b82f6);border-radius:2px;margin-bottom:1.25rem}
+.rp-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem}
+.rp-m{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.75rem;text-align:center}
+.rp-mv{font-size:1.1rem;font-weight:700;color:#0b1120}.rp-ml{font-size:.68rem;color:#94a3b8;margin-top:.2rem}
+.rp-section-title{font-size:.82rem;font-weight:700;color:#0b1120;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.rp-chart{display:flex;flex-direction:column;gap:.45rem}
+.rp-bar-row{display:flex;align-items:center;gap:.75rem}
+.rp-area{font-size:.72rem;color:#475569;width:170px;flex-shrink:0;text-align:right}
+.rp-bar-wrap{flex:1;background:#f1f5f9;border-radius:4px;height:18px;overflow:hidden}
+.rp-bar-fill{height:100%;border-radius:4px;background:#10b981}
+.rp-pct{font-size:.72rem;font-weight:700;color:#10b981;width:38px;flex-shrink:0}
+.rp-table{width:100%;border-collapse:collapse;font-size:.72rem;margin-top:.5rem}
+.rp-table th{background:#0b1120;color:#fff;padding:.4rem .5rem;text-align:left;font-weight:600}
+.rp-table td{padding:.35rem .5rem;border-bottom:1px solid #f1f5f9;color:#475569}
+.rp-table tr:nth-child(even) td{background:#f8fafc}
+.rp-table .g{color:#10b981;font-weight:600}
+.sig{display:inline-block;padding:.1rem .4rem;border-radius:4px;font-weight:700;font-size:.68rem}
+.sig.sb{background:rgba(16,185,129,.1);color:#10b981}
+.blur-row td{filter:blur(4px);user-select:none;opacity:.6}
+.rp-fade{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,#fff)}
 </style>
 </head>
 <body>
 <nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#meth">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
 <section class="hero"><div class="hc"><div class="hb">Updated with RTB Q2 2025 data</div><h1>Micro-area rankings for smarter <em>buy-to-let</em> decisions.</h1><p class="hs">15 years of Irish property data. Risk-scored. Yield-mapped. Every county's micro-areas ranked by growth, risk, and return — built on official government sources.</p><div class="hctas"><a href="#snap" class="bp">Get Free County Snapshot →</a><a href="#reports" class="bs">View Full Reports</a></div></div></section>
 <div class="cb"><div class="cbi"><div class="ci"><div class="cn">26</div><div class="cl">Counties Covered</div></div><div class="ci"><div class="cn">15yr</div><div class="cl">Transaction History</div></div><div class="ci"><div class="cn">500+</div><div class="cl">Micro-Areas Scored</div></div><div class="ci"><div class="cn">3</div><div class="cl">Risk-Adjusted Signals</div></div></div><p style="text-align:center;font-size:.8rem;color:var(--t3);margin-top:1.5rem;font-weight:500">Built exclusively on official Irish government data — Property Price Register &amp; Residential Tenancies Board.</p></div>
+
+<section style="padding:5rem 2rem;background:var(--bg2)" id="sample">
+<div class="sh fade-in" style="margin-bottom:3rem">
+  <div class="ol">Real Sample</div>
+  <h2>See exactly what you get</h2>
+  <p>This is a real page from the Dublin report — generated live from 15 years of PPR data.</p>
+</div>
+<div class="rp-wrap fade-in">
+  <div class="rp-browser">
+    <div class="rp-bar"><span></span><span></span><span></span></div>
+    <div class="rp-doc">
+      <div class="rp-header">
+        <h2>Dublin Property Investment Report</h2>
+        <p>Micro-area intelligence &bull; Updated with RTB Q2 2025 data &bull; Generated March 2026</p>
+        <div class="rp-rule"></div>
+      </div>
+      <div class="rp-metrics">
+        <div class="rp-m"><div class="rp-mv">€484,581</div><div class="rp-ml">Median Price</div></div>
+        <div class="rp-m"><div class="rp-mv">5.3%</div><div class="rp-ml">5yr County Growth</div></div>
+        <div class="rp-m"><div class="rp-mv">5.5%</div><div class="rp-ml">County Gross Yield</div></div>
+        <div class="rp-m"><div class="rp-mv">415</div><div class="rp-ml">Micro-Areas Analysed</div></div>
+      </div>
+      <div class="rp-section-title">Top Micro-Areas by Estimated Yield</div>
+      <div class="rp-chart">
+        <div class="rp-bar-row"><span class="rp-area">Snugborough Rd Dublin 15</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:100%"></div></div><span class="rp-pct">13.6%</span></div>
+        <div class="rp-bar-row"><span class="rp-area">Ballymun Dublin 11</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:97%"></div></div><span class="rp-pct">13.2%</span></div>
+        <div class="rp-bar-row"><span class="rp-area">Clondalkin</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:87%"></div></div><span class="rp-pct">11.9%</span></div>
+        <div class="rp-bar-row"><span class="rp-area">Main St</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:86%"></div></div><span class="rp-pct">11.7%</span></div>
+        <div class="rp-bar-row"><span class="rp-area">Northwood</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:84%"></div></div><span class="rp-pct">11.5%</span></div>
+        <div class="rp-bar-row"><span class="rp-area">Monastery Rd Dublin 22</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:79%"></div></div><span class="rp-pct">10.8%</span></div>
+        <div class="rp-bar-row"><span class="rp-area">Coolock Dublin 17</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:79%"></div></div><span class="rp-pct">10.7%</span></div>
+        <div class="rp-bar-row"><span class="rp-area">Finglas Rd Dublin 11</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:78%"></div></div><span class="rp-pct">10.7%</span></div>
+      </div>
+      <div class="rp-section-title" style="margin-top:14px">Micro-Area Ranking Table</div>
+      <table class="rp-table">
+        <thead><tr><th>#</th><th>Micro-Area</th><th>Median Price</th><th>5yr Growth</th><th>Yield</th><th>Risk</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Snugborough Rd Dublin 15</td><td>€245,000</td><td class="g">+6.4%</td><td>13.6%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
+          <tr><td>2</td><td>Ballymun Dublin 11</td><td>€250,000</td><td class="g">+16.0%</td><td>13.2%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
+          <tr><td>3</td><td>Clondalkin</td><td>€270,000</td><td class="g">+3.9%</td><td>11.9%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
+          <tr><td>4</td><td>Main St</td><td>€274,000</td><td class="g">+6.2%</td><td>11.7%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
+          <tr class="blur-row"><td>5</td><td>Northwood</td><td>€278,000</td><td>+16.2%</td><td>11.5%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
+          <tr class="blur-row"><td>6</td><td>Monastery Rd Dublin 22</td><td>€290,000</td><td>+10.3%</td><td>10.8%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
+        </tbody>
+      </table>
+      <div class="rp-fade"></div>
+    </div>
+  </div>
+</div>
+<p style="text-align:center;font-size:.8rem;color:var(--t3);margin-top:1.5rem">Real data from the Dublin report &bull; Last rows blurred to show report depth</p>
+</section>
 <section><div class="sh fade-in"><div class="ol">Investment Intelligence</div><h2>Three questions every investor needs answered</h2><p>Our reports score every micro-area on the metrics that actually matter for property investment decisions.</p></div><div class="pg"><div class="pc fade-in"><div class="pi">📈</div><h3>Where is growth strong?</h3><p>5-year compound growth rates for every micro-area, benchmarked against county and national averages.</p></div><div class="pc fade-in"><div class="pi">🛡️</div><h3>Where is risk low?</h3><p>Volatility scoring, transaction volume analysis, and price consistency metrics.</p></div><div class="pc fade-in"><div class="pi">💰</div><h3>What return will I get?</h3><p>Gross rental yield estimates using official RTB rent data, mapped to micro-area median prices.</p></div></div></section>
 <section class="is"><div class="ig fade-in"><div class="it"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Sample Data</div><h3>Micro-area intelligence, not county averages</h3><p>County-level data hides the real story. Our reports drill into individual areas — ranking them by growth, risk, and yield.</p><a href="#snap" class="bp" style="margin-top:.5rem">Get Free Snapshot →</a></div><div><table class="itable"><thead><tr><th>Micro-Area</th><th>Growth</th><th>Yield</th><th>Signal</th></tr></thead><tbody><tr><td>Swords, Dublin</td><td style="color:var(--green)">+8.2%</td><td>5.1%</td><td><span class="ss">STRONG BUY</span></td></tr><tr><td>Ballincollig, Cork</td><td style="color:var(--green)">+7.5%</td><td>4.8%</td><td><span class="ss">STRONG BUY</span></td></tr><tr><td>Salthill, Galway</td><td style="color:var(--gold)">+5.1%</td><td>4.2%</td><td><span class="sm">MODERATE</span></td></tr><tr class="blur"><td>Castletroy, Limerick</td><td>+6.9%</td><td>5.4%</td><td><span class="ss">STRONG BUY</span></td></tr><tr class="blur"><td>Drogheda, Louth</td><td>+7.1%</td><td>5.0%</td><td><span class="ss">STRONG BUY</span></td></tr></tbody></table><p style="font-size:.78rem;color:var(--t3);margin-top:.75rem;text-align:center">* Sample data — full reports contain all micro-areas per county</p></div></div></section>
 <section id="how"><div class="sh fade-in"><div class="ol">How It Works</div><h2>From raw data to investment insight</h2></div><div class="sg fade-in"><div class="sr"><div class="sn">01</div><div class="st"><h3>We ingest 15 years of PPR transactions</h3><p>Every residential property sale registered in Ireland since 2010, cleaned and normalised.</p></div></div><div class="sr"><div class="sn">02</div><div class="st"><h3>Cross-reference with RTB rental data</h3><p>Official Q2 2025 rent figures mapped to micro-areas for yield calculation.</p></div></div><div class="sr"><div class="sn">03</div><div class="st"><h3>Score every micro-area on 3 dimensions</h3><p>Growth trajectory, risk profile, and rental yield — combined into a clear investment signal.</p></div></div><div class="sr"><div class="sn">04</div><div class="st"><h3>Delivered as a detailed PDF report</h3><p>County-by-county intelligence you can read, share, or use to brief your mortgage advisor.</p></div></div></div></section>
