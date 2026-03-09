@@ -1,3 +1,4 @@
+
 import os
 import datetime
 import tempfile
@@ -69,7 +70,7 @@ def load_data():
     cached = os.path.join(TMP_DIR, "PPR-ALL.csv")
     if os.path.exists(cached):
         return pd.read_csv(cached, encoding="latin-1", low_memory=False)
-    url = "https://github.com/diouri7/Irish-property-insights/releases/download/v1.0/PPR-ALL.csv"
+    url = "https://www.propertypriceregister.ie/website/npsra/pprweb.nsf/PPR-ALL.csv"
     r = requests.get(url, timeout=180, verify=False)
     r.raise_for_status()
     with open(cached, "wb") as f:
@@ -712,14 +713,6 @@ def build_pdf_report(analysis, is_snapshot=False):
 LANDING_HTML = """<!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-24NY207Q8J"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-24NY207Q8J');
-</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IrishPropertyInsights — Data-Driven Property Investment Intelligence</title>
 <meta name="description" content="15 years of Irish property data, risk-scored and yield-mapped across 26 counties.">
@@ -801,124 +794,25 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}.fade-in.visible{opacity:1;transform:translateY(0)}
 @media(max-width:768px){.nk{display:none}.cbi{grid-template-columns:repeat(2,1fr)}.pg,.ig,.mg,.ag{grid-template-columns:1fr}.ef,.csw{flex-direction:column}.eb{padding:2.5rem 1.5rem}.sr{gap:1.25rem}.sn{font-size:2.2rem;min-width:40px}}
-
-/* Sample Report Preview */
-.rp-wrap{display:flex;justify-content:center;padding:0 1rem}
-.rp-browser{width:100%;max-width:750px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08)}
-.rp-bar{background:#f1f3f5;padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center}
-.rp-bar span{width:12px;height:12px;border-radius:50%;background:#e5e7eb}
-.rp-bar span:nth-child(1){background:#ef4444}.rp-bar span:nth-child(2){background:#f59e0b}.rp-bar span:nth-child(3){background:#10b981}
-.rp-doc{background:#fff;padding:2rem 2.5rem;color:#1e293b;font-family:'DM Sans',sans-serif;position:relative}
-.rp-header h2{font-size:1.4rem;font-weight:700;color:#0b1120;margin-bottom:.3rem}
-.rp-header p{font-size:.78rem;color:#64748b;margin-bottom:1rem}
-.rp-rule{height:2px;background:linear-gradient(90deg,#10b981,#3b82f6);border-radius:2px;margin-bottom:1.25rem}
-.rp-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem}
-.rp-m{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.75rem;text-align:center}
-.rp-mv{font-size:1.1rem;font-weight:700;color:#0b1120}.rp-ml{font-size:.68rem;color:#94a3b8;margin-top:.2rem}
-.rp-section-title{font-size:.82rem;font-weight:700;color:#0b1120;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em}
-.rp-chart{display:flex;flex-direction:column;gap:.45rem}
-.rp-bar-row{display:flex;align-items:center;gap:.75rem}
-.rp-area{font-size:.72rem;color:#475569;width:170px;flex-shrink:0;text-align:right}
-.rp-bar-wrap{flex:1;background:#f1f5f9;border-radius:4px;height:18px;overflow:hidden}
-.rp-bar-fill{height:100%;border-radius:4px;background:#10b981}
-.rp-pct{font-size:.72rem;font-weight:700;color:#10b981;width:38px;flex-shrink:0}
-.rp-table{width:100%;border-collapse:collapse;font-size:.72rem;margin-top:.5rem}
-.rp-table th{background:#0b1120;color:#fff;padding:.4rem .5rem;text-align:left;font-weight:600}
-.rp-table td{padding:.35rem .5rem;border-bottom:1px solid #f1f5f9;color:#475569}
-.rp-table tr:nth-child(even) td{background:#f8fafc}
-.rp-table .g{color:#10b981;font-weight:600}
-.sig{display:inline-block;padding:.1rem .4rem;border-radius:4px;font-weight:700;font-size:.68rem}
-.sig.sb{background:rgba(16,185,129,.1);color:#10b981}
-.blur-row td{filter:blur(4px);user-select:none;opacity:.6}
-.rp-fade{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,#fff)}
 </style>
 </head>
 <body>
 <nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#meth">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
 <section class="hero"><div class="hc"><div class="hb">Updated with RTB Q2 2025 data</div><h1>Micro-area rankings for smarter <em>buy-to-let</em> decisions.</h1><p class="hs">15 years of Irish property data. Risk-scored. Yield-mapped. Every county's micro-areas ranked by growth, risk, and return — built on official government sources.</p><div class="hctas"><a href="#snap" class="bp">Get Free County Snapshot →</a><a href="#reports" class="bs">View Full Reports</a></div></div></section>
 <div class="cb"><div class="cbi"><div class="ci"><div class="cn">26</div><div class="cl">Counties Covered</div></div><div class="ci"><div class="cn">15yr</div><div class="cl">Transaction History</div></div><div class="ci"><div class="cn">500+</div><div class="cl">Micro-Areas Scored</div></div><div class="ci"><div class="cn">3</div><div class="cl">Risk-Adjusted Signals</div></div></div><p style="text-align:center;font-size:.8rem;color:var(--t3);margin-top:1.5rem;font-weight:500">Built exclusively on official Irish government data — Property Price Register &amp; Residential Tenancies Board.</p></div>
-
-<section style="padding:5rem 2rem;background:var(--bg2)" id="sample">
-<div class="sh fade-in" style="margin-bottom:3rem">
-  <div class="ol">Real Sample</div>
-  <h2>See exactly what you get</h2>
-  <p>This is a real page from the Dublin report — generated live from 15 years of PPR data.</p>
-</div>
-<div class="rp-wrap fade-in">
-  <div class="rp-browser">
-    <div class="rp-bar"><span></span><span></span><span></span></div>
-    <div class="rp-doc">
-      <div class="rp-header">
-        <h2>Dublin Property Investment Report</h2>
-        <p>Micro-area intelligence &bull; Updated with RTB Q2 2025 data &bull; Generated March 2026</p>
-        <div class="rp-rule"></div>
-      </div>
-      <div class="rp-metrics">
-        <div class="rp-m"><div class="rp-mv">€484,581</div><div class="rp-ml">Median Price</div></div>
-        <div class="rp-m"><div class="rp-mv">5.3%</div><div class="rp-ml">5yr County Growth</div></div>
-        <div class="rp-m"><div class="rp-mv">5.5%</div><div class="rp-ml">County Gross Yield</div></div>
-        <div class="rp-m"><div class="rp-mv">415</div><div class="rp-ml">Micro-Areas Analysed</div></div>
-      </div>
-      <div class="rp-section-title">Top Micro-Areas by Estimated Yield</div>
-      <div class="rp-chart">
-        <div class="rp-bar-row"><span class="rp-area">Snugborough Rd Dublin 15</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:100%"></div></div><span class="rp-pct">13.6%</span></div>
-        <div class="rp-bar-row"><span class="rp-area">Ballymun Dublin 11</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:97%"></div></div><span class="rp-pct">13.2%</span></div>
-        <div class="rp-bar-row"><span class="rp-area">Clondalkin</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:87%"></div></div><span class="rp-pct">11.9%</span></div>
-        <div class="rp-bar-row"><span class="rp-area">Main St</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:86%"></div></div><span class="rp-pct">11.7%</span></div>
-        <div class="rp-bar-row"><span class="rp-area">Northwood</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:84%"></div></div><span class="rp-pct">11.5%</span></div>
-        <div class="rp-bar-row"><span class="rp-area">Monastery Rd Dublin 22</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:79%"></div></div><span class="rp-pct">10.8%</span></div>
-        <div class="rp-bar-row"><span class="rp-area">Coolock Dublin 17</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:79%"></div></div><span class="rp-pct">10.7%</span></div>
-        <div class="rp-bar-row"><span class="rp-area">Finglas Rd Dublin 11</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:78%"></div></div><span class="rp-pct">10.7%</span></div>
-      </div>
-      <div class="rp-section-title" style="margin-top:14px">Micro-Area Ranking Table</div>
-      <table class="rp-table">
-        <thead><tr><th>#</th><th>Micro-Area</th><th>Median Price</th><th>5yr Growth</th><th>Yield</th><th>Risk</th><th>Signal</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>Snugborough Rd Dublin 15</td><td>€245,000</td><td class="g">+6.4%</td><td>13.6%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr><td>2</td><td>Ballymun Dublin 11</td><td>€250,000</td><td class="g">+16.0%</td><td>13.2%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr><td>3</td><td>Clondalkin</td><td>€270,000</td><td class="g">+3.9%</td><td>11.9%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr><td>4</td><td>Main St</td><td>€274,000</td><td class="g">+6.2%</td><td>11.7%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr class="blur-row"><td>5</td><td>Northwood</td><td>€278,000</td><td>+16.2%</td><td>11.5%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr class="blur-row"><td>6</td><td>Monastery Rd Dublin 22</td><td>€290,000</td><td>+10.3%</td><td>10.8%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-        </tbody>
-      </table>
-      <div class="rp-fade"></div>
-    </div>
-  </div>
-</div>
-<p style="text-align:center;font-size:.8rem;color:var(--t3);margin-top:1.5rem">Real data from the Dublin report &bull; Last rows blurred to show report depth</p>
-</section>
 <section><div class="sh fade-in"><div class="ol">Investment Intelligence</div><h2>Three questions every investor needs answered</h2><p>Our reports score every micro-area on the metrics that actually matter for property investment decisions.</p></div><div class="pg"><div class="pc fade-in"><div class="pi">📈</div><h3>Where is growth strong?</h3><p>5-year compound growth rates for every micro-area, benchmarked against county and national averages.</p></div><div class="pc fade-in"><div class="pi">🛡️</div><h3>Where is risk low?</h3><p>Volatility scoring, transaction volume analysis, and price consistency metrics.</p></div><div class="pc fade-in"><div class="pi">💰</div><h3>What return will I get?</h3><p>Gross rental yield estimates using official RTB rent data, mapped to micro-area median prices.</p></div></div></section>
 <section class="is"><div class="ig fade-in"><div class="it"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Sample Data</div><h3>Micro-area intelligence, not county averages</h3><p>County-level data hides the real story. Our reports drill into individual areas — ranking them by growth, risk, and yield.</p><a href="#snap" class="bp" style="margin-top:.5rem">Get Free Snapshot →</a></div><div><table class="itable"><thead><tr><th>Micro-Area</th><th>Growth</th><th>Yield</th><th>Signal</th></tr></thead><tbody><tr><td>Swords, Dublin</td><td style="color:var(--green)">+8.2%</td><td>5.1%</td><td><span class="ss">STRONG BUY</span></td></tr><tr><td>Ballincollig, Cork</td><td style="color:var(--green)">+7.5%</td><td>4.8%</td><td><span class="ss">STRONG BUY</span></td></tr><tr><td>Salthill, Galway</td><td style="color:var(--gold)">+5.1%</td><td>4.2%</td><td><span class="sm">MODERATE</span></td></tr><tr class="blur"><td>Castletroy, Limerick</td><td>+6.9%</td><td>5.4%</td><td><span class="ss">STRONG BUY</span></td></tr><tr class="blur"><td>Drogheda, Louth</td><td>+7.1%</td><td>5.0%</td><td><span class="ss">STRONG BUY</span></td></tr></tbody></table><p style="font-size:.78rem;color:var(--t3);margin-top:.75rem;text-align:center">* Sample data — full reports contain all micro-areas per county</p></div></div></section>
 <section id="how"><div class="sh fade-in"><div class="ol">How It Works</div><h2>From raw data to investment insight</h2></div><div class="sg fade-in"><div class="sr"><div class="sn">01</div><div class="st"><h3>We ingest 15 years of PPR transactions</h3><p>Every residential property sale registered in Ireland since 2010, cleaned and normalised.</p></div></div><div class="sr"><div class="sn">02</div><div class="st"><h3>Cross-reference with RTB rental data</h3><p>Official Q2 2025 rent figures mapped to micro-areas for yield calculation.</p></div></div><div class="sr"><div class="sn">03</div><div class="st"><h3>Score every micro-area on 3 dimensions</h3><p>Growth trajectory, risk profile, and rental yield — combined into a clear investment signal.</p></div></div><div class="sr"><div class="sn">04</div><div class="st"><h3>Delivered as a detailed PDF report</h3><p>County-by-county intelligence you can read, share, or use to brief your mortgage advisor.</p></div></div></div></section>
-<section class="es" id="snap"><div class="eb fade-in"><h2>Get your free county snapshot</h2><p style="margin-bottom:1.25rem">A 2-page investment briefing for any Irish county. Here's what you get:</p><ul style="text-align:left;list-style:none;margin:0 auto 1.75rem;max-width:340px;font-size:.92rem;color:var(--t2);line-height:2"><li>✓ &nbsp;Top 3 ranked micro-areas</li><li>✓ &nbsp;5-year compound growth rate per area</li><li>✓ &nbsp;Estimated gross rental yield</li><li>✓ &nbsp;Risk score (low / medium / high)</li><li>✓ &nbsp;Clear BUY / MODERATE / AVOID signal</li></ul><div class="ef" id="snapStep1"><select id="snapCounty" required style="flex:1;padding:.85rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem"><option value="" disabled selected>Select county...</option>%COUNTY_OPTIONS%</select><button type="button" class="bp" onclick="openSnapModal()">Get Free Snapshot →</button></div><p class="en">Free snapshot — enter your email to receive it.</p></div></section>
-<!-- Email Gate Modal -->
-<div id="snapModal" style="display:none;position:fixed;inset:0;background:rgba(11,17,32,.85);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center">
-<div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3rem 2.5rem;max-width:460px;width:90%;position:relative;border-top:3px solid var(--green)">
-<button onclick="closeSnapModal()" style="position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:var(--t3);font-size:1.4rem;cursor:pointer;line-height:1">×</button>
-<h3 style="font-family:var(--fd);font-size:1.5rem;font-weight:700;margin-bottom:.5rem">One last step</h3>
-<p style="color:var(--t2);font-size:.93rem;margin-bottom:1.5rem">Enter your email to download the free <strong id="modalCountyName"></strong> snapshot. We'll also notify you when new reports launch.</p>
-<div style="display:flex;flex-direction:column;gap:.75rem">
-<input type="email" id="snapEmail" placeholder="your@email.com" style="padding:.9rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem;outline:none" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'" />
-<button class="bp" onclick="submitSnapModal()" style="justify-content:center;width:100%;padding:1rem">Download My Free Snapshot →</button>
-</div>
-<p style="font-size:.76rem;color:var(--t3);margin-top:1rem;text-align:center">No spam. Unsubscribe anytime.</p>
-</div>
-</div>
-
+<section class="es" id="snap"><div class="eb fade-in"><h2>Get your free county snapshot</h2><p style="margin-bottom:1.25rem">A 2-page investment briefing for any Irish county. Here's what you get:</p><ul style="text-align:left;list-style:none;margin:0 auto 1.75rem;max-width:340px;font-size:.92rem;color:var(--t2);line-height:2"><li>✓ &nbsp;Top 3 ranked micro-areas</li><li>✓ &nbsp;5-year compound growth rate per area</li><li>✓ &nbsp;Estimated gross rental yield</li><li>✓ &nbsp;Risk score (low / medium / high)</li><li>✓ &nbsp;Clear BUY / MODERATE / AVOID signal</li></ul><form class="ef" action="/snapshot" method="get"><select name="county" required style="flex:1;padding:.85rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem"><option value="" disabled selected>Select county...</option>%COUNTY_OPTIONS%</select><button type="submit" class="bp">Download Free →</button></form><p class="en">Free. No email required. See the data for yourself.</p></div></section>
+<section style="padding:4rem 2rem;border-bottom:1px solid var(--border)"><div style="max-width:700px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem"><div class="mc" style="border-left:3px solid var(--green)"><p style="font-size:.92rem;color:var(--t2);line-height:1.7;font-style:italic;margin-bottom:1rem">"I was looking at Cork for a buy-to-let but the report flagged areas I'd never have considered — and showed me where yields were actually strongest."</p><p style="font-size:.82rem;font-weight:600">— Early beta user, Dublin-based investor</p></div><div class="mc" style="border-left:3px solid var(--blue)"><p style="font-size:.92rem;color:var(--t2);line-height:1.7;font-style:italic;margin-bottom:1rem">"The micro-area breakdown is what makes this useful. County averages are meaningless when you're choosing between two specific towns."</p><p style="font-size:.82rem;font-weight:600">— Property advisor, Galway</p></div></div></section>
 <section id="who"><div class="sh fade-in"><div class="ol">Straight Talk</div><h2>Is this report right for you?</h2><p>We'd rather be honest upfront than waste your time.</p></div><div class="ag fade-in"><div class="ac"><h3><span style="font-size:1.1rem">✅</span> Built for you if…</h3><ul class="al fl"><li><span class="ic">✓</span><span>You're evaluating <strong>buy-to-let opportunities</strong> across Irish counties.</span></li><li><span class="ic">✓</span><span>You're an <strong>existing landlord</strong> exploring where to expand next.</span></li><li><span class="ic">✓</span><span>You're a <strong>mortgage broker or advisor</strong> wanting data-backed talking points.</span></li><li><span class="ic">✓</span><span>You want a <strong>quick shortlist</strong> worth investigating further.</span></li></ul></div><div class="ac"><h3><span style="font-size:1.1rem">✗</span> Probably not for you if…</h3><ul class="al nl2"><li><span class="ic">✗</span><span>You're looking for a <strong>crystal ball</strong>. We analyse trends — we don't predict.</span></li><li><span class="ic">✗</span><span>You expect <strong>individual property valuations</strong>. We score areas, not addresses.</span></li><li><span class="ic">✗</span><span>You need <strong>legal, tax, or planning</strong> advice. This is market data only.</span></li><li><span class="ic">✗</span><span>You're buying a <strong>home to live in</strong>. Signals are optimised for investment returns.</span></li></ul></div></div><div class="fq fade-in"><div class="fi"><div class="fqq">How accurate is the yield estimate?</div><div class="fqa">We use official RTB Q2 2025 rent data cross-referenced with PPR median sale prices, dampened by 0.4× at micro-area level. These are gross estimates — your actual yield depends on vacancy and costs. A reliable first filter, not a final calculation.</div></div><div class="fi"><div class="fqq">Isn't this just historical data?</div><div class="fqa">Yes — and that's the point. Investment patterns are visible in historical data before headlines. We track 5-year compound growth, transaction volumes, and volatility. Combined with current RTB rents, this gives a grounded view of where momentum exists.</div></div><div class="fi"><div class="fqq">Why trust micro-area scoring over my own research?</div><div class="fqa">You shouldn't rely on it alone. The report narrows 500+ areas to a shortlist worth deeper research. It replaces hours of manual PPR browsing, not your judgment.</div></div><div class="fi"><div class="fqq">What about new developments, zoning, local demand?</div><div class="fqa">We analyse transactions and rents — not planning applications or infrastructure. This is the quantitative layer. You bring the local knowledge.</div></div></div></section>
-<section class="rs" id="reports"><div class="sh fade-in"><div class="ol">Full Reports</div><h2>Get the full investment report</h2><p>Comprehensive micro-area analysis for any of Ireland's 26 counties. Every area scored and ranked.</p><div style="margin-top:1.25rem;display:inline-flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fd);font-size:1.2rem;color:var(--t3);text-decoration:line-through">€49</span><span style="font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--green)">€29</span><span style="font-size:.88rem;color:var(--t3)">per county</span></div><p style="font-size:.82rem;color:var(--gold);margin-top:.5rem;font-weight:600">🚀 Founding price — will increase as we add features</p></div><div class="fade-in" style="max-width:500px;margin:0 auto;text-align:center"><div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.25rem"><a href="https://diourielouafi.gumroad.com/l/dqfeno" target="_blank" class="bp" style="width:100%;justify-content:center;padding:1rem 2rem;font-size:1.1rem">Buy Dublin Report — €29 →</a><a href="https://diourielouafi.gumroad.com/l/qzexsg" target="_blank" class="bp" style="width:100%;justify-content:center;padding:1rem 2rem;font-size:1.1rem;background:var(--blue)">Buy Kildare Report — €29 →</a></div><p style="font-size:.85rem;color:var(--t2);margin-top:0">More counties coming soon. Want a specific county?</p><form class="ef" style="margin-top:.75rem" id="countyRequestForm"><input type="email" placeholder="your@email.com" required id="reqEmail" style="flex:1;padding:.85rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem"><select id="reqCounty" style="padding:.85rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.9rem">%COUNTY_OPTIONS_FULL%</select><button type="submit" class="bs" style="white-space:nowrap">Request County</button></form><p style="font-size:.78rem;color:var(--t3);margin-top:.5rem">We'll email you when your county report is ready.</p></div></section>
+<section class="rs" id="reports"><div class="sh fade-in"><div class="ol">Full Reports</div><h2>Generate a full investment report</h2><p>Comprehensive micro-area analysis for any of Ireland's 26 counties. Every area scored and ranked.</p><div style="margin-top:1.25rem;display:inline-flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--green)">€14.99</span><span style="font-size:.88rem;color:var(--t3)">per county</span></div><p style="font-size:.82rem;color:var(--gold);margin-top:.5rem;font-weight:600">🚀 Founding price — will increase as we add features</p></div><form class="csw fade-in" action="/report" method="get"><select name="county" required>%COUNTY_OPTIONS_FULL%</select><button type="submit" class="bp">Generate Report</button></form></section>
 <section id="meth"><div class="sh fade-in"><div class="ol">Methodology</div><h2>Transparent, data-driven scoring</h2><p>No black boxes. Here's exactly how we analyse the market.</p></div><div class="mg fade-in"><div class="mc"><h4>📊 Property Price Register</h4><p>Every residential transaction since 2010 — cleaned, deduplicated, and analysed.</p></div><div class="mc"><h4>🏠 RTB Rental Data</h4><p>Official Q2 2025 rent figures providing the most current yield data available.</p></div><div class="mc"><h4>📐 Growth Scoring</h4><p>CAGR at micro-area level with volume weighting to penalise thin markets.</p></div><div class="mc"><h4>⚖️ Risk Model</h4><p>Coefficient of variation, transaction frequency, and price consistency combined.</p></div></div></section>
 <footer><p>© 2025 IrishPropertyInsights. Data from <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a>. For informational purposes only — not financial advice.</p></footer>
 <div class="toast" id="toast"></div>
 <script>
 const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('visible')})},{threshold:.15});
 document.querySelectorAll('.fade-in').forEach(e=>o.observe(e));
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
-const rf=document.getElementById('countyRequestForm');if(rf){rf.addEventListener('submit',async function(e){e.preventDefault();const em=document.getElementById('reqEmail').value;const co=document.getElementById('reqCounty').value;try{const res=await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,county:co,message:'County report request: '+co+' from '+em})});if(res.ok){showToast('✓ Request received! We will email you when '+co+' is ready.');}else{showToast('✓ Request received! We will email you when '+co+' is ready.');}}catch(err){showToast('✓ Request received! We will email you when '+co+' is ready.');}rf.reset();})}\nfunction openSnapModal(){const c=document.getElementById('snapCounty').value;if(!c){showToast('Please select a county first.');return;}document.getElementById('modalCountyName').textContent=c;document.getElementById('snapModal').style.display='flex';document.getElementById('snapEmail').focus();}
-function closeSnapModal(){document.getElementById('snapModal').style.display='none';document.getElementById('snapEmail').value='';}
-async function submitSnapModal(){const em=document.getElementById('snapEmail').value;const co=document.getElementById('snapCounty').value;if(!em||!em.includes('@')){showToast('Please enter a valid email.');return;}try{await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,county:co,type:'snapshot_download',message:'Free snapshot downloaded: '+co+' by '+em})});}catch(e){}closeSnapModal();showToast('✓ Downloading your '+co+' snapshot...');setTimeout(()=>{window.location.href='/snapshot?county='+encodeURIComponent(co);},600);}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSnapModal();});
 </script>
 </body></html>"""
 
