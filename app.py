@@ -1026,12 +1026,22 @@ def _load_or_train():
 
     # Download PPR CSV
     csv_path = "PPR-ALL.csv"
-    if not os.path.exists(csv_path):
+    if not os.path.exists(csv_path) and not os.path.exists("PPR-ALL.zip"):
         print("Downloading PPR CSV…")
         import urllib.request
-        url = "https://propertypriceregister.ie/website/npsra/ppr/npsra-ppr.nsf/Downloads/PPR-ALL.zip/$FILE/PPR-ALL.zip"
+        # Try multiple URLs for PPR data
+        urls = [
+            "https://www.propertypriceregister.ie/website/npsra/ppr/npsra-ppr.nsf/Downloads/PPR-ALL.zip/$FILE/PPR-ALL.zip",
+            "https://data.gov.ie/dataset/property-price-register/resource/98c5e0f6-79fc-4ff4-a50e-e32d2c469e5e",
+        ]
+        url = urls[0]
         try:
-            urllib.request.urlretrieve(url, "PPR-ALL.zip")
+            # Use requests with timeout instead of urlretrieve
+            import requests as req_lib
+            resp = req_lib.get(url, timeout=300, stream=True)
+            with open("PPR-ALL.zip", "wb") as zf:
+                for chunk in resp.iter_content(chunk_size=8192):
+                    zf.write(chunk)
             import zipfile
             with zipfile.ZipFile("PPR-ALL.zip", "r") as z:
                 z.extractall(".")
@@ -1164,7 +1174,7 @@ input,select{{font-family:'DM Sans',sans-serif;font-size:1rem;padding:0.75rem 1r
           <label>Asking Price</label>
           <div class="price-wrap">
             <span>€</span>
-            <input type="number" name="asking_price" placeholder="350000" min="30000" max="5000000" required>
+            <input type="number" name="asking_price" placeholder="e.g. 350000" required>
           </div>
         </div>
       </div>
