@@ -5,3 +5,5 @@ matplotlib==3.8.2
 reportlab==4.0.8
 gunicorn==21.2.0
 requests
+scikit-learn
+joblib
