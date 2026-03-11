@@ -903,7 +903,7 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 <!-- ── END DEAL CHECKER SECTION ── -->
 
 <!-- ── HEATMAP SECTION ── -->
-<section style="background:#0a0c0f;padding:5rem 2rem;border-top:1px solid #1a1c20;">
+<section style="background:#0a0c0f;padding:3rem 2rem 3rem;border-top:1px solid #1a1c20;">
   <div style="max-width:1000px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:2.5rem;">
       <div style="display:inline-block;font-size:0.7rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#c9a84c;border:1px solid #c9a84c;padding:0.3rem 0.8rem;border-radius:2px;margin-bottom:1.2rem;">Interactive Map</div>
@@ -921,8 +921,8 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 
     <div id="hm-map-flex" style="display:flex;gap:2rem;align-items:flex-start;">
       <!-- MAP -->
-      <div style="flex:1;min-width:0;">
-        <svg id="ireland-map" viewBox="0 0 370 420" style="width:100%;height:auto;">
+      <div style="flex:2;min-width:0;">
+        <svg id="ireland-map" viewBox="15 10 310 360" style="width:100%;height:auto;min-height:400px;">
           <path id="hm-Donegal"   onclick="hmSelect(\'Donegal\')"   style="cursor:pointer;stroke:#0a0c0f;stroke-width:1.5;transition:filter 0.15s;" d="M90,22 L135,15 L165,30 L178,52 L158,68 L143,83 L120,76 L98,60 L83,45 Z"/>
           <path id="hm-NI" style="fill:#141618;stroke:#0a0c0f;stroke-width:1;" d="M165,30 L218,23 L232,45 L218,68 L188,76 L158,68 L178,52 Z"/>
           <path id="hm-Sligo"     onclick="hmSelect(\'Sligo\')"     style="cursor:pointer;stroke:#0a0c0f;stroke-width:1.5;transition:filter 0.15s;" d="M76,83 L106,76 L120,76 L128,91 L113,106 L90,106 L72,94 Z"/>
@@ -1009,6 +1009,11 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 
 <style>
 .hm-toggle { transition: background 0.2s, color 0.2s; }
+@media (max-width: 700px) {
+  #hm-map-flex { flex-direction: column !important; gap: 1.5rem !important; }
+  #hm-map-flex > div:first-child { flex: unset !important; width: 100% !important; }
+  #hm-map-flex > div:last-child { width: 100% !important; }
+}
 .hm-county-path-hover:hover { opacity: 0.85; filter: brightness(1.25); stroke: white !important; stroke-width: 2 !important; }
 </style>
 
