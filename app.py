@@ -840,7 +840,68 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 
 <section style="padding:5rem 2rem;background:var(--bg2)" id="sample">
 <div class="sh fade-in" style="margin-bottom:3rem">
-  <div class="ol">Real Sample</div>
+  
+<!-- ── DEAL CHECKER SECTION ── -->
+<section style="background:#0f1014;padding:5rem 2rem;">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <div style="display:inline-block;font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;border:1px solid #c9a84c;padding:0.3rem 0.8rem;border-radius:2px;margin-bottom:1.5rem;">Free Tool</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:white;line-height:1.15;margin-bottom:1rem;">Is That Property a Good Deal?</h2>
+    <p style="color:#9a9690;font-size:1rem;font-weight:300;line-height:1.7;max-width:500px;margin:0 auto 2.5rem;">Enter any Irish property and we'll compare it against 700,000+ real PPR transactions instantly.</p>
+    <div style="background:#1a1c20;border:1px solid #2a2c30;border-radius:4px;padding:2rem 2.5rem;text-align:left;">
+      <form method="POST" action="/deal-checker" style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:1rem;align-items:end;">
+        <div>
+          <label style="display:block;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6b6860;margin-bottom:0.4rem;">County</label>
+          <select name="county" required style="width:100%;font-family:inherit;font-size:0.95rem;padding:0.7rem 1rem;border:1px solid #2a2c30;border-radius:3px;background:#0f1014;color:white;">
+            <option value="" disabled selected>Select</option>
+            <option value="Carlow">Carlow</option>
+            <option value="Cavan">Cavan</option>
+            <option value="Clare">Clare</option>
+            <option value="Cork">Cork</option>
+            <option value="Donegal">Donegal</option>
+            <option value="Dublin">Dublin</option>
+            <option value="Galway">Galway</option>
+            <option value="Kerry">Kerry</option>
+            <option value="Kildare">Kildare</option>
+            <option value="Kilkenny">Kilkenny</option>
+            <option value="Laois">Laois</option>
+            <option value="Leitrim">Leitrim</option>
+            <option value="Limerick">Limerick</option>
+            <option value="Longford">Longford</option>
+            <option value="Louth">Louth</option>
+            <option value="Mayo">Mayo</option>
+            <option value="Meath">Meath</option>
+            <option value="Monaghan">Monaghan</option>
+            <option value="Offaly">Offaly</option>
+            <option value="Roscommon">Roscommon</option>
+            <option value="Sligo">Sligo</option>
+            <option value="Tipperary">Tipperary</option>
+            <option value="Waterford">Waterford</option>
+            <option value="Westmeath">Westmeath</option>
+            <option value="Wexford">Wexford</option>
+            <option value="Wicklow">Wicklow</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6b6860;margin-bottom:0.4rem;">Area / Town</label>
+          <input type="text" name="area" placeholder="e.g. Blackrock" required style="width:100%;font-family:inherit;font-size:0.95rem;padding:0.7rem 1rem;border:1px solid #2a2c30;border-radius:3px;background:#0f1014;color:white;">
+        </div>
+        <div>
+          <label style="display:block;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6b6860;margin-bottom:0.4rem;">Asking Price</label>
+          <div style="position:relative;">
+            <span style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:#6b6860;">€</span>
+            <input type="number" name="asking_price" placeholder="350000" required style="width:100%;font-family:inherit;font-size:0.95rem;padding:0.7rem 1rem 0.7rem 1.8rem;border:1px solid #2a2c30;border-radius:3px;background:#0f1014;color:white;">
+          </div>
+        </div>
+        <div>
+          <button type="submit" style="width:100%;padding:0.7rem 1.5rem;background:#c9a84c;color:#0f1014;border:none;border-radius:3px;font-family:inherit;font-size:0.85rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;white-space:nowrap;">Analyse →</button>
+        </div>
+      </form>
+      <p style="margin-top:1rem;font-size:0.75rem;color:#4a4845;text-align:center;">Not financial advice. Based on PPR data 2010–2024.</p>
+    </div>
+  </div>
+</section>
+<!-- ── END DEAL CHECKER SECTION ── -->
+<div class="ol">Real Sample</div>
   <h2>See exactly what you get</h2>
   <p>This is a real page from the Dublin report — generated live from 15 years of PPR data.</p>
 </div>
