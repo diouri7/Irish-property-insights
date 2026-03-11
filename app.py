@@ -380,6 +380,90 @@ def confidence_badge(transactions):
         return "Low Confidence", "🟤", "Based on fewer than 6 sales — use as early indicator only."
 
 
+
+# ─── RPZ DATA ───────────────────────────────────────────
+# Official Rent Pressure Zones (RTB / Government of Ireland, 2024)
+# All local electoral areas and towns designated as RPZ areas
+RPZ_KEYWORDS = [
+    # Dublin City & suburbs
+    "Dublin", "Swords", "Malahide", "Portmarnock", "Clongriffin",
+    "Baldoyle", "Sutton", "Howth", "Raheny", "Clontarf", "Marino",
+    "Drumcondra", "Glasnevin", "Finglas", "Ballymun", "Santry",
+    "Beaumont", "Artane", "Coolock", "Kilbarrack", "Donaghmede",
+    "Blanchardstown", "Castleknock", "Mulhuddart", "Clonsilla",
+    "Lucan", "Clondalkin", "Tallaght", "Rathfarnham", "Templeogue",
+    "Terenure", "Kimmage", "Crumlin", "Drimnagh", "Walkinstown",
+    "Ballyfermot", "Chapelizod", "Palmerstown", "Rialto", "Kilmainham",
+    "Inchicore", "Islandbridge", "Rathmines", "Ranelagh", "Milltown",
+    "Dundrum", "Stillorgan", "Foxrock", "Leopardstown", "Sandyford",
+    "Stepaside", "Carrickmines", "Kilternan", "Glencullen",
+    "Dun Laoghaire", "Blackrock", "Monkstown", "Deansgrange",
+    "Killiney", "Shankill", "Bray", "Greystones",
+    "Cabinteely", "Sallynoggin", "Glasthule",
+    # South Dublin / Wicklow border
+    "Greystones", "Delgany", "Kilcoole", "Newcastle",
+    # Dun Laoghaire-Rathdown
+    "Dundrum", "Stillorgan", "Deansgrange", "Ballybrack",
+    # Fingal
+    "Swords", "Malahide", "Rush", "Lusk", "Donabate", "Balbriggan",
+    "Balbriggan", "Skerries", "Naul", "Garristown",
+    # South Dublin
+    "Rathcoole", "Saggart", "Clondalkin", "Tallaght", "Citywest",
+    # Cork City & suburbs
+    "Cork", "Ballincollig", "Carrigaline", "Cobh", "Glanmire",
+    "Blarney", "Tower", "Midleton", "Youghal", "Mallow",
+    "Douglas", "Bishopstown", "Wilton", "Togher", "Turners Cross",
+    "Blackpool", "Mayfield", "Gurranabraher", "Sunday's Well",
+    "Shandon", "Blackrock", "Mahon",
+    # Galway City & suburbs
+    "Galway", "Salthill", "Knocknacarra", "Renmore", "Ballybane",
+    "Doughiska", "Merlin Park", "Claregalway", "Oranmore",
+    "Athenry", "Tuam",
+    # Kildare (all designated)
+    "Naas", "Newbridge", "Celbridge", "Maynooth", "Leixlip",
+    "Clane", "Kilcock", "Monasterevin", "Athy", "Kildare",
+    "Rathangan", "Kilcullen", "Curragh",
+    # Meath
+    "Navan", "Ashbourne", "Ratoath", "Dunshaughlin", "Trim",
+    "Kells", "Dunboyne", "Clonee", "Stamullen",
+    # Wicklow
+    "Wicklow", "Arklow", "Bray", "Greystones", "Kilcoole",
+    "Tinahely", "Rathdrum",
+    # Louth
+    "Drogheda", "Dundalk", "Ardee", "Carlingford",
+    # Limerick City & county
+    "Limerick", "Castletroy", "Dooradoyle", "Raheen", "Ballinacurra",
+    "Annacotty", "Monaleen", "Corbally", "Ennis Road", "Mulgrave",
+    # Waterford
+    "Waterford", "Tramore", "Dungarvan",
+    # Clare
+    "Ennis", "Shannon", "Killaloe",
+    # Laois
+    "Portlaoise", "Portarlington",
+    # Offaly
+    "Tullamore",
+    # Westmeath
+    "Athlone", "Mullingar",
+    # Wexford
+    "Wexford", "Gorey", "New Ross",
+]
+
+# Normalise to lowercase for matching
+_RPZ_LOWER = [k.lower() for k in RPZ_KEYWORDS]
+
+
+def is_rpz(area_name):
+    """Return True if this micro-area is in (or likely in) an RPZ.
+    Uses partial keyword matching on the official RTB RPZ list."""
+    if not isinstance(area_name, str):
+        return False
+    a = area_name.lower().strip()
+    for kw in _RPZ_LOWER:
+        if kw in a or a in kw:
+            return True
+    return False
+
+
 def make_price_chart(yearly_df, county_name):
     """Generate a price trend chart and return as bytes."""
     fig, ax = plt.subplots(figsize=(7, 3.2))
@@ -563,12 +647,13 @@ def build_pdf_report(analysis, is_snapshot=False):
         table_data_df = micro_df
 
     # Table header
-    header = ["#", "Micro-Area", "Median Price", "5yr Growth", "Yield", "Risk", "Signal", "Txns", "Confidence"]
+    header = ["#", "Micro-Area", "Median Price", "5yr Growth", "Yield", "Risk", "Signal", "Txns", "Confidence", "RPZ"]
 
     table_rows = [header]
     for idx, row in table_data_df.iterrows():
         rank = len(table_rows)
         conf_label, conf_emoji, _ = confidence_badge(row["transactions"])
+        rpz_flag = "⚠ Yes" if is_rpz(row["area"]) else "No"
         table_rows.append([
             str(rank),
             str(row["area"])[:25],
@@ -579,10 +664,11 @@ def build_pdf_report(analysis, is_snapshot=False):
             row["signal"],
             str(row["transactions"]),
             f"{conf_emoji} {conf_label.split()[0]}",
+            rpz_flag,
         ])
 
     # Column widths
-    col_w = [0.5*cm, 3.8*cm, 2.2*cm, 1.8*cm, 1.4*cm, 1.4*cm, 2.2*cm, 1.1*cm, 2.0*cm]
+    col_w = [0.5*cm, 3.4*cm, 2.0*cm, 1.6*cm, 1.3*cm, 1.3*cm, 2.0*cm, 1.0*cm, 1.7*cm, 1.2*cm]
 
     tbl = Table(table_rows, colWidths=col_w, repeatRows=1)
 
@@ -1857,7 +1943,7 @@ footer a{color:#64748B;text-decoration:none}
     <p>Each micro-area receives a composite data signal based on weighted scoring of growth rate, gross yield, and risk classification. These are <strong>data indicators, not financial advice</strong>.</p>
     <table class="conf-table">
       <tr><th>Signal</th><th>What it means</th></tr>
-      <tr><td><strong>HIGH POTENTIAL</strong></td><td>Strong yield, strong growth, low-medium risk. Score ≥ 6.</td></tr>
+      <tr><td><strong>HIGH POTENTIAL</strong></td><td>Strong yield, strong growth, low-medium risk. Score ≥ 6. <em style="color:#F59E0B">Check RPZ status — yield assumes market rent.</em></td></tr>
       <tr><td><strong>GOOD PROSPECT</strong></td><td>Above-average on multiple dimensions. Score 4–5.</td></tr>
       <tr><td><strong>MODERATE POTENTIAL</strong></td><td>Some positive indicators but not across the board. Score 2–3.</td></tr>
       <tr><td><strong>HOLD</strong></td><td>Neutral — no strong positive or negative signals. Score 0–1.</td></tr>
@@ -1874,6 +1960,19 @@ footer a{color:#64748B;text-decoration:none}
       <tr><td><span class="tip"><span class="badge silver">⚪ Medium</span><span class="tiptext">Based on a moderate number of sales. While the trend is clear, we recommend checking for individual high-value outliers that may slightly skew the average.</span></span></td><td>6–14 sales</td><td>Good indicator. Check for 1–2 outliers that may skew the average.</td></tr>
       <tr><td><span class="tip"><span class="badge bronze">🟤 Low</span><span class="tiptext">Data is based on a small sample size (fewer than 6 sales). This signal should be used as an early-stage indicator rather than a definitive valuation. A single high-value sale can skew the average significantly.</span></span></td><td>1–5 sales</td><td>Small sample. Use as early-stage indicator only — not a final valuation.</td></tr>
     </table>
+  </div>
+
+
+  <div class="section red" style="border-left-color:#F59E0B">
+    <h2>🏘️ Rent Pressure Zone (RPZ) Indicator</h2>
+    <p>Every micro-area now shows an <strong>RPZ flag</strong> — indicating whether that area falls within an official <strong>Rent Pressure Zone</strong> as designated by the Irish Government and the Residential Tenancies Board (RTB).</p>
+    <p>In RPZ areas, annual rent increases are <strong>capped at 2% or the rate of inflation (HICP), whichever is lower</strong>. This is a critical variable for any landlord or buy-to-let investor — a HIGH POTENTIAL signal based on current market rent may be misleading if the property already has a sitting tenant in an RPZ, since you cannot increase rent to market rate.</p>
+    <table class="conf-table">
+      <tr><th>RPZ Status</th><th>What it means for investors</th></tr>
+      <tr><td><strong>⚠ Yes — RPZ</strong></td><td>Rent increases capped at 2%/HICP. Yield calculation reflects current market rent, not necessarily achievable rent for existing tenancies.</td></tr>
+      <tr><td><strong>No — Non-RPZ</strong></td><td>No statutory rent cap. Rent can be set at market rate on a new tenancy.</td></tr>
+    </table>
+    <p style="margin-top:.75rem;font-size:.88rem;color:#64748B">RPZ boundaries are based on the RTB's official 2024 designations. Always verify current status at <a href="https://www.rtb.ie/registration-and-compliance/rent-pressure-zones" target="_blank" style="color:#94A3B8">rtb.ie</a> before making investment decisions. Micro-area matching uses keyword-based detection — verify manually for boundary areas.</p>
   </div>
 
   <div class="disclaimer">
