@@ -1220,7 +1220,7 @@ input,select{{font-family:'DM Sans',sans-serif;font-size:1rem;padding:0.75rem 1r
     desc_enc = 0
 
     import pandas as pd
-    X = pd.DataFrame([{{"county_enc":county_enc,"micro_enc":micro_enc,"desc_enc":desc_enc,"year":2024}}])
+    X = pd.DataFrame({"county_enc":[county_enc],"micro_enc":[micro_enc],"desc_enc":[desc_enc],"year":[2024]})
     predicted  = np.expm1(model.predict(X)[0])
     diff_pct   = ((asking_price - predicted) / predicted) * 100
 
