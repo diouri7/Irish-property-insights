@@ -1462,6 +1462,152 @@ hmPaint(); hmRank();
 </div>
 
 <section id="who"><div class="sh fade-in"><div class="ol">Straight Talk</div><h2>This report is built for serious investors</h2><p>We built this for people who make decisions based on data, not headlines.</p></div><div class="ag fade-in"><div class="ac"><h3><span style="font-size:1.1rem">✅</span> Built for you if…</h3><ul class="al fl"><li><span class="ic">✓</span><span>You're evaluating <strong>buy-to-let opportunities</strong> across Irish counties.</span></li><li><span class="ic">✓</span><span>You're an <strong>existing landlord</strong> exploring where to expand next.</span></li><li><span class="ic">✓</span><span>You're a <strong>mortgage broker or advisor</strong> wanting data-backed talking points.</span></li><li><span class="ic">✓</span><span>You want a <strong>quick shortlist</strong> worth investigating further.</span></li></ul></div><div class="ac"><h3><span style="font-size:1.1rem">✗</span> Probably not for you if…</h3><ul class="al nl2"><li><span class="ic">✗</span><span>You're looking for a <strong>crystal ball</strong>. We analyse trends — we don't predict.</span></li><li><span class="ic">✗</span><span>You expect <strong>individual property valuations</strong>. We score areas, not addresses.</span></li><li><span class="ic">✗</span><span>You need <strong>legal, tax, or planning</strong> advice. This is market data only.</span></li><li><span class="ic">✗</span><span>You're buying a <strong>home to live in</strong>. Signals are optimised for investment returns.</span></li></ul></div></div><div class="fq fade-in"><div class="fi"><div class="fqq">How accurate is the yield estimate?</div><div class="fqa">We use official RTB Q2 2025 rent data cross-referenced with PPR median sale prices, dampened by 0.4× at micro-area level. These are gross estimates — your actual yield depends on vacancy and costs. A reliable first filter, not a final calculation.</div></div><div class="fi"><div class="fqq">Isn't this just historical data?</div><div class="fqa">Yes — and that's the point. Investment patterns are visible in historical data before headlines. We track 5-year compound growth, transaction volumes, and volatility. Combined with current RTB rents, this gives a grounded view of where momentum exists.</div></div><div class="fi"><div class="fqq">Why trust micro-area scoring over my own research?</div><div class="fqa">You shouldn't rely on it alone. The report narrows 500+ areas to a shortlist worth deeper research. It replaces hours of manual PPR browsing, not your judgment.</div></div><div class="fi"><div class="fqq">What about new developments, zoning, local demand?</div><div class="fqa">We analyse transactions and rents — not planning applications or infrastructure. This is the quantitative layer. You bring the local knowledge.</div></div></div></section>
+<!-- ── FULL REPORT PREVIEW (BLURRED) ── -->
+<section style="padding:5rem 2rem;background:var(--bg);">
+  <div style="max-width:1000px;margin:0 auto;">
+
+    <!-- Header -->
+    <div class="sh fade-in" style="margin-bottom:3rem;">
+      <div class="ol">What You Get</div>
+      <h2>Inside the full €29 report</h2>
+      <p>A complete micro-area intelligence report for your county — every area ranked, scored, and explained. Here's exactly what it looks like.</p>
+    </div>
+
+    <!-- Page thumbnails row -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem;" class="fade-in">
+
+      <!-- Page 1 thumbnail: Cover + metrics -->
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.06);">
+        <div style="background:#f1f3f5;padding:.4rem .7rem;display:flex;gap:.35rem;align-items:center;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;display:inline-block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#f59e0b;display:inline-block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;"></span>
+          <span style="font-size:.6rem;color:#94a3b8;margin-left:.5rem;">Page 1 — Overview</span>
+        </div>
+        <div style="padding:1rem;color:#0b1120;font-family:'DM Sans',sans-serif;">
+          <div style="font-size:.7rem;font-weight:700;color:#10b981;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em;">Dublin County Report</div>
+          <div style="height:2px;background:linear-gradient(90deg,#10b981,#3b82f6);border-radius:2px;margin-bottom:.75rem;"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:.75rem;">
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:.4rem;text-align:center;">
+              <div style="font-size:.85rem;font-weight:700;color:#0b1120;">€484k</div>
+              <div style="font-size:.5rem;color:#94a3b8;">Median Price</div>
+            </div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:.4rem;text-align:center;">
+              <div style="font-size:.85rem;font-weight:700;color:#10b981;">5.5%</div>
+              <div style="font-size:.5rem;color:#94a3b8;">County Yield</div>
+            </div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:.4rem;text-align:center;">
+              <div style="font-size:.85rem;font-weight:700;color:#0b1120;">+5.3%</div>
+              <div style="font-size:.5rem;color:#94a3b8;">5yr Growth</div>
+            </div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:.4rem;text-align:center;">
+              <div style="font-size:.85rem;font-weight:700;color:#0b1120;">415</div>
+              <div style="font-size:.5rem;color:#94a3b8;">Areas Scored</div>
+            </div>
+          </div>
+          <!-- Mini bar chart -->
+          <div style="font-size:.55rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem;">Top Areas by Yield</div>
+          <div style="display:flex;flex-direction:column;gap:.25rem;">
+            <div style="display:flex;align-items:center;gap:.4rem;"><span style="font-size:.52rem;color:#475569;width:80px;text-align:right;flex-shrink:0;">Snugborough Rd</span><div style="flex:1;background:#f1f5f9;border-radius:2px;height:8px;"><div style="width:100%;height:100%;background:#10b981;border-radius:2px;"></div></div><span style="font-size:.55rem;font-weight:700;color:#10b981;width:26px;">13.6%</span></div>
+            <div style="display:flex;align-items:center;gap:.4rem;"><span style="font-size:.52rem;color:#475569;width:80px;text-align:right;flex-shrink:0;">Ballymun D11</span><div style="flex:1;background:#f1f5f9;border-radius:2px;height:8px;"><div style="width:97%;height:100%;background:#10b981;border-radius:2px;"></div></div><span style="font-size:.55rem;font-weight:700;color:#10b981;width:26px;">13.2%</span></div>
+            <div style="display:flex;align-items:center;gap:.4rem;"><span style="font-size:.52rem;color:#475569;width:80px;text-align:right;flex-shrink:0;">Clondalkin D22</span><div style="flex:1;background:#f1f5f9;border-radius:2px;height:8px;"><div style="width:87%;height:100%;background:#10b981;border-radius:2px;"></div></div><span style="font-size:.55rem;font-weight:700;color:#10b981;width:26px;">11.9%</span></div>
+            <div style="display:flex;align-items:center;gap:.4rem;filter:blur(3px);user-select:none;"><span style="font-size:.52rem;color:#475569;width:80px;text-align:right;flex-shrink:0;">████████</span><div style="flex:1;background:#f1f5f9;border-radius:2px;height:8px;"><div style="width:82%;height:100%;background:#10b981;border-radius:2px;"></div></div><span style="font-size:.55rem;font-weight:700;color:#10b981;width:26px;">11.1%</span></div>
+            <div style="display:flex;align-items:center;gap:.4rem;filter:blur(3px);user-select:none;"><span style="font-size:.52rem;color:#475569;width:80px;text-align:right;flex-shrink:0;">████████</span><div style="flex:1;background:#f1f5f9;border-radius:2px;height:8px;"><div style="width:78%;height:100%;background:#10b981;border-radius:2px;"></div></div><span style="font-size:.55rem;font-weight:700;color:#10b981;width:26px;">10.6%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2 thumbnail: Ranking table -->
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.06);">
+        <div style="background:#f1f3f5;padding:.4rem .7rem;display:flex;gap:.35rem;align-items:center;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;display:inline-block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#f59e0b;display:inline-block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;"></span>
+          <span style="font-size:.6rem;color:#94a3b8;margin-left:.5rem;">Page 2 — Full Rankings</span>
+        </div>
+        <div style="padding:.75rem;color:#0b1120;font-family:'DM Sans',sans-serif;">
+          <div style="font-size:.6rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem;">All 415 Micro-Areas Ranked</div>
+          <table style="width:100%;border-collapse:collapse;font-size:.52rem;">
+            <thead><tr style="background:#0b1120;color:#fff;">
+              <th style="padding:.25rem .3rem;text-align:left;">#</th>
+              <th style="padding:.25rem .3rem;text-align:left;">Area</th>
+              <th style="padding:.25rem .3rem;">Yield</th>
+              <th style="padding:.25rem .3rem;">Growth</th>
+              <th style="padding:.25rem .3rem;">RPZ</th>
+              <th style="padding:.25rem .3rem;">Signal</th>
+              <th style="padding:.25rem .3rem;">★</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:.22rem .3rem;color:#475569;">1</td><td style="padding:.22rem .3rem;">Snugborough Rd</td><td style="padding:.22rem .3rem;text-align:center;color:#10b981;font-weight:700;">13.6%</td><td style="padding:.22rem .3rem;text-align:center;color:#10b981;">+6.4%</td><td style="padding:.22rem .3rem;text-align:center;color:#f97316;font-weight:700;">⚠</td><td style="padding:.22rem .3rem;text-align:center;font-size:.48rem;color:#10b981;font-weight:700;">HIGH POT.</td><td style="padding:.22rem .3rem;text-align:center;color:#f59e0b;font-size:.55rem;">★★★</td></tr>
+              <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc;"><td style="padding:.22rem .3rem;color:#475569;">2</td><td style="padding:.22rem .3rem;">Ballymun D11</td><td style="padding:.22rem .3rem;text-align:center;color:#10b981;font-weight:700;">13.2%</td><td style="padding:.22rem .3rem;text-align:center;color:#10b981;">+16%</td><td style="padding:.22rem .3rem;text-align:center;color:#f97316;font-weight:700;">⚠</td><td style="padding:.22rem .3rem;text-align:center;font-size:.48rem;color:#10b981;font-weight:700;">HIGH POT.</td><td style="padding:.22rem .3rem;text-align:center;color:#f59e0b;font-size:.55rem;">★★★</td></tr>
+              <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:.22rem .3rem;color:#475569;">3</td><td style="padding:.22rem .3rem;">Clondalkin D22</td><td style="padding:.22rem .3rem;text-align:center;color:#10b981;font-weight:700;">11.9%</td><td style="padding:.22rem .3rem;text-align:center;color:#10b981;">+3.9%</td><td style="padding:.22rem .3rem;text-align:center;color:#f97316;font-weight:700;">⚠</td><td style="padding:.22rem .3rem;text-align:center;font-size:.48rem;color:#10b981;font-weight:700;">HIGH POT.</td><td style="padding:.22rem .3rem;text-align:center;color:#f59e0b;font-size:.55rem;">★★★</td></tr>
+              <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc;filter:blur(2.5px);user-select:none;"><td style="padding:.22rem .3rem;">4</td><td style="padding:.22rem .3rem;">██████████</td><td style="padding:.22rem .3rem;text-align:center;">██%</td><td style="padding:.22rem .3rem;text-align:center;">+█%</td><td style="padding:.22rem .3rem;text-align:center;">█</td><td style="padding:.22rem .3rem;text-align:center;font-size:.48rem;">███ POT.</td><td style="padding:.22rem .3rem;text-align:center;">███</td></tr>
+              <tr style="border-bottom:1px solid #f1f5f9;filter:blur(2.5px);user-select:none;"><td style="padding:.22rem .3rem;">5</td><td style="padding:.22rem .3rem;">██████████</td><td style="padding:.22rem .3rem;text-align:center;">██%</td><td style="padding:.22rem .3rem;text-align:center;">+█%</td><td style="padding:.22rem .3rem;text-align:center;">█</td><td style="padding:.22rem .3rem;text-align:center;font-size:.48rem;">███ POT.</td><td style="padding:.22rem .3rem;text-align:center;">███</td></tr>
+              <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc;filter:blur(2.5px);user-select:none;"><td style="padding:.22rem .3rem;">6</td><td style="padding:.22rem .3rem;">██████████</td><td style="padding:.22rem .3rem;text-align:center;">██%</td><td style="padding:.22rem .3rem;text-align:center;">+█%</td><td style="padding:.22rem .3rem;text-align:center;">█</td><td style="padding:.22rem .3rem;text-align:center;font-size:.48rem;">███ POT.</td><td style="padding:.22rem .3rem;text-align:center;">███</td></tr>
+              <tr style="filter:blur(2.5px);user-select:none;"><td style="padding:.22rem .3rem;">7</td><td style="padding:.22rem .3rem;">██████████</td><td style="padding:.22rem .3rem;text-align:center;">██%</td><td style="padding:.22rem .3rem;text-align:center;">+█%</td><td style="padding:.22rem .3rem;text-align:center;">█</td><td style="padding:.22rem .3rem;text-align:center;font-size:.48rem;">███ POT.</td><td style="padding:.22rem .3rem;text-align:center;">███</td></tr>
+            </tbody>
+          </table>
+          <div style="text-align:center;margin-top:.5rem;font-size:.55rem;color:#94a3b8;">+ 408 more areas · all scored &amp; ranked</div>
+        </div>
+      </div>
+
+      <!-- Page 3 thumbnail: Methodology -->
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.06);">
+        <div style="background:#f1f3f5;padding:.4rem .7rem;display:flex;gap:.35rem;align-items:center;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;display:inline-block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#f59e0b;display:inline-block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;"></span>
+          <span style="font-size:.6rem;color:#94a3b8;margin-left:.5rem;">Page 3 — Methodology</span>
+        </div>
+        <div style="padding:.75rem;color:#0b1120;font-family:'DM Sans',sans-serif;">
+          <div style="font-size:.6rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem;">How Each Score is Calculated</div>
+          <div style="display:flex;flex-direction:column;gap:.5rem;">
+            <div style="padding:.4rem .5rem;background:#f0fdf4;border-left:2px solid #10b981;border-radius:2px;">
+              <div style="font-size:.58rem;font-weight:700;color:#10b981;margin-bottom:.15rem;">📈 Growth Score</div>
+              <div style="font-size:.52rem;color:#64748b;line-height:1.4;">5yr CAGR at micro-area level, volume-weighted to penalise thin markets with fewer than 10 transactions.</div>
+            </div>
+            <div style="padding:.4rem .5rem;background:#fffbeb;border-left:2px solid #f59e0b;border-radius:2px;">
+              <div style="font-size:.58rem;font-weight:700;color:#f59e0b;margin-bottom:.15rem;">⚖️ Risk Score</div>
+              <div style="font-size:.52rem;color:#64748b;line-height:1.4;">CV of yearly median prices combined with avg. annual transaction volume. Low CV + high volume = Low risk.</div>
+            </div>
+            <div style="padding:.4rem .5rem;background:#eff6ff;border-left:2px solid #3b82f6;border-radius:2px;">
+              <div style="font-size:.58rem;font-weight:700;color:#3b82f6;margin-bottom:.15rem;">💰 Yield Estimate</div>
+              <div style="font-size:.52rem;color:#64748b;line-height:1.4;">RTB Q2 2025 official rents × 0.4 dampening factor ÷ PPR median sale price. Gross estimate only.</div>
+            </div>
+            <div style="padding:.4rem .5rem;background:#fff7ed;border-left:2px solid #f97316;border-radius:2px;">
+              <div style="font-size:.58rem;font-weight:700;color:#f97316;margin-bottom:.15rem;">⚠ RPZ Flag</div>
+              <div style="font-size:.52rem;color:#64748b;line-height:1.4;">Each area cross-checked against official RTB 2024 Rent Pressure Zone list. Rent capped at 2%/yr in RPZ areas.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What's included checklist -->
+    <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:14px;padding:2rem 2.5rem;max-width:760px;margin:0 auto 2rem;" class="fade-in">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem 2rem;">
+        <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>All micro-areas in your county ranked by signal</div>
+        <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>RPZ flag on every single area</div>
+        <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>Gross yield estimate (RTB Q2 2025 rents)</div>
+        <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>Data confidence rating (★★★ / ★★☆ / ★☆☆)</div>
+        <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>5-year CAGR growth per micro-area</div>
+        <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>Risk classification (Low / Medium / High)</div>
+        <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>Price trend chart (2010–2025)</div>
+        <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>Full methodology appendix included</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align:center;" class="fade-in">
+      <p style="color:var(--t3);font-size:.88rem;margin-bottom:1rem;">Based on 727,000+ PPR transactions · Updated March 2026 · Instant PDF download</p>
+      <a href="#reports" class="bp" style="font-size:1.05rem;padding:1rem 2.5rem;">Get the Full Report — €29 →</a>
+      <p style="font-size:.78rem;color:var(--t3);margin-top:.75rem;">Or <a href="#snap" style="color:var(--green);text-decoration:none;">get the free snapshot first</a> — top 3 areas, no card needed</p>
+    </div>
+
+  </div>
+</section>
+<!-- ── END FULL REPORT PREVIEW ── -->
+
 <section class="rs" id="reports"><div class="sh fade-in"><div class="ol">Full Reports</div><h2>Unlock the full county report</h2><p>Every micro-area in your chosen county — ranked by yield, growth, and risk. Built for investors who want data, not guesswork.</p><div style="margin-top:1.25rem;display:inline-flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fd);font-size:1.2rem;color:var(--t3);text-decoration:line-through">€49</span><span style="font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--green)">€29</span><span style="font-size:.88rem;color:var(--t3)">per county</span></div><p style="font-size:.82rem;color:var(--gold);margin-top:.5rem;font-weight:600">🚀 Founding price — locks in <span id="cdTimer">calculating...</span></p><script>(function(){var d=new Date("2026-04-01T23:59:59");function p(n){return n<10?"0"+n:n;}function u(){var n=new Date(),diff=d-n;if(diff<=0){document.getElementById("cdTimer").textContent="soon";return;}var dy=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);document.getElementById("cdTimer").textContent="in "+dy+"d "+p(h)+"h "+p(m)+"m "+p(s)+"s";}u();setInterval(u,1000);})();</script></div><div class="fade-in" style="max-width:480px;margin:0 auto;text-align:center"><div style="margin-bottom:1.5rem"><label style="display:block;font-size:.85rem;color:var(--t3);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.08em">Select your county</label><select id="countyBuySelect" style="width:100%;padding:1rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:1rem;cursor:pointer"><option value="">— Choose a county —</option><optgroup label="✅ Available Now"><option value="https://diourielouafi.gumroad.com/l/dqfeno">Dublin</option><option value="https://diourielouafi.gumroad.com/l/nsofqi">Cork</option><option value="https://diourielouafi.gumroad.com/l/khbhp">Galway</option><option value="https://diourielouafi.gumroad.com/l/qzexsg">Kildare</option><option value="https://diourielouafi.gumroad.com/l/pqllej">Kerry</option><option value="https://diourielouafi.gumroad.com/l/jlixrl">Meath</option><option value="https://diourielouafi.gumroad.com/l/qjecas">Wicklow</option></optgroup><optgroup label="⏳ Coming Soon"><option value="coming">Carlow</option><option value="coming">Cavan</option><option value="coming">Clare</option><option value="coming">Donegal</option><option value="coming">Kilkenny</option><option value="coming">Laois</option><option value="coming">Leitrim</option><option value="coming">Limerick</option><option value="coming">Longford</option><option value="coming">Louth</option><option value="coming">Mayo</option><option value="coming">Monaghan</option><option value="coming">Offaly</option><option value="coming">Roscommon</option><option value="coming">Sligo</option><option value="coming">Tipperary</option><option value="coming">Waterford</option><option value="coming">Westmeath</option><option value="coming">Wexford</option></optgroup></select></div><button id="countyBuyBtn" onclick="(function(){var s=document.getElementById(\'countyBuySelect\');if(!s.value)return;if(s.value===\'coming\'){var n=s.options[s.selectedIndex].text;document.getElementById(\'reqCounty\').value=n;document.querySelector(\'#countyRequestForm input[type=email]\').focus();document.getElementById(\'countyRequestForm\').scrollIntoView({behavior:\'smooth\'});showToast(\'Enter your email below to be notified when \'+n+\' launches!\');return;}window.open(s.value,\'_blank\');})()" class="bp" style="width:100%;justify-content:center;padding:1rem 2rem;font-size:1.1rem">Get Instant Access — €29 →</button><p style="font-size:.82rem;color:var(--t3);margin-top:.75rem">7 counties live now — more added weekly. Can\'t see yours?</p><form class="ef" style="margin-top:.75rem" id="countyRequestForm"><input type="email" placeholder="your@email.com" required id="reqEmail" style="flex:1;padding:.85rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem"><select id="reqCounty" style="padding:.85rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.9rem">%COUNTY_OPTIONS_FULL%</select><button type="submit" class="bs" style="white-space:nowrap">Request County</button></form><p style="font-size:.78rem;color:var(--t3);margin-top:.5rem">We'll email you when your county report is ready.</p></div></section>
 <section id="meth"><div class="sh fade-in"><div class="ol">Methodology</div><h2>Transparent, data-driven scoring</h2><p>No black boxes. Here's exactly how we analyse the market.</p></div><div class="mg fade-in"><div class="mc"><h4>📊 Property Price Register</h4><p>Every residential transaction since 2010 — cleaned, deduplicated, and analysed.</p></div><div class="mc"><h4>🏠 RTB Rental Data</h4><p>Official Q2 2025 rent figures providing the most current yield data available.</p></div><div class="mc"><h4>📐 Growth Scoring</h4><p>CAGR at micro-area level with volume weighting to penalise thin markets.</p></div><div class="mc"><h4>⚖️ Risk Model</h4><p>Coefficient of variation, transaction frequency, and price consistency combined.</p></div></div></section>
 <section style="padding:5rem 2rem;background:var(--bg2);border-top:1px solid var(--border)">
