@@ -1038,7 +1038,8 @@ def _load_or_train():
         try:
             # Use requests with timeout instead of urlretrieve
             import requests as req_lib
-            resp = req_lib.get(url, timeout=300, stream=True)
+            import ssl
+            resp = req_lib.get(url, timeout=300, stream=True, verify=False)
             with open("PPR-ALL.zip", "wb") as zf:
                 for chunk in resp.iter_content(chunk_size=8192):
                     zf.write(chunk)
