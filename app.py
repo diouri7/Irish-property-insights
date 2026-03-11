@@ -917,10 +917,10 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
         <button onclick="setMetric('risk',this)" class="hm-btn" style="padding:0.45rem 1rem;border:none;border-radius:2px;font-family:inherit;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;background:transparent;color:#6b6860;transition:all 0.2s;">Risk Score</button>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:2rem;align-items:start;">
+    <div style="display:grid;grid-template-columns:1.8fr 260px;gap:2rem;align-items:start;">
       <!-- MAP -->
-      <div style="background:#111316;border:1px solid #1a1c20;border-radius:4px;padding:1.5rem;display:flex;align-items:center;justify-content:center;min-height:450px;">
-        <svg id="hm-svg" viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <div style="background:#111316;border:1px solid #1a1c20;border-radius:4px;padding:2rem;display:flex;align-items:center;justify-content:center;min-height:500px;">
+        <svg id="hm-svg" viewBox="10 10 300 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;display:block;margin:0 auto;">
           <!-- DONEGAL - large, northwest -->
           <path id="hm-Donegal"   onclick="hmSel('Donegal')"   class="hmc" d="M60,20 L130,10 L165,25 L175,50 L155,70 L135,85 L105,78 L75,58 L55,40 Z"/>
           <!-- MAYO - large, west -->
