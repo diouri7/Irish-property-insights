@@ -1468,6 +1468,10 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSnapMod
   IrishPropertyInsights provides data analysis based on public records. It is not financial advice.<br>
   <a href="/" style="color:#9a9690">Home</a> · <a href="/methodology" style="color:#9a9690">Methodology</a>
 </div>
+<div style="text-align:center;padding:1.5rem 2rem;border-top:1px solid #e8e4dc;margin-top:2rem;font-size:.76rem;color:#9a9690;line-height:1.6;">
+  IrishPropertyInsights provides data analysis based on public records. It is not financial advice.<br>
+  <a href="/" style="color:#9a9690">Home</a> · <a href="/methodology" style="color:#9a9690">Methodology</a>
+</div>
 </body></html>"""
 
 
