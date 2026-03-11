@@ -1266,32 +1266,32 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 
 <script>
 const hmD={
-  Dublin:{yield:5.5,growth:5.3,risk:'Medium',signal:'HIGH POTENTIAL',price:484581},
-  Cork:{yield:5.1,growth:6.2,risk:'Low',signal:'HIGH POTENTIAL',price:320000},
-  Galway:{yield:4.8,growth:5.8,risk:'Low',signal:'HIGH POTENTIAL',price:285000},
-  Kildare:{yield:4.2,growth:6.8,risk:'Low',signal:'HIGH POTENTIAL',price:355000},
-  Meath:{yield:4.5,growth:7.1,risk:'Low',signal:'HIGH POTENTIAL',price:320000},
-  Wicklow:{yield:3.9,growth:5.5,risk:'Low',signal:'MODERATE',price:380000},
-  Limerick:{yield:5.4,growth:6.9,risk:'Low',signal:'HIGH POTENTIAL',price:245000},
-  Waterford:{yield:5.2,growth:5.1,risk:'Medium',signal:'HIGH POTENTIAL',price:220000},
-  Louth:{yield:5.0,growth:7.1,risk:'Low',signal:'HIGH POTENTIAL',price:235000},
-  Wexford:{yield:4.6,growth:6.3,risk:'Low',signal:'HIGH POTENTIAL',price:210000},
-  Kilkenny:{yield:4.4,growth:5.8,risk:'Low',signal:'MODERATE',price:230000},
-  Tipperary:{yield:5.8,growth:4.2,risk:'Medium',signal:'MODERATE',price:175000},
-  Clare:{yield:5.3,growth:5.6,risk:'Low',signal:'HIGH POTENTIAL',price:195000},
-  Kerry:{yield:4.9,growth:6.1,risk:'Medium',signal:'HIGH POTENTIAL',price:215000},
-  Mayo:{yield:6.2,growth:3.8,risk:'Medium',signal:'MODERATE',price:145000},
-  Sligo:{yield:5.9,growth:4.1,risk:'Medium',signal:'MODERATE',price:155000},
-  Donegal:{yield:6.5,growth:3.5,risk:'High',signal:'MODERATE',price:125000},
-  Roscommon:{yield:6.8,growth:3.2,risk:'High',signal:'AVOID',price:115000},
-  Laois:{yield:5.1,growth:5.9,risk:'Low',signal:'HIGH POTENTIAL',price:185000},
-  Offaly:{yield:5.3,growth:5.2,risk:'Medium',signal:'MODERATE',price:165000},
-  Westmeath:{yield:5.0,growth:5.4,risk:'Low',signal:'HIGH POTENTIAL',price:175000},
-  Longford:{yield:7.1,growth:2.8,risk:'High',signal:'AVOID',price:95000},
-  Cavan:{yield:6.1,growth:3.6,risk:'High',signal:'AVOID',price:130000},
-  Monaghan:{yield:5.7,growth:4.0,risk:'Medium',signal:'MODERATE',price:140000},
-  Carlow:{yield:5.2,growth:6.1,risk:'Low',signal:'HIGH POTENTIAL',price:190000},
-  Leitrim:{yield:7.8,growth:2.5,risk:'High',signal:'AVOID',price:85000}
+  Dublin:{yield:5.5,growth:5.3,risk:'Medium',signal:'HIGH POTENTIAL',price:484581,rpz:true},
+  Cork:{yield:5.1,growth:6.2,risk:'Low',signal:'HIGH POTENTIAL',price:320000,rpz:true},
+  Galway:{yield:4.8,growth:5.8,risk:'Low',signal:'HIGH POTENTIAL',price:285000,rpz:true},
+  Kildare:{yield:4.2,growth:6.8,risk:'Low',signal:'HIGH POTENTIAL',price:355000,rpz:true},
+  Meath:{yield:4.5,growth:7.1,risk:'Low',signal:'HIGH POTENTIAL',price:320000,rpz:true},
+  Wicklow:{yield:3.9,growth:5.5,risk:'Low',signal:'MODERATE',price:380000,rpz:true},
+  Limerick:{yield:5.4,growth:6.9,risk:'Low',signal:'HIGH POTENTIAL',price:245000,rpz:true},
+  Waterford:{yield:5.2,growth:5.1,risk:'Medium',signal:'HIGH POTENTIAL',price:220000,rpz:true},
+  Louth:{yield:5.0,growth:7.1,risk:'Low',signal:'HIGH POTENTIAL',price:235000,rpz:true},
+  Wexford:{yield:4.6,growth:6.3,risk:'Low',signal:'HIGH POTENTIAL',price:210000,rpz:false},
+  Kilkenny:{yield:4.4,growth:5.8,risk:'Low',signal:'MODERATE',price:230000,rpz:false},
+  Tipperary:{yield:5.8,growth:4.2,risk:'Medium',signal:'MODERATE',price:175000,rpz:false},
+  Clare:{yield:5.3,growth:5.6,risk:'Low',signal:'HIGH POTENTIAL',price:195000,rpz:true},
+  Kerry:{yield:4.9,growth:6.1,risk:'Medium',signal:'HIGH POTENTIAL',price:215000,rpz:false},
+  Mayo:{yield:6.2,growth:3.8,risk:'Medium',signal:'MODERATE',price:145000,rpz:false},
+  Sligo:{yield:5.9,growth:4.1,risk:'Medium',signal:'MODERATE',price:155000,rpz:false},
+  Donegal:{yield:6.5,growth:3.5,risk:'High',signal:'MODERATE',price:125000,rpz:false},
+  Roscommon:{yield:6.8,growth:3.2,risk:'High',signal:'AVOID',price:115000,rpz:false},
+  Laois:{yield:5.1,growth:5.9,risk:'Low',signal:'HIGH POTENTIAL',price:185000,rpz:true},
+  Offaly:{yield:5.3,growth:5.2,risk:'Medium',signal:'MODERATE',price:165000,rpz:true},
+  Westmeath:{yield:5.0,growth:5.4,risk:'Low',signal:'HIGH POTENTIAL',price:175000,rpz:true},
+  Longford:{yield:7.1,growth:2.8,risk:'High',signal:'AVOID',price:95000,rpz:false},
+  Cavan:{yield:6.1,growth:3.6,risk:'High',signal:'AVOID',price:130000,rpz:false},
+  Monaghan:{yield:5.7,growth:4.0,risk:'Medium',signal:'MODERATE',price:140000,rpz:false},
+  Carlow:{yield:5.2,growth:6.1,risk:'Low',signal:'HIGH POTENTIAL',price:190000,rpz:true},
+  Leitrim:{yield:7.8,growth:2.5,risk:'High',signal:'AVOID',price:85000,rpz:false}
 };
 
 let hmM='yield', hmS=null;
@@ -1363,6 +1363,10 @@ function hmCard(n){
         <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:white;">€${d.price.toLocaleString()}</div>
       </div>
     </div>
+    <div style="padding:0.6rem 1rem;border-top:1px solid #2a2c30;display:flex;align-items:center;justify-content:space-between;">
+      <span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:#6b6860;">RPZ Status</span>
+      <span style="font-size:0.75rem;font-weight:700;${d.rpz?'color:#f97316;':'color:#4ade80;'}">${d.rpz?'⚠ Yes — Rent Capped 2%':'✓ No — Market Rent OK'}</span>
+    </div>
     ${cta}`;
 }
 
@@ -1421,14 +1425,14 @@ hmPaint(); hmRank();
       </div>
       <div class="rp-section-title" style="margin-top:14px">Micro-Area Ranking Table</div>
       <table class="rp-table">
-        <thead><tr><th>#</th><th>Micro-Area</th><th>Median Price</th><th>5yr Growth</th><th>Yield</th><th>Risk</th><th>Signal</th></tr></thead>
+        <thead><tr><th>#</th><th>Micro-Area</th><th>Median Price</th><th>5yr Growth</th><th>Yield</th><th>Risk</th><th>RPZ</th><th>Signal</th><th>Confidence</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td>Snugborough Rd Dublin 15</td><td>€245,000</td><td class="g">+6.4%</td><td>13.6%</td><td>Medium</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
-          <tr><td>2</td><td>Ballymun Dublin 11</td><td>€250,000</td><td class="g">+16.0%</td><td>13.2%</td><td>Medium</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
-          <tr><td>3</td><td>Clondalkin, Dublin 22</td><td>€270,000</td><td class="g">+3.9%</td><td>11.9%</td><td>Low</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
-          <tr><td>4</td><td>Main St, Blanchardstown</td><td>€274,000</td><td class="g">+6.2%</td><td>11.7%</td><td>Low</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
-          <tr class="blur-row"><td>5</td><td>Northwood, Santry D9</td><td>€278,000</td><td>+16.2%</td><td>11.5%</td><td>Medium</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
-          <tr class="blur-row"><td>6</td><td>Monastery Rd Dublin 22</td><td>€290,000</td><td>+10.3%</td><td>10.8%</td><td>Low</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
+          <tr><td>1</td><td>Snugborough Rd Dublin 15</td><td>€245,000</td><td class="g">+6.4%</td><td>13.6%</td><td>Medium</td><td><span style="color:#f97316;font-size:.68rem;font-weight:700;">⚠ RPZ</span></td><td><span class="sig sb">HIGH POTENTIAL</span></td><td style="color:#f59e0b;">★★★</td></tr>
+          <tr><td>2</td><td>Ballymun Dublin 11</td><td>€250,000</td><td class="g">+16.0%</td><td>13.2%</td><td>Medium</td><td><span style="color:#f97316;font-size:.68rem;font-weight:700;">⚠ RPZ</span></td><td><span class="sig sb">HIGH POTENTIAL</span></td><td style="color:#f59e0b;">★★★</td></tr>
+          <tr><td>3</td><td>Clondalkin, Dublin 22</td><td>€270,000</td><td class="g">+3.9%</td><td>11.9%</td><td>Low</td><td><span style="color:#f97316;font-size:.68rem;font-weight:700;">⚠ RPZ</span></td><td><span class="sig sb">HIGH POTENTIAL</span></td><td style="color:#f59e0b;">★★★</td></tr>
+          <tr><td>4</td><td>Main St, Blanchardstown</td><td>€274,000</td><td class="g">+6.2%</td><td>11.7%</td><td>Low</td><td><span style="color:#f97316;font-size:.68rem;font-weight:700;">⚠ RPZ</span></td><td><span class="sig sb">HIGH POTENTIAL</span></td><td style="color:#f59e0b;">★★☆</td></tr>
+          <tr class="blur-row"><td>5</td><td>Northwood, Santry D9</td><td>€278,000</td><td>+16.2%</td><td>11.5%</td><td>Medium</td><td>⚠ RPZ</td><td><span class="sig sb">HIGH POTENTIAL</span></td><td>★★★</td></tr>
+          <tr class="blur-row"><td>6</td><td>Monastery Rd Dublin 22</td><td>€290,000</td><td>+10.3%</td><td>10.8%</td><td>Low</td><td>⚠ RPZ</td><td><span class="sig sb">HIGH POTENTIAL</span></td><td>★★☆</td></tr>
         </tbody>
       </table>
       <div class="rp-fade"></div>
@@ -1436,9 +1440,10 @@ hmPaint(); hmRank();
   </div>
 </div>
 <p style="text-align:center;font-size:.8rem;color:var(--t3);margin-top:1.5rem">Real data from the Dublin report &bull; Last rows blurred to show report depth</p>
+<p style="text-align:center;font-size:.78rem;color:#f97316;margin-top:.5rem;max-width:600px;margin-left:auto;margin-right:auto;">⚠ <strong>RPZ Note:</strong> All 4 areas above are in Rent Pressure Zones — annual rent increases are legally capped at 2%. Factor this into yield projections for existing tenancies.</p>
 </section>
 <section><div class="sh fade-in"><div class="ol">Investment Intelligence</div><h2>Three questions every Irish property investor needs answered</h2><p>Our reports score every micro-area on the metrics that actually matter for property investment decisions.</p></div><div class="pg"><div class="pc fade-in"><div class="pi">📈</div><h3>Where is growth strong?</h3><p>5-year compound growth rates for every micro-area, benchmarked against county and national averages.</p></div><div class="pc fade-in"><div class="pi">🛡️</div><h3>Where is risk low?</h3><p>Volatility scoring, transaction volume analysis, and price consistency metrics.</p></div><div class="pc fade-in"><div class="pi">💰</div><h3>What return will I get?</h3><p>Gross rental yield estimates using official RTB rent data, mapped to micro-area median prices.</p></div></div></section>
-<section class="is"><div class="ig fade-in"><div class="it"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Sample Data</div><h3>Micro-area precision — not vague county averages</h3><p>County-level data hides the real story. Our reports drill into individual areas — ranking them by growth, risk, and yield.</p><a href="#snap" class="bp" style="margin-top:.5rem">See Top Areas For Free →</a></div><div><table class="itable"><thead><tr><th>Micro-Area</th><th>Growth</th><th>Yield</th><th>Signal</th></tr></thead><tbody><tr><td>Swords, Dublin 17</td><td style="color:var(--green)">+8.2%</td><td>5.1%</td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr><td>Ballincollig, Cork</td><td style="color:var(--green)">+7.5%</td><td>4.8%</td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr><td>Salthill, Co. Galway</td><td style="color:var(--gold)">+5.1%</td><td>4.2%</td><td><span class="sm">MODERATE</span></td></tr><tr class="blur"><td>Castletroy, Co. Limerick</td><td>+6.9%</td><td>5.4%</td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr class="blur"><td>Drogheda, Louth</td><td>+7.1%</td><td>5.0%</td><td><span class="ss">HIGH POTENTIAL</span></td></tr></tbody></table><p style="font-size:.78rem;color:var(--t3);margin-top:.75rem;text-align:center">* Sample data — full reports contain all micro-areas per county</p></div></div></section>
+<section class="is"><div class="ig fade-in"><div class="it"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Sample Data</div><h3>Micro-area precision — not vague county averages</h3><p>County-level data hides the real story. Our reports drill into individual areas — ranking them by growth, risk, and yield.</p><a href="#snap" class="bp" style="margin-top:.5rem">See Top Areas For Free →</a></div><div><table class="itable"><thead><tr><th>Micro-Area</th><th>Growth</th><th>Yield</th><th>RPZ</th><th>Signal</th></tr></thead><tbody><tr><td>Swords, Dublin 17</td><td style="color:var(--green)">+8.2%</td><td>5.1%</td><td><span style="color:#f97316;font-weight:700;font-size:.75rem;">⚠ Yes</span></td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr><td>Ballincollig, Cork</td><td style="color:var(--green)">+7.5%</td><td>4.8%</td><td><span style="color:#f97316;font-weight:700;font-size:.75rem;">⚠ Yes</span></td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr><td>Salthill, Co. Galway</td><td style="color:var(--gold)">+5.1%</td><td>4.2%</td><td><span style="color:#f97316;font-weight:700;font-size:.75rem;">⚠ Yes</span></td><td><span class="sm">MODERATE</span></td></tr><tr class="blur"><td>Castletroy, Co. Limerick</td><td>+6.9%</td><td>5.4%</td><td>No</td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr class="blur"><td>Drogheda, Louth</td><td>+7.1%</td><td>5.0%</td><td>⚠ Yes</td><td><span class="ss">HIGH POTENTIAL</span></td></tr></tbody></table><p style="font-size:.78rem;color:var(--t3);margin-top:.75rem;text-align:center">* Sample data — full reports contain all micro-areas per county</p></div></div></section>
 <section id="how"><div class="sh fade-in"><div class="ol">How It Works</div><h2>How we turn 15 years of raw data into clear investment signals</h2></div><div class="sg fade-in"><div class="sr"><div class="sn">01</div><div class="st"><h3>We ingest 15 years of PPR transactions</h3><p>Every residential property sale registered in Ireland since 2010, cleaned and normalised.</p></div></div><div class="sr"><div class="sn">02</div><div class="st"><h3>Cross-reference with RTB rental data</h3><p>Official Q2 2025 rent figures mapped to micro-areas for yield calculation.</p></div></div><div class="sr"><div class="sn">03</div><div class="st"><h3>Score every micro-area on 3 dimensions</h3><p>Growth trajectory, risk profile, and rental yield — combined into a clear investment signal.</p></div></div><div class="sr"><div class="sn">04</div><div class="st"><h3>Delivered instantly as a detailed PDF report</h3><p>County-by-county intelligence you can read, share, or use to brief your mortgage advisor.</p></div></div></div></section>
 <section class="es" id="snap"><div class="eb fade-in"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Free — No Credit Card</div><h2>Get your free investor snapshot</h2><p style="margin-bottom:1.25rem">A 2-page investment briefing for any Irish county — free, instant, no credit card. See the top areas before you commit to the full report.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;max-width:420px;margin:0 auto 1.5rem;text-align:left"><div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1rem"><div style="font-size:.78rem;color:var(--green);font-weight:700;margin-bottom:.4rem">FREE SNAPSHOT</div><ul style="list-style:none;font-size:.82rem;color:var(--t2);line-height:1.9"><li>✓ Top 3 micro-areas</li><li>✓ Growth rate per area</li><li>✓ Rental yield estimate</li><li>✓ Risk score</li><li>✓ BUY / AVOID signal</li><li style="color:var(--t3)">✗ Full area rankings</li><li style="color:var(--t3)">✗ All micro-areas scored</li><li style="color:var(--t3)">✗ Investment breakdown</li></ul></div><div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.25);border-radius:10px;padding:1rem"><div style="font-size:.78rem;color:var(--gold);font-weight:700;margin-bottom:.4rem">FULL REPORT — €29</div><ul style="list-style:none;font-size:.82rem;color:var(--t2);line-height:1.9"><li style="color:var(--t3)">—</li><li style="color:var(--t3)">—</li><li style="color:var(--t3)">—</li><li style="color:var(--t3)">—</li><li style="color:var(--t3)">—</li><li>✓ Every micro-area ranked</li><li>✓ Full scoring breakdown</li><li>✓ Complete investment guide</li></ul></div></div><div class="ef" id="snapStep1"><select id="snapCounty" required style="flex:1;padding:.85rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem"><option value="" disabled selected>Select county...</option>%COUNTY_OPTIONS%</select><button type="button" class="bp" onclick="openSnapModal()">See Top Areas For Free →</button></div><p class="en">Free snapshot — enter your email to receive it. Upgrade to full report anytime for €29.</p></div></section>
 <!-- Email Gate Modal -->
