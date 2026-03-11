@@ -304,7 +304,7 @@ def analyse_county(county_name):
     results_df = pd.DataFrame(results)
 
     # Sort by signal strength, then yield, then growth
-    signal_order = {"STRONG BUY": 0, "BUY": 1, "MODERATE": 2, "HOLD": 3, "AVOID": 4}
+    signal_order = {"HIGH POTENTIAL": 0, "GOOD PROSPECT": 1, "MODERATE POTENTIAL": 2, "HOLD": 3, "CAUTION": 4}
     results_df["signal_rank"] = results_df["signal"].map(signal_order)
     results_df = results_df.sort_values(
         ["signal_rank", "gross_yield", "growth_5yr"],
@@ -357,18 +357,29 @@ def compute_signal(growth, gross_yield, risk):
         score -= 1
 
     if score >= 6:
-        return "STRONG BUY"
+        return "HIGH POTENTIAL"
     elif score >= 4:
-        return "BUY"
+        return "GOOD PROSPECT"
     elif score >= 2:
-        return "MODERATE"
+        return "MODERATE POTENTIAL"
     elif score >= 0:
         return "HOLD"
     else:
-        return "AVOID"
+        return "CAUTION"
 
 
 # ─── CHART GENERATION ───────────────────────────────────
+
+def confidence_badge(transactions):
+    """Return (label, emoji, tooltip) based on transaction count."""
+    if transactions >= 15:
+        return "High Confidence", "🟡", "Based on 15+ recent sales — statistically reliable."
+    elif transactions >= 6:
+        return "Medium Confidence", "⚪", "Based on 6-14 sales — good indicator, check for outliers."
+    else:
+        return "Low Confidence", "🟤", "Based on fewer than 6 sales — use as early indicator only."
+
+
 def make_price_chart(yearly_df, county_name):
     """Generate a price trend chart and return as bytes."""
     fig, ax = plt.subplots(figsize=(7, 3.2))
@@ -412,9 +423,9 @@ def make_top_areas_chart(micro_df, county_name, top_n=10):
 
     colors = []
     for s in top["signal"]:
-        if s == "STRONG BUY":
+        if s == "HIGH POTENTIAL":
             colors.append("#10B981")
-        elif s == "BUY":
+        elif s == "GOOD PROSPECT":
             colors.append("#3B82F6")
         elif s == "MODERATE":
             colors.append("#F59E0B")
@@ -552,11 +563,12 @@ def build_pdf_report(analysis, is_snapshot=False):
         table_data_df = micro_df
 
     # Table header
-    header = ["#", "Micro-Area", "Median Price", "5yr Growth", "Yield", "Risk", "Signal", "Txns"]
+    header = ["#", "Micro-Area", "Median Price", "5yr Growth", "Yield", "Risk", "Signal", "Txns", "Confidence"]
 
     table_rows = [header]
     for idx, row in table_data_df.iterrows():
         rank = len(table_rows)
+        conf_label, conf_emoji, _ = confidence_badge(row["transactions"])
         table_rows.append([
             str(rank),
             str(row["area"])[:25],
@@ -566,10 +578,11 @@ def build_pdf_report(analysis, is_snapshot=False):
             row["risk"],
             row["signal"],
             str(row["transactions"]),
+            f"{conf_emoji} {conf_label.split()[0]}",
         ])
 
     # Column widths
-    col_w = [0.6*cm, 4.2*cm, 2.4*cm, 2*cm, 1.6*cm, 1.6*cm, 2.4*cm, 1.4*cm]
+    col_w = [0.5*cm, 3.8*cm, 2.2*cm, 1.8*cm, 1.4*cm, 1.4*cm, 2.2*cm, 1.1*cm, 2.0*cm]
 
     tbl = Table(table_rows, colWidths=col_w, repeatRows=1)
 
@@ -597,15 +610,15 @@ def build_pdf_report(analysis, is_snapshot=False):
     # Color-code signals
     for i, row in enumerate(table_rows[1:], start=1):
         signal = row[6]
-        if signal == "STRONG BUY":
+        if signal == "HIGH POTENTIAL":
             tbl_style.append(("TEXTCOLOR", (6, i), (6, i), C_GREEN))
             tbl_style.append(("FONTNAME", (6, i), (6, i), "Helvetica-Bold"))
-        elif signal == "BUY":
+        elif signal == "GOOD PROSPECT":
             tbl_style.append(("TEXTCOLOR", (6, i), (6, i), C_BLUE))
             tbl_style.append(("FONTNAME", (6, i), (6, i), "Helvetica-Bold"))
-        elif signal == "MODERATE":
+        elif signal == "MODERATE POTENTIAL":
             tbl_style.append(("TEXTCOLOR", (6, i), (6, i), C_GOLD))
-        elif signal == "AVOID":
+        elif signal == "CAUTION":
             tbl_style.append(("TEXTCOLOR", (6, i), (6, i), C_RED))
 
         # Color-code risk
@@ -683,9 +696,9 @@ def build_pdf_report(analysis, is_snapshot=False):
 
         elements.append(Paragraph("Investment Signal", s_h3))
         elements.append(Paragraph(
-            "Each micro-area receives a composite investment signal (STRONG BUY / BUY / MODERATE / HOLD / AVOID) "
+            "Each micro-area receives a data signal (HIGH POTENTIAL / GOOD PROSPECT / MODERATE POTENTIAL / HOLD / CAUTION) "
             "based on a weighted scoring of growth rate, gross yield, and risk classification. Areas must perform "
-            "well across all three dimensions to receive a STRONG BUY rating.",
+            "well across all three dimensions to receive a HIGH POTENTIAL rating.",
             s_body
         ))
 
@@ -834,7 +847,7 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 </style>
 </head>
 <body>
-<nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#meth">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
+<nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
 
 <!-- ── HERO ── -->
 <section class="hero" style="padding:7rem 2rem 3rem;">
@@ -1149,31 +1162,31 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 
 <script>
 const hmD={
-  Dublin:{yield:5.5,growth:5.3,risk:'Medium',signal:'STRONG BUY',price:484581},
-  Cork:{yield:5.1,growth:6.2,risk:'Low',signal:'STRONG BUY',price:320000},
-  Galway:{yield:4.8,growth:5.8,risk:'Low',signal:'STRONG BUY',price:285000},
-  Kildare:{yield:4.2,growth:6.8,risk:'Low',signal:'STRONG BUY',price:355000},
-  Meath:{yield:4.5,growth:7.1,risk:'Low',signal:'STRONG BUY',price:320000},
+  Dublin:{yield:5.5,growth:5.3,risk:'Medium',signal:'HIGH POTENTIAL',price:484581},
+  Cork:{yield:5.1,growth:6.2,risk:'Low',signal:'HIGH POTENTIAL',price:320000},
+  Galway:{yield:4.8,growth:5.8,risk:'Low',signal:'HIGH POTENTIAL',price:285000},
+  Kildare:{yield:4.2,growth:6.8,risk:'Low',signal:'HIGH POTENTIAL',price:355000},
+  Meath:{yield:4.5,growth:7.1,risk:'Low',signal:'HIGH POTENTIAL',price:320000},
   Wicklow:{yield:3.9,growth:5.5,risk:'Low',signal:'MODERATE',price:380000},
-  Limerick:{yield:5.4,growth:6.9,risk:'Low',signal:'STRONG BUY',price:245000},
-  Waterford:{yield:5.2,growth:5.1,risk:'Medium',signal:'STRONG BUY',price:220000},
-  Louth:{yield:5.0,growth:7.1,risk:'Low',signal:'STRONG BUY',price:235000},
-  Wexford:{yield:4.6,growth:6.3,risk:'Low',signal:'STRONG BUY',price:210000},
+  Limerick:{yield:5.4,growth:6.9,risk:'Low',signal:'HIGH POTENTIAL',price:245000},
+  Waterford:{yield:5.2,growth:5.1,risk:'Medium',signal:'HIGH POTENTIAL',price:220000},
+  Louth:{yield:5.0,growth:7.1,risk:'Low',signal:'HIGH POTENTIAL',price:235000},
+  Wexford:{yield:4.6,growth:6.3,risk:'Low',signal:'HIGH POTENTIAL',price:210000},
   Kilkenny:{yield:4.4,growth:5.8,risk:'Low',signal:'MODERATE',price:230000},
   Tipperary:{yield:5.8,growth:4.2,risk:'Medium',signal:'MODERATE',price:175000},
-  Clare:{yield:5.3,growth:5.6,risk:'Low',signal:'STRONG BUY',price:195000},
-  Kerry:{yield:4.9,growth:6.1,risk:'Medium',signal:'STRONG BUY',price:215000},
+  Clare:{yield:5.3,growth:5.6,risk:'Low',signal:'HIGH POTENTIAL',price:195000},
+  Kerry:{yield:4.9,growth:6.1,risk:'Medium',signal:'HIGH POTENTIAL',price:215000},
   Mayo:{yield:6.2,growth:3.8,risk:'Medium',signal:'MODERATE',price:145000},
   Sligo:{yield:5.9,growth:4.1,risk:'Medium',signal:'MODERATE',price:155000},
   Donegal:{yield:6.5,growth:3.5,risk:'High',signal:'MODERATE',price:125000},
   Roscommon:{yield:6.8,growth:3.2,risk:'High',signal:'AVOID',price:115000},
-  Laois:{yield:5.1,growth:5.9,risk:'Low',signal:'STRONG BUY',price:185000},
+  Laois:{yield:5.1,growth:5.9,risk:'Low',signal:'HIGH POTENTIAL',price:185000},
   Offaly:{yield:5.3,growth:5.2,risk:'Medium',signal:'MODERATE',price:165000},
-  Westmeath:{yield:5.0,growth:5.4,risk:'Low',signal:'STRONG BUY',price:175000},
+  Westmeath:{yield:5.0,growth:5.4,risk:'Low',signal:'HIGH POTENTIAL',price:175000},
   Longford:{yield:7.1,growth:2.8,risk:'High',signal:'AVOID',price:95000},
   Cavan:{yield:6.1,growth:3.6,risk:'High',signal:'AVOID',price:130000},
   Monaghan:{yield:5.7,growth:4.0,risk:'Medium',signal:'MODERATE',price:140000},
-  Carlow:{yield:5.2,growth:6.1,risk:'Low',signal:'STRONG BUY',price:190000},
+  Carlow:{yield:5.2,growth:6.1,risk:'Low',signal:'HIGH POTENTIAL',price:190000},
   Leitrim:{yield:7.8,growth:2.5,risk:'High',signal:'AVOID',price:85000}
 };
 
@@ -1213,7 +1226,7 @@ function hmSel(n){
 
 function hmCard(n){
   const d=hmD[n]; if(!d) return;
-  const sc=d.signal==='STRONG BUY'?'background:rgba(26,107,60,0.3);color:#4ade80':
+  const sc=d.signal==='HIGH POTENTIAL'?'background:rgba(26,107,60,0.3);color:#4ade80':
            d.signal==='MODERATE'?'background:rgba(201,168,76,0.2);color:#c9a84c':
            'background:rgba(192,57,43,0.2);color:#ef4444';
   const gc=d.growth>=6?'#4ade80':d.growth>=4?'#c9a84c':'#ef4444';
@@ -1306,12 +1319,12 @@ hmPaint(); hmRank();
       <table class="rp-table">
         <thead><tr><th>#</th><th>Micro-Area</th><th>Median Price</th><th>5yr Growth</th><th>Yield</th><th>Risk</th><th>Signal</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td>Snugborough Rd Dublin 15</td><td>€245,000</td><td class="g">+6.4%</td><td>13.6%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr><td>2</td><td>Ballymun Dublin 11</td><td>€250,000</td><td class="g">+16.0%</td><td>13.2%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr><td>3</td><td>Clondalkin</td><td>€270,000</td><td class="g">+3.9%</td><td>11.9%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr><td>4</td><td>Main St</td><td>€274,000</td><td class="g">+6.2%</td><td>11.7%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr class="blur-row"><td>5</td><td>Northwood</td><td>€278,000</td><td>+16.2%</td><td>11.5%</td><td>Medium</td><td><span class="sig sb">STRONG BUY</span></td></tr>
-          <tr class="blur-row"><td>6</td><td>Monastery Rd Dublin 22</td><td>€290,000</td><td>+10.3%</td><td>10.8%</td><td>Low</td><td><span class="sig sb">STRONG BUY</span></td></tr>
+          <tr><td>1</td><td>Snugborough Rd Dublin 15</td><td>€245,000</td><td class="g">+6.4%</td><td>13.6%</td><td>Medium</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
+          <tr><td>2</td><td>Ballymun Dublin 11</td><td>€250,000</td><td class="g">+16.0%</td><td>13.2%</td><td>Medium</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
+          <tr><td>3</td><td>Clondalkin</td><td>€270,000</td><td class="g">+3.9%</td><td>11.9%</td><td>Low</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
+          <tr><td>4</td><td>Main St</td><td>€274,000</td><td class="g">+6.2%</td><td>11.7%</td><td>Low</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
+          <tr class="blur-row"><td>5</td><td>Northwood</td><td>€278,000</td><td>+16.2%</td><td>11.5%</td><td>Medium</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
+          <tr class="blur-row"><td>6</td><td>Monastery Rd Dublin 22</td><td>€290,000</td><td>+10.3%</td><td>10.8%</td><td>Low</td><td><span class="sig sb">HIGH POTENTIAL</span></td></tr>
         </tbody>
       </table>
       <div class="rp-fade"></div>
@@ -1321,7 +1334,7 @@ hmPaint(); hmRank();
 <p style="text-align:center;font-size:.8rem;color:var(--t3);margin-top:1.5rem">Real data from the Dublin report &bull; Last rows blurred to show report depth</p>
 </section>
 <section><div class="sh fade-in"><div class="ol">Investment Intelligence</div><h2>Three questions every Irish property investor needs answered</h2><p>Our reports score every micro-area on the metrics that actually matter for property investment decisions.</p></div><div class="pg"><div class="pc fade-in"><div class="pi">📈</div><h3>Where is growth strong?</h3><p>5-year compound growth rates for every micro-area, benchmarked against county and national averages.</p></div><div class="pc fade-in"><div class="pi">🛡️</div><h3>Where is risk low?</h3><p>Volatility scoring, transaction volume analysis, and price consistency metrics.</p></div><div class="pc fade-in"><div class="pi">💰</div><h3>What return will I get?</h3><p>Gross rental yield estimates using official RTB rent data, mapped to micro-area median prices.</p></div></div></section>
-<section class="is"><div class="ig fade-in"><div class="it"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Sample Data</div><h3>Micro-area precision — not vague county averages</h3><p>County-level data hides the real story. Our reports drill into individual areas — ranking them by growth, risk, and yield.</p><a href="#snap" class="bp" style="margin-top:.5rem">See Top Areas For Free →</a></div><div><table class="itable"><thead><tr><th>Micro-Area</th><th>Growth</th><th>Yield</th><th>Signal</th></tr></thead><tbody><tr><td>Swords, Dublin</td><td style="color:var(--green)">+8.2%</td><td>5.1%</td><td><span class="ss">STRONG BUY</span></td></tr><tr><td>Ballincollig, Cork</td><td style="color:var(--green)">+7.5%</td><td>4.8%</td><td><span class="ss">STRONG BUY</span></td></tr><tr><td>Salthill, Galway</td><td style="color:var(--gold)">+5.1%</td><td>4.2%</td><td><span class="sm">MODERATE</span></td></tr><tr class="blur"><td>Castletroy, Limerick</td><td>+6.9%</td><td>5.4%</td><td><span class="ss">STRONG BUY</span></td></tr><tr class="blur"><td>Drogheda, Louth</td><td>+7.1%</td><td>5.0%</td><td><span class="ss">STRONG BUY</span></td></tr></tbody></table><p style="font-size:.78rem;color:var(--t3);margin-top:.75rem;text-align:center">* Sample data — full reports contain all micro-areas per county</p></div></div></section>
+<section class="is"><div class="ig fade-in"><div class="it"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Sample Data</div><h3>Micro-area precision — not vague county averages</h3><p>County-level data hides the real story. Our reports drill into individual areas — ranking them by growth, risk, and yield.</p><a href="#snap" class="bp" style="margin-top:.5rem">See Top Areas For Free →</a></div><div><table class="itable"><thead><tr><th>Micro-Area</th><th>Growth</th><th>Yield</th><th>Signal</th></tr></thead><tbody><tr><td>Swords, Dublin</td><td style="color:var(--green)">+8.2%</td><td>5.1%</td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr><td>Ballincollig, Cork</td><td style="color:var(--green)">+7.5%</td><td>4.8%</td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr><td>Salthill, Galway</td><td style="color:var(--gold)">+5.1%</td><td>4.2%</td><td><span class="sm">MODERATE</span></td></tr><tr class="blur"><td>Castletroy, Limerick</td><td>+6.9%</td><td>5.4%</td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr class="blur"><td>Drogheda, Louth</td><td>+7.1%</td><td>5.0%</td><td><span class="ss">HIGH POTENTIAL</span></td></tr></tbody></table><p style="font-size:.78rem;color:var(--t3);margin-top:.75rem;text-align:center">* Sample data — full reports contain all micro-areas per county</p></div></div></section>
 <section id="how"><div class="sh fade-in"><div class="ol">How It Works</div><h2>How we turn 15 years of raw data into clear investment signals</h2></div><div class="sg fade-in"><div class="sr"><div class="sn">01</div><div class="st"><h3>We ingest 15 years of PPR transactions</h3><p>Every residential property sale registered in Ireland since 2010, cleaned and normalised.</p></div></div><div class="sr"><div class="sn">02</div><div class="st"><h3>Cross-reference with RTB rental data</h3><p>Official Q2 2025 rent figures mapped to micro-areas for yield calculation.</p></div></div><div class="sr"><div class="sn">03</div><div class="st"><h3>Score every micro-area on 3 dimensions</h3><p>Growth trajectory, risk profile, and rental yield — combined into a clear investment signal.</p></div></div><div class="sr"><div class="sn">04</div><div class="st"><h3>Delivered instantly as a detailed PDF report</h3><p>County-by-county intelligence you can read, share, or use to brief your mortgage advisor.</p></div></div></div></section>
 <section class="es" id="snap"><div class="eb fade-in"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Free — No Credit Card</div><h2>Get your free investor snapshot</h2><p style="margin-bottom:1.25rem">A 2-page investment briefing for any Irish county — free, instant, no credit card. See the top areas before you commit to the full report.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;max-width:420px;margin:0 auto 1.5rem;text-align:left"><div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1rem"><div style="font-size:.78rem;color:var(--green);font-weight:700;margin-bottom:.4rem">FREE SNAPSHOT</div><ul style="list-style:none;font-size:.82rem;color:var(--t2);line-height:1.9"><li>✓ Top 3 micro-areas</li><li>✓ Growth rate per area</li><li>✓ Rental yield estimate</li><li>✓ Risk score</li><li>✓ BUY / AVOID signal</li><li style="color:var(--t3)">✗ Full area rankings</li><li style="color:var(--t3)">✗ All micro-areas scored</li><li style="color:var(--t3)">✗ Investment breakdown</li></ul></div><div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.25);border-radius:10px;padding:1rem"><div style="font-size:.78rem;color:var(--gold);font-weight:700;margin-bottom:.4rem">FULL REPORT — €29</div><ul style="list-style:none;font-size:.82rem;color:var(--t2);line-height:1.9"><li style="color:var(--t3)">—</li><li style="color:var(--t3)">—</li><li style="color:var(--t3)">—</li><li style="color:var(--t3)">—</li><li style="color:var(--t3)">—</li><li>✓ Every micro-area ranked</li><li>✓ Full scoring breakdown</li><li>✓ Complete investment guide</li></ul></div></div><div class="ef" id="snapStep1"><select id="snapCounty" required style="flex:1;padding:.85rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem"><option value="" disabled selected>Select county...</option>%COUNTY_OPTIONS%</select><button type="button" class="bp" onclick="openSnapModal()">See Top Areas For Free →</button></div><p class="en">Free snapshot — enter your email to receive it. Upgrade to full report anytime for €29.</p></div></section>
 <!-- Email Gate Modal -->
@@ -1656,7 +1669,7 @@ input,select{{font-family:'DM Sans',sans-serif;font-size:1rem;padding:0.75rem 1r
     predicted  = np.expm1(model.predict(X)[0])
     diff_pct   = ((asking_price - predicted) / predicted) * 100
 
-    if diff_pct <= -15: verdict,color,bg = "STRONG BUY","#1a6b3c","#f0faf4"
+    if diff_pct <= -15: verdict,color,bg = "HIGH POTENTIAL","#1a6b3c","#f0faf4"
     elif diff_pct <= -5: verdict,color,bg = "GOOD DEAL","#1a6b3c","#f0faf4"
     elif diff_pct <= 5:  verdict,color,bg = "FAIR","#a07c10","#fffbf0"
     elif diff_pct <= 15: verdict,color,bg = "OVERPRICED","#d4821a","#fff8f0"
@@ -1710,6 +1723,118 @@ nav{{border-bottom:1px solid #ddd8ce;padding:1.2rem 2rem;display:flex;align-item
 </div>
 </body></html>"""
 # ── END DEAL CHECKER ───────────────────────────────────────────
+
+@app.route("/methodology")
+def methodology():
+    return """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Methodology | IrishPropertyInsights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#0B1120;color:#F1F5F9;line-height:1.7}
+nav{padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(148,163,184,.1);background:rgba(11,17,32,.9)}
+.nl{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:#F1F5F9;text-decoration:none}
+.nl span{color:#10B981}
+.back{font-size:.85rem;color:#94A3B8;text-decoration:none}
+.back:hover{color:#F1F5F9}
+main{max-width:760px;margin:0 auto;padding:4rem 2rem}
+h1{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:700;margin-bottom:.75rem;line-height:1.15}
+.sub{color:#94A3B8;font-size:1.05rem;margin-bottom:3rem;max-width:560px}
+.section{margin-bottom:2.5rem;padding:2rem;background:#1A2332;border:1px solid rgba(148,163,184,.1);border-radius:12px;border-left:3px solid #10B981}
+.section.gold{border-left-color:#F59E0B}
+.section.blue{border-left-color:#3B82F6}
+.section.red{border-left-color:#EF4444}
+h2{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;margin-bottom:.75rem;color:#F1F5F9}
+p{color:#94A3B8;font-size:.95rem;margin-bottom:.75rem}
+p:last-child{margin-bottom:0}
+strong{color:#CBD5E1}
+.conf-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.88rem}
+.conf-table th{text-align:left;padding:.6rem 1rem;background:rgba(148,163,184,.08);color:#64748B;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+.conf-table td{padding:.6rem 1rem;border-top:1px solid rgba(148,163,184,.08);color:#94A3B8}
+.conf-table tr:hover td{background:rgba(255,255,255,.02)}
+.badge{display:inline-block;padding:.2rem .6rem;border-radius:4px;font-size:.75rem;font-weight:700}
+.badge.gold{background:rgba(245,158,11,.15);color:#F59E0B}
+.badge.silver{background:rgba(148,163,184,.15);color:#CBD5E1}
+.badge.bronze{background:rgba(180,120,60,.15);color:#C97A3A}
+.disclaimer{margin-top:3rem;padding:1.5rem;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:8px;font-size:.85rem;color:#94A3B8}
+footer{text-align:center;padding:2rem;border-top:1px solid rgba(148,163,184,.1);font-size:.8rem;color:#475569}
+footer a{color:#64748B;text-decoration:none}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nl">Irish<span>Property</span>Insights</a>
+  <a href="/" class="back">← Back to site</a>
+</nav>
+<main>
+  <h1>Data Transparency &amp; Methodology</h1>
+  <p class="sub">How we turn 727,000 raw property transactions into actionable investment signals — and how to read our confidence scores.</p>
+
+  <div class="section">
+    <h2>📊 Data Source 1 — Property Price Register (PPR)</h2>
+    <p>We ingest every residential property transaction registered in Ireland since 2010 from the <strong>Property Services Regulatory Authority's Property Price Register</strong> — the official government record of all settled sale prices.</p>
+    <p>Unlike asking prices on listing sites like Daft or MyHome, PPR data reflects <strong>actual completed transactions</strong>. We clean, deduplicate, and normalise this data to extract micro-area signals.</p>
+    <p><strong>Coverage:</strong> 727,000+ transactions across all 26 counties, 2010–2024.</p>
+  </div>
+
+  <div class="section gold">
+    <h2>🏠 Data Source 2 — RTB Rental Index</h2>
+    <p>Rental yield estimates are cross-referenced with <strong>Residential Tenancies Board (RTB) Q2 2025 quarterly rent data</strong> — the official Irish government rental index.</p>
+    <p>We map county-level RTB rents to micro-areas using a <strong>0.4× dampening factor</strong> that adjusts for the price difference between a micro-area and its county average. This prevents overstating yields in lower-priced areas.</p>
+    <p><strong>Formula:</strong> Gross Yield = (Adjusted Annual Rent ÷ Micro-Area Median Price) × 100</p>
+  </div>
+
+  <div class="section blue">
+    <h2>📈 Growth Calculation</h2>
+    <p>5-year <strong>Compound Annual Growth Rate (CAGR)</strong> is calculated for each micro-area using yearly median sale prices. Only micro-areas with <strong>10+ transactions in the 5-year window</strong> are included — thin markets are excluded entirely.</p>
+    <p><strong>Formula:</strong> CAGR = ((Latest Median ÷ Earliest Median) ^ (1 ÷ Years)) − 1</p>
+  </div>
+
+  <div class="section">
+    <h2>⚖️ Risk Model</h2>
+    <p>Risk is assessed using the <strong>Coefficient of Variation (CV)</strong> — price standard deviation divided by mean — combined with average annual transaction volume.</p>
+    <p><strong>Low Risk:</strong> CV &lt; 15% and 5+ annual transactions.<br>
+       <strong>Medium Risk:</strong> CV &lt; 25% or 3+ annual transactions.<br>
+       <strong>High Risk:</strong> All others. Thinly-traded markets are penalised.</p>
+  </div>
+
+  <div class="section gold">
+    <h2>🎯 Investment Signals</h2>
+    <p>Each micro-area receives a composite data signal based on weighted scoring of growth rate, gross yield, and risk classification. These are <strong>data indicators, not financial advice</strong>.</p>
+    <table class="conf-table">
+      <tr><th>Signal</th><th>What it means</th></tr>
+      <tr><td><strong>HIGH POTENTIAL</strong></td><td>Strong yield, strong growth, low-medium risk. Score ≥ 6.</td></tr>
+      <tr><td><strong>GOOD PROSPECT</strong></td><td>Above-average on multiple dimensions. Score 4–5.</td></tr>
+      <tr><td><strong>MODERATE POTENTIAL</strong></td><td>Some positive indicators but not across the board. Score 2–3.</td></tr>
+      <tr><td><strong>HOLD</strong></td><td>Neutral — no strong positive or negative signals. Score 0–1.</td></tr>
+      <tr><td><strong>CAUTION</strong></td><td>Negative growth, high risk, or poor yield combination. Score &lt; 0.</td></tr>
+    </table>
+  </div>
+
+  <div class="section blue">
+    <h2>🏅 Data Confidence Score</h2>
+    <p>Every micro-area is assigned a confidence level based on the number of recent transactions. Low sample sizes can be skewed by a single high-value sale — the confidence score tells you how much weight to give the signal.</p>
+    <table class="conf-table">
+      <tr><th>Badge</th><th>Transactions</th><th>Meaning</th></tr>
+      <tr><td><span class="badge gold">🟡 High</span></td><td>15+ sales</td><td>Statistically significant. Trends are reliable.</td></tr>
+      <tr><td><span class="badge silver">⚪ Medium</span></td><td>6–14 sales</td><td>Good indicator. Check for 1–2 outliers that may skew the average.</td></tr>
+      <tr><td><span class="badge bronze">🟤 Low</span></td><td>1–5 sales</td><td>Small sample. Use as early-stage indicator only — not a final valuation.</td></tr>
+    </table>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Important:</strong> All signals and scores are generated from historical public records for informational purposes only. They do not constitute financial advice. Gross yield estimates do not account for management fees, maintenance, LPT, vacancy, or financing costs. Always conduct independent due diligence and consult a qualified financial advisor before making any investment decision.
+  </div>
+</main>
+<footer><p>© 2025 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/">Back to site</a></p></footer>
+</body>
+</html>"""
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=PORT)
