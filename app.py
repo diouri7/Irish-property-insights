@@ -1376,7 +1376,10 @@ hmPaint(); hmRank();
     <p style="font-size:.82rem;color:var(--t3);margin-top:1.5rem;text-align:center">All data from <a href="https://www.propertypriceregister.ie" target="_blank" style="color:var(--t2);text-decoration:none">Property Price Register</a> &amp; <a href="https://www.rtb.ie" target="_blank" style="color:var(--t2);text-decoration:none">Residential Tenancies Board</a> — official Irish government sources.</p>
   </div>
 </section>
-<footer><p>© 2025 IrishPropertyInsights. Data from <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a>. For informational purposes only — not financial advice.</p></footer>
+<footer>
+  <p>© 2025 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/methodology">Methodology</a></p>
+  <p style="margin-top:.4rem;font-size:.76rem;color:var(--t3)">IrishPropertyInsights provides data analysis based on public records. It is not financial advice. Always consult a qualified advisor before making investment decisions.</p>
+</footer>
 <div class="toast" id="toast"></div>
 <script>
 const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('visible')})},{threshold:.15});
@@ -1387,6 +1390,10 @@ function closeSnapModal(){document.getElementById('snapModal').style.display='no
 async function submitSnapModal(){const em=document.getElementById('snapEmail').value;const co=document.getElementById('snapCounty').value;if(!em||!em.includes('@')){showToast('Please enter a valid email.');return;}try{await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,county:co,type:'snapshot_download',message:'Free snapshot downloaded: '+co+' by '+em})});}catch(e){}closeSnapModal();showToast('✓ Downloading your '+co+' snapshot...');setTimeout(()=>{window.location.href='/snapshot?county='+encodeURIComponent(co);},600);setTimeout(()=>{const reportsEl=document.getElementById('reports');if(reportsEl){const sel=document.getElementById('countyBuySelect');if(sel){for(let i=0;i<sel.options.length;i++){if(sel.options[i].text===co){sel.value=sel.options[i].value;break;}}}showToast('📊 Want all micro-areas for '+co+'? Scroll to Full Reports — €29');reportsEl.scrollIntoView({behavior:'smooth'});}},4000);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSnapModal();});
 </script>
+<div style="text-align:center;padding:1.5rem 2rem;border-top:1px solid #e8e4dc;margin-top:2rem;font-size:.76rem;color:#9a9690;line-height:1.6;">
+  IrishPropertyInsights provides data analysis based on public records. It is not financial advice.<br>
+  <a href="/" style="color:#9a9690">Home</a> · <a href="/methodology" style="color:#9a9690">Methodology</a>
+</div>
 </body></html>"""
 
 
@@ -1853,6 +1860,16 @@ footer a{color:#64748B;text-decoration:none}
 
   <div class="disclaimer">
     <strong>Important:</strong> All signals and scores are generated from historical public records for informational purposes only. They do not constitute financial advice. Gross yield estimates do not account for management fees, maintenance, LPT, vacancy, or financing costs. Always conduct independent due diligence and consult a qualified financial advisor before making any investment decision.
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;padding:2.5rem;background:#1A2332;border:1px solid rgba(148,163,184,.1);border-radius:16px;">
+    <p style="color:#94A3B8;font-size:.95rem;margin-bottom:1.25rem;">Ready to put this into practice?</p>
+    <h3 style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:600;margin-bottom:1.5rem;color:#F1F5F9;">See the data for your county</h3>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="/#snap" style="display:inline-block;padding:.85rem 1.8rem;background:#10B981;color:#fff;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;">Get Free County Snapshot →</a>
+      <a href="/#reports" style="display:inline-block;padding:.85rem 1.8rem;background:transparent;color:#CBD5E1;border:1px solid rgba(148,163,184,.2);border-radius:10px;font-weight:500;font-size:.95rem;text-decoration:none;">View Full Reports — €29</a>
+    </div>
+    <p style="font-size:.78rem;color:#475569;margin-top:1rem;">No credit card required for the free snapshot</p>
   </div>
 </main>
 <footer><p>© 2025 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/">Back to site</a></p></footer>
