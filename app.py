@@ -1029,24 +1029,31 @@ def _load_or_train():
     if not os.path.exists(csv_path) and not os.path.exists("PPR-ALL.zip"):
         print("Downloading PPR CSV…")
         import urllib.request
-        # Try multiple URLs for PPR data
-        urls = [
-            "https://www.propertypriceregister.ie/website/npsra/ppr/npsra-ppr.nsf/Downloads/PPR-ALL.zip/$FILE/PPR-ALL.zip",
-            "https://data.gov.ie/dataset/property-price-register/resource/98c5e0f6-79fc-4ff4-a50e-e32d2c469e5e",
-        ]
-        url = urls[0]
+        # Download from Google Drive
+        url = "https://drive.google.com/uc?export=download&id=1_swvDrOfx66RHsDWwaGpn6Cifx3NLktV"
         try:
             # Use requests with timeout instead of urlretrieve
             import requests as req_lib
             import ssl
-            resp = req_lib.get(url, timeout=300, stream=True, verify=False)
-            with open("PPR-ALL.zip", "wb") as zf:
-                for chunk in resp.iter_content(chunk_size=8192):
-                    zf.write(chunk)
-            import zipfile
-            with zipfile.ZipFile("PPR-ALL.zip", "r") as z:
-                z.extractall(".")
-            print("PPR CSV downloaded and extracted.")
+            # Google Drive large file download (handles virus scan confirmation)
+            session = req_lib.Session()
+            resp = session.get(url, stream=True, verify=False, timeout=300)
+            # Check for Google Drive confirmation page
+            token = None
+            for key, value in resp.cookies.items():
+                if key.startswith("download_warning"):
+                    token = value
+                    break
+            if token:
+                params = {"confirm": token, "id": "1_swvDrOfx66RHsDWwaGpn6Cifx3NLktV"}
+                resp = session.get("https://drive.google.com/uc?export=download", 
+                                   params=params, stream=True, verify=False, timeout=300)
+            with open("PPR-ALL.csv", "wb") as cf:
+                for chunk in resp.iter_content(chunk_size=32768):
+                    if chunk:
+                        cf.write(chunk)
+            csv_path = "PPR-ALL.csv"  # Already a CSV, no zip extraction needed
+            print("PPR CSV downloaded from Google Drive.")
         except Exception as e:
             print("Download failed:", e)
             _model_cache["ready"] = False
