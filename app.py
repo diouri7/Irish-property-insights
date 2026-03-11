@@ -920,62 +920,88 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
     <div style="display:grid;grid-template-columns:1fr 260px;gap:2rem;align-items:start;">
       <!-- MAP -->
       <div style="background:#111316;border:1px solid #1a1c20;border-radius:4px;padding:1.5rem;display:flex;align-items:center;justify-content:center;min-height:450px;">
-        <svg id="hm-svg" viewBox="18 12 255 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
-          <path id="hm-Donegal"   onclick="hmSel('Donegal')"   class="hmc" d="M90,22 L135,15 L165,30 L178,52 L158,68 L143,83 L120,76 L98,60 L83,45 Z"/>
-          <path id="hm-Sligo"     onclick="hmSel('Sligo')"     class="hmc" d="M76,83 L106,76 L120,76 L128,91 L113,106 L90,106 L72,94 Z"/>
-          <path id="hm-Leitrim"   onclick="hmSel('Leitrim')"   class="hmc" d="M120,76 L143,83 L147,98 L135,113 L120,109 L113,106 L128,91 Z"/>
-          <path id="hm-Mayo"      onclick="hmSel('Mayo')"      class="hmc" d="M38,76 L75,68 L98,60 L98,83 L83,98 L72,94 L60,113 L38,121 L23,106 L30,91 Z"/>
-          <path id="hm-Roscommon" onclick="hmSel('Roscommon')" class="hmc" d="M106,106 L128,98 L147,98 L151,117 L140,132 L120,132 L106,124 L102,113 Z"/>
-          <path id="hm-Galway"    onclick="hmSel('Galway')"    class="hmc" d="M23,117 L60,113 L83,98 L98,106 L102,113 L106,124 L98,140 L83,158 L60,158 L38,155 L19,140 Z"/>
-          <path id="hm-Clare"     onclick="hmSel('Clare')"     class="hmc" d="M60,158 L83,158 L98,140 L109,147 L113,163 L106,178 L86,186 L64,178 L57,166 Z"/>
-          <path id="hm-Limerick"  onclick="hmSel('Limerick')"  class="hmc" d="M86,186 L106,178 L120,181 L132,196 L124,211 L106,215 L86,207 L79,196 Z"/>
-          <path id="hm-Kerry"     onclick="hmSel('Kerry')"     class="hmc" d="M57,196 L79,196 L86,207 L83,226 L68,243 L49,245 L34,230 L38,211 Z"/>
-          <path id="hm-Cork"      onclick="hmSel('Cork')"      class="hmc" d="M83,226 L106,215 L128,215 L147,222 L155,237 L147,252 L128,260 L106,260 L86,252 L72,243 L68,243 Z"/>
-          <path id="hm-Tipperary" onclick="hmSel('Tipperary')" class="hmc" d="M109,147 L132,143 L151,151 L162,166 L158,184 L143,192 L132,196 L120,181 L113,163 Z"/>
-          <path id="hm-Waterford" onclick="hmSel('Waterford')" class="hmc" d="M128,215 L147,222 L166,215 L173,203 L162,192 L158,184 L143,192 L132,196 Z"/>
-          <path id="hm-Wexford"   onclick="hmSel('Wexford')"   class="hmc" d="M166,215 L185,207 L200,215 L204,230 L192,245 L173,249 L155,237 L147,222 Z"/>
-          <path id="hm-Kilkenny"  onclick="hmSel('Kilkenny')"  class="hmc" d="M151,151 L170,151 L185,162 L185,181 L173,192 L162,192 L158,184 L162,166 Z"/>
-          <path id="hm-Carlow"    onclick="hmSel('Carlow')"    class="hmc" d="M170,151 L189,147 L200,158 L196,173 L185,181 L185,162 Z"/>
-          <path id="hm-Laois"     onclick="hmSel('Laois')"     class="hmc" d="M151,117 L173,121 L192,128 L200,143 L189,147 L170,151 L151,151 L140,132 Z"/>
-          <path id="hm-Offaly"    onclick="hmSel('Offaly')"    class="hmc" d="M128,106 L151,105 L173,106 L177,121 L173,121 L151,117 L140,124 L128,117 Z"/>
-          <path id="hm-Westmeath" onclick="hmSel('Westmeath')" class="hmc" d="M140,85 L166,84 L188,91 L192,106 L177,106 L173,106 L151,105 L140,98 Z"/>
-          <path id="hm-Longford"  onclick="hmSel('Longford')"  class="hmc" d="M128,76 L151,74 L166,84 L155,94 L140,98 L140,85 L132,79 Z"/>
-          <path id="hm-Cavan"     onclick="hmSel('Cavan')"     class="hmc" d="M151,74 L173,72 L192,79 L196,91 L188,91 L166,84 L155,94 L143,83 Z"/>
-          <path id="hm-Monaghan"  onclick="hmSel('Monaghan')"  class="hmc" d="M192,64 L211,60 L225,72 L218,84 L200,87 L192,79 L173,72 Z"/>
-          <path id="hm-Meath"     onclick="hmSel('Meath')"     class="hmc" d="M188,91 L215,87 L230,98 L230,117 L211,124 L196,121 L192,106 Z"/>
-          <path id="hm-Louth"     onclick="hmSel('Louth')"     class="hmc" d="M211,72 L234,68 L243,83 L234,98 L215,98 L215,87 Z"/>
-          <path id="hm-Dublin"    onclick="hmSel('Dublin')"    class="hmc" d="M230,98 L251,94 L260,109 L252,124 L234,128 L230,117 Z"/>
-          <path id="hm-Wicklow"   onclick="hmSel('Wicklow')"   class="hmc" d="M234,128 L252,124 L268,136 L264,155 L249,166 L230,162 L222,147 L226,134 Z"/>
-          <path id="hm-Kildare"   onclick="hmSel('Kildare')"   class="hmc" d="M196,121 L218,117 L230,128 L226,143 L211,147 L200,143 L192,128 Z"/>
-          <!-- NI greyed -->
-          <path style="fill:#1a1c20;stroke:#111316;stroke-width:1;pointer-events:none;" d="M165,30 L218,23 L240,45 L230,70 L218,84 L192,64 L178,52 Z"/>
-          <!-- Labels -->
-          <text x="118" y="50"  font-size="7.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Donegal</text>
-          <text x="98"  y="93"  font-size="6.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Sligo</text>
-          <text x="133" y="97"  font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Leitrim</text>
-          <text x="62"  y="100" font-size="7"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Mayo</text>
-          <text x="127" y="117" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Roscommon</text>
-          <text x="64"  y="134" font-size="7"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Galway</text>
-          <text x="86"  y="167" font-size="6.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Clare</text>
-          <text x="106" y="199" font-size="6.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Limerick</text>
-          <text x="59"  y="220" font-size="6.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Kerry</text>
-          <text x="113" y="238" font-size="7"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Cork</text>
-          <text x="136" y="170" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Tipperary</text>
-          <text x="150" y="205" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Waterford</text>
-          <text x="178" y="228" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Wexford</text>
-          <text x="170" y="171" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Kilkenny</text>
-          <text x="184" y="158" font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Carlow</text>
-          <text x="170" y="137" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Laois</text>
-          <text x="152" y="112" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Offaly</text>
-          <text x="163" y="96"  font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Westmeath</text>
-          <text x="147" y="83"  font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Longford</text>
-          <text x="170" y="85"  font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Cavan</text>
-          <text x="207" y="76"  font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Monaghan</text>
-          <text x="210" y="107" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Meath</text>
-          <text x="224" y="84"  font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Louth</text>
-          <text x="243" y="111" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Dublin</text>
-          <text x="249" y="147" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Wicklow</text>
-          <text x="212" y="133" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Kildare</text>
+        <svg id="hm-svg" viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+          <!-- DONEGAL - large, northwest -->
+          <path id="hm-Donegal"   onclick="hmSel('Donegal')"   class="hmc" d="M60,20 L130,10 L165,25 L175,50 L155,70 L135,85 L105,78 L75,58 L55,40 Z"/>
+          <!-- MAYO - large, west -->
+          <path id="hm-Mayo"      onclick="hmSel('Mayo')"      class="hmc" d="M20,90 L65,78 L90,72 L100,95 L85,115 L70,110 L55,130 L28,138 L12,120 L18,102 Z"/>
+          <!-- SLIGO - small, northwest -->
+          <path id="hm-Sligo"     onclick="hmSel('Sligo')"     class="hmc" d="M80,78 L110,72 L125,82 L128,98 L110,108 L88,106 L72,94 Z"/>
+          <!-- LEITRIM - medium -->
+          <path id="hm-Leitrim"   onclick="hmSel('Leitrim')"   class="hmc" d="M125,72 L148,68 L160,80 L158,100 L142,110 L128,108 L125,95 Z"/>
+          <!-- DONEGAL label fix - already done above -->
+          <!-- CAVAN - medium, north midlands -->
+          <path id="hm-Cavan"     onclick="hmSel('Cavan')"     class="hmc" d="M158,72 L188,65 L205,75 L205,95 L188,103 L168,100 L158,88 Z"/>
+          <!-- MONAGHAN - medium -->
+          <path id="hm-Monaghan"  onclick="hmSel('Monaghan')"  class="hmc" d="M205,68 L232,62 L248,75 L242,92 L220,96 L205,88 Z"/>
+          <!-- LOUTH - small, east -->
+          <path id="hm-Louth"     onclick="hmSel('Louth')"     class="hmc" d="M242,75 L265,70 L275,88 L265,105 L245,105 L235,92 Z"/>
+          <!-- ROSCOMMON - medium, midlands -->
+          <path id="hm-Roscommon" onclick="hmSel('Roscommon')" class="hmc" d="M100,115 L128,108 L145,118 L142,140 L125,150 L105,148 L92,135 Z"/>
+          <!-- LONGFORD - medium -->
+          <path id="hm-Longford"  onclick="hmSel('Longford')"  class="hmc" d="M148,100 L172,96 L182,108 L178,125 L160,130 L145,122 Z"/>
+          <!-- WESTMEATH - medium -->
+          <path id="hm-Westmeath" onclick="hmSel('Westmeath')" class="hmc" d="M172,96 L200,92 L215,105 L212,122 L192,128 L175,122 L178,108 Z"/>
+          <!-- MEATH - medium, east midlands -->
+          <path id="hm-Meath"     onclick="hmSel('Meath')"     class="hmc" d="M205,95 L235,92 L252,105 L248,128 L225,135 L205,128 L205,108 Z"/>
+          <!-- DUBLIN - larger, east coast -->
+          <path id="hm-Dublin"    onclick="hmSel('Dublin')"    class="hmc" d="M252,105 L278,100 L292,118 L285,140 L262,145 L248,132 Z"/>
+          <!-- GALWAY - large, west -->
+          <path id="hm-Galway"    onclick="hmSel('Galway')"    class="hmc" d="M18,148 L55,138 L82,128 L95,140 L92,162 L75,178 L50,180 L22,168 Z"/>
+          <!-- OFFALY - medium -->
+          <path id="hm-Offaly"    onclick="hmSel('Offaly')"    class="hmc" d="M148,130 L178,125 L192,138 L188,155 L165,160 L148,152 Z"/>
+          <!-- KILDARE - medium, east -->
+          <path id="hm-Kildare"   onclick="hmSel('Kildare')"   class="hmc" d="M212,128 L242,125 L255,142 L248,162 L225,165 L210,152 Z"/>
+          <!-- WICKLOW - medium, southeast -->
+          <path id="hm-Wicklow"   onclick="hmSel('Wicklow')"   class="hmc" d="M262,145 L288,140 L302,158 L295,180 L272,188 L255,175 L255,158 Z"/>
+          <!-- LAOIS - medium -->
+          <path id="hm-Laois"     onclick="hmSel('Laois')"     class="hmc" d="M175,158 L205,152 L218,165 L212,182 L190,188 L172,180 Z"/>
+          <!-- CLARE - medium, west -->
+          <path id="hm-Clare"     onclick="hmSel('Clare')"     class="hmc" d="M52,185 L80,178 L95,165 L108,175 L112,192 L100,208 L78,215 L55,205 Z"/>
+          <!-- TIPPERARY - large, south midlands -->
+          <path id="hm-Tipperary" onclick="hmSel('Tipperary')" class="hmc" d="M108,175 L138,168 L162,172 L175,188 L168,210 L148,218 L125,215 L108,202 Z"/>
+          <!-- CARLOW - small -->
+          <path id="hm-Carlow"    onclick="hmSel('Carlow')"    class="hmc" d="M212,182 L235,178 L245,192 L238,208 L218,210 L208,196 Z"/>
+          <!-- KILKENNY - medium -->
+          <path id="hm-Kilkenny"  onclick="hmSel('Kilkenny')"  class="hmc" d="M175,205 L205,198 L222,210 L218,230 L198,238 L175,230 Z"/>
+          <!-- LIMERICK - medium, southwest -->
+          <path id="hm-Limerick"  onclick="hmSel('Limerick')"  class="hmc" d="M78,225 L108,215 L128,218 L138,235 L128,252 L105,258 L80,248 L70,235 Z"/>
+          <!-- WATERFORD - medium -->
+          <path id="hm-Waterford" onclick="hmSel('Waterford')" class="hmc" d="M148,222 L178,215 L200,220 L205,238 L188,252 L162,255 L145,242 Z"/>
+          <!-- WEXFORD - medium, southeast -->
+          <path id="hm-Wexford"   onclick="hmSel('Wexford')"   class="hmc" d="M205,235 L232,228 L248,242 L245,265 L222,272 L200,260 L198,242 Z"/>
+          <!-- KERRY - large, southwest -->
+          <path id="hm-Kerry"     onclick="hmSel('Kerry')"     class="hmc" d="M38,255 L70,248 L80,265 L75,290 L55,305 L32,302 L18,280 L25,262 Z"/>
+          <!-- CORK - largest, south -->
+          <path id="hm-Cork"      onclick="hmSel('Cork')"      class="hmc" d="M80,262 L115,255 L148,258 L165,268 L168,288 L155,305 L125,315 L95,312 L70,298 L68,278 Z"/>
+
+          <!-- LABELS -->
+          <text x="108" y="48"  font-size="9"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none" font-weight="500">Donegal</text>
+          <text x="52"  y="112" font-size="8.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none" font-weight="500">Mayo</text>
+          <text x="100" y="94"  font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Sligo</text>
+          <text x="142" y="92"  font-size="7"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Leitrim</text>
+          <text x="182" y="88"  font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Cavan</text>
+          <text x="224" y="83"  font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Monaghan</text>
+          <text x="255" y="91"  font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Louth</text>
+          <text x="118" y="133" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Roscommon</text>
+          <text x="162" y="117" font-size="7"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Longford</text>
+          <text x="194" y="113" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Westmeath</text>
+          <text x="228" y="115" font-size="8"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Meath</text>
+          <text x="268" y="125" font-size="8"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Dublin</text>
+          <text x="55"  y="158" font-size="8.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Galway</text>
+          <text x="168" y="146" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Offaly</text>
+          <text x="232" y="148" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Kildare</text>
+          <text x="278" y="165" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Wicklow</text>
+          <text x="194" y="172" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Laois</text>
+          <text x="82"  y="198" font-size="8"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Clare</text>
+          <text x="140" y="196" font-size="8"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Tipperary</text>
+          <text x="228" y="197" font-size="7"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Carlow</text>
+          <text x="198" y="218" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Kilkenny</text>
+          <text x="105" y="238" font-size="8"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Limerick</text>
+          <text x="176" y="237" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Waterford</text>
+          <text x="222" y="252" font-size="7.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Wexford</text>
+          <text x="48"  y="278" font-size="8.5" fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Kerry</text>
+          <text x="120" y="285" font-size="9"   fill="rgba(255,255,255,0.7)" text-anchor="middle" pointer-events="none">Cork</text>
         </svg>
       </div>
       <!-- SIDEBAR -->
