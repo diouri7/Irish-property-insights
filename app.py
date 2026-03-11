@@ -904,7 +904,7 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 
 <!-- ── HEATMAP SECTION ── -->
 <section style="background:#0a0c0f;padding:5rem 2rem;border-top:1px solid #1a1c20;">
-  <div style="max-width:960px;margin:0 auto;">
+  <div style="max-width:1000px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:2.5rem;">
       <div style="display:inline-block;font-size:0.7rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#c9a84c;border:1px solid #c9a84c;padding:0.3rem 0.8rem;border-radius:2px;margin-bottom:1.2rem;">Interactive Map</div>
       <h2 style="font-family:\'Playfair Display\',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:white;line-height:1.1;margin-bottom:0.8rem;">Irish Property Investment Heatmap</h2>
@@ -919,9 +919,9 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
       </div>
     </div>
 
-    <div style="display:flex;gap:2.5rem;align-items:flex-start;flex-wrap:wrap;">
+    <div id="hm-map-flex" style="display:flex;gap:2rem;align-items:flex-start;">
       <!-- MAP -->
-      <div style="flex:1;min-width:280px;">
+      <div style="flex:1;min-width:0;">
         <svg id="ireland-map" viewBox="0 0 370 420" style="width:100%;height:auto;">
           <path id="hm-Donegal"   onclick="hmSelect(\'Donegal\')"   style="cursor:pointer;stroke:#0a0c0f;stroke-width:1.5;transition:filter 0.15s;" d="M90,22 L135,15 L165,30 L178,52 L158,68 L143,83 L120,76 L98,60 L83,45 Z"/>
           <path id="hm-NI" style="fill:#141618;stroke:#0a0c0f;stroke-width:1;" d="M165,30 L218,23 L232,45 L218,68 L188,76 L158,68 L178,52 Z"/>
@@ -982,7 +982,7 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
       </div>
 
       <!-- SIDEBAR -->
-      <div style="width:280px;flex-shrink:0;">
+      <div style="width:260px;flex-shrink:0;">
         <div id="hm-county-info">
           <div style="background:#1a1c20;border:1px solid #2a2c30;border-radius:4px;padding:2rem 1.2rem;text-align:center;color:#4a4845;font-size:0.85rem;line-height:1.6;margin-bottom:1rem;">
             <div style="font-size:1.5rem;margin-bottom:0.8rem;">🗺️</div>
