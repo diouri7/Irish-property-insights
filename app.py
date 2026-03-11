@@ -919,8 +919,8 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
     </div>
     <div style="display:grid;grid-template-columns:1fr 260px;gap:2rem;align-items:start;">
       <!-- MAP -->
-      <div style="background:#111316;border:1px solid #1a1c20;border-radius:4px;padding:1rem;display:flex;align-items:center;justify-content:center;">
-        <svg id="hm-svg" viewBox="20 12 265 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <div style="background:#111316;border:1px solid #1a1c20;border-radius:4px;padding:1.5rem;display:flex;align-items:center;justify-content:center;min-height:450px;">
+        <svg id="hm-svg" viewBox="18 12 255 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
           <path id="hm-Donegal"   onclick="hmSel('Donegal')"   class="hmc" d="M90,22 L135,15 L165,30 L178,52 L158,68 L143,83 L120,76 L98,60 L83,45 Z"/>
           <path id="hm-Sligo"     onclick="hmSel('Sligo')"     class="hmc" d="M76,83 L106,76 L120,76 L128,91 L113,106 L90,106 L72,94 Z"/>
           <path id="hm-Leitrim"   onclick="hmSel('Leitrim')"   class="hmc" d="M120,76 L143,83 L147,98 L135,113 L120,109 L113,106 L128,91 Z"/>
@@ -940,15 +940,15 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
           <path id="hm-Offaly"    onclick="hmSel('Offaly')"    class="hmc" d="M128,106 L151,105 L173,106 L177,121 L173,121 L151,117 L140,124 L128,117 Z"/>
           <path id="hm-Westmeath" onclick="hmSel('Westmeath')" class="hmc" d="M140,85 L166,84 L188,91 L192,106 L177,106 L173,106 L151,105 L140,98 Z"/>
           <path id="hm-Longford"  onclick="hmSel('Longford')"  class="hmc" d="M128,76 L151,74 L166,84 L155,94 L140,98 L140,85 L132,79 Z"/>
-          <path id="hm-Cavan"     onclick="hmSel('Cavan')"     class="hmc" d="M147,60 L173,57 L192,64 L196,79 L188,91 L166,84 L151,74 L143,66 Z"/>
-          <path id="hm-Monaghan"  onclick="hmSel('Monaghan')"  class="hmc" d="M173,49 L200,45 L215,57 L211,72 L192,75 L192,64 L181,55 Z"/>
+          <path id="hm-Cavan"     onclick="hmSel('Cavan')"     class="hmc" d="M151,74 L173,72 L192,79 L196,91 L188,91 L166,84 L155,94 L143,83 Z"/>
+          <path id="hm-Monaghan"  onclick="hmSel('Monaghan')"  class="hmc" d="M192,64 L211,60 L225,72 L218,84 L200,87 L192,79 L173,72 Z"/>
           <path id="hm-Meath"     onclick="hmSel('Meath')"     class="hmc" d="M188,91 L215,87 L230,98 L230,117 L211,124 L196,121 L192,106 Z"/>
           <path id="hm-Louth"     onclick="hmSel('Louth')"     class="hmc" d="M211,72 L234,68 L243,83 L234,98 L215,98 L215,87 Z"/>
           <path id="hm-Dublin"    onclick="hmSel('Dublin')"    class="hmc" d="M230,98 L251,94 L260,109 L252,124 L234,128 L230,117 Z"/>
           <path id="hm-Wicklow"   onclick="hmSel('Wicklow')"   class="hmc" d="M234,128 L252,124 L268,136 L264,155 L249,166 L230,162 L222,147 L226,134 Z"/>
           <path id="hm-Kildare"   onclick="hmSel('Kildare')"   class="hmc" d="M196,121 L218,117 L230,128 L226,143 L211,147 L200,143 L192,128 Z"/>
           <!-- NI greyed -->
-          <path style="fill:#1a1c20;stroke:#111316;stroke-width:1;pointer-events:none;" d="M165,30 L218,23 L232,45 L218,68 L188,76 L158,68 L178,52 Z"/>
+          <path style="fill:#1a1c20;stroke:#111316;stroke-width:1;pointer-events:none;" d="M165,30 L218,23 L240,45 L230,70 L218,84 L192,64 L178,52 Z"/>
           <!-- Labels -->
           <text x="118" y="50"  font-size="7.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Donegal</text>
           <text x="98"  y="93"  font-size="6.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Sligo</text>
@@ -969,8 +969,8 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
           <text x="152" y="112" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Offaly</text>
           <text x="163" y="96"  font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Westmeath</text>
           <text x="147" y="83"  font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Longford</text>
-          <text x="170" y="72"  font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Cavan</text>
-          <text x="194" y="61"  font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Monaghan</text>
+          <text x="170" y="85"  font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Cavan</text>
+          <text x="207" y="76"  font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Monaghan</text>
           <text x="210" y="107" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Meath</text>
           <text x="224" y="84"  font-size="5.5" fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Louth</text>
           <text x="243" y="111" font-size="6"   fill="rgba(255,255,255,0.55)" text-anchor="middle" pointer-events="none">Dublin</text>
