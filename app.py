@@ -984,12 +984,122 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 .mas-row .mr-sig.mo{background:rgba(245,158,11,.15);color:#f59e0b;}
 #masNoResult{display:none;padding:1rem;text-align:center;color:var(--t3);font-size:.88rem;}
 /* ── MOBILE TABLE SCROLL ── */
-@media(max-width:700px){
-  .rp-doc table,.itable{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-  .rp-doc table thead,.itable thead{white-space:nowrap;}
-  .eb>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
-  section{padding:3rem 1.25rem!important;}
-  .sh h2{font-size:clamp(1.5rem,5vw,2rem)!important;}
+/* ═══════════════════════════════════════
+   MOBILE — comprehensive responsive fixes
+   ═══════════════════════════════════════ */
+
+/* ── Tablet: 768px ── */
+@media(max-width:768px){
+  .nk{display:none}
+  /* Stats grid: 2 cols on tablet */
+  .cbi{grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  /* All main 2/3-col grids collapse to 1 col */
+  .pg,.ig,.mg,.ag{grid-template-columns:1fr}
+  /* Forms stack vertically */
+  .ef,.csw{flex-direction:column}
+  /* Snapshot card padding */
+  .eb{padding:2.5rem 1.5rem}
+  /* How It Works steps */
+  .sr{gap:1.25rem}
+  .sn{font-size:2.2rem;min-width:40px}
+  /* Heatmap: stack map + card */
+  #hm-layout{grid-template-columns:1fr!important;}
+  /* Compare counties selectors stack */
+  #ccSelectors{flex-direction:column;align-items:stretch}
+  #ccSelectors .cc-sel,#ccSelectors .cc-add{max-width:100%}
+  /* Trust bar: smaller gaps */
+  .trust-bar-inner{gap:1.25rem}
+  .trust-divider{display:none}
+  /* Blurred report preview: 1 col */
+  div[style*="grid-template-columns:repeat(3,1fr)"][class*="fade-in"]{grid-template-columns:1fr!important}
+  /* What's included checklist: 1 col */
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:.75rem 2rem"]{grid-template-columns:1fr!important}
+}
+
+/* ── Mobile: 600px ── */
+@media(max-width:600px){
+  /* Section padding */
+  section{padding:2.5rem 1.1rem!important}
+  /* Hero */
+  .hero{padding:5rem 1.25rem 2.5rem!important}
+  .ht{font-size:clamp(2rem,8vw,2.8rem)!important}
+  .hs{font-size:1rem!important}
+  /* Headings */
+  .sh h2{font-size:clamp(1.4rem,5.5vw,2rem)!important}
+  h2{font-size:clamp(1.4rem,5.5vw,2.2rem)!important}
+  /* All tables: horizontally scrollable */
+  .rp-doc table,.itable,.cc-table,.rp-table{
+    display:block;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    white-space:nowrap;
+  }
+  .rp-doc table thead,.itable thead,.cc-table thead{white-space:nowrap}
+  /* Scroll hint label on tables */
+  .rp-table-wrap,.cc-table-wrap,.rp-wrap{position:relative}
+  /* Sample report browser: full width */
+  .rp-browser{border-radius:10px}
+  .rp-doc{padding:1.25rem 1rem}
+  /* Report preview metrics: 2 cols */
+  .rp-metrics{grid-template-columns:1fr 1fr!important}
+  /* Micro-area search result rows: simpler layout */
+  .mas-row{grid-template-columns:1fr auto auto!important;gap:.4rem}
+  .mas-row .mr-growth,.mas-row>div:last-child{display:none}
+  /* Snapshot comparison grid: stack */
+  .eb>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  /* Hero CTA buttons: stack */
+  .hctas{flex-direction:column;align-items:center}
+  .hctas a,.hctas button{width:100%;max-width:320px;justify-content:center;text-align:center}
+  /* Stats: 2 per row */
+  .cbi{grid-template-columns:1fr 1fr;gap:1rem}
+  .cn{font-size:2rem}
+  /* Value cards */
+  .pg{gap:1rem}
+  .pc{padding:1.5rem 1.25rem}
+  /* How It Works */
+  .sr{flex-direction:column;gap:.75rem;padding:1.5rem 0}
+  .sn{font-size:1.8rem}
+  /* Snap modal */
+  #snapModal>div{padding:1.5rem 1.25rem!important;margin:.75rem}
+  /* Exit popup */
+  #exitPopupBox{padding:1.75rem 1.25rem}
+  #exitPopupBox .ep-preview{grid-template-columns:1fr 1fr 1fr;gap:.4rem}
+  #exitPopupBox .ep-card{padding:.5rem .35rem;font-size:.66rem}
+  /* Compare counties table: allow scroll */
+  #compare .cc-table-wrap{margin:0 -1.1rem;padding:0 1.1rem}
+  /* Micro-area search */
+  #masInput{font-size:.9rem;padding:.85rem 1rem .85rem 2.6rem}
+  /* Trust bar */
+  .trust-bar{padding:1.5rem 1rem}
+  .trust-logo span{font-size:.68rem}
+  /* Report preview page thumbnails: stack */
+  div[style*="grid-template-columns:repeat(3,1fr)"][style*="gap:1.5rem"]{
+    grid-template-columns:1fr!important
+  }
+  /* What's included checklist */
+  div[style*="gap:.75rem 2rem"]{grid-template-columns:1fr!important}
+  /* Sticky bar */
+  #stickyCTA{padding:.5rem .9rem;gap:.5rem}
+  #stickyCTA .sc-msg{font-size:.75rem}
+  /* FAQ */
+  .fqq{font-size:.95rem}
+  .fqa{font-size:.85rem}
+  /* Methodology cards */
+  .mg{gap:1rem}
+  .mc{padding:1.25rem}
+}
+
+/* ── Small phones: 400px ── */
+@media(max-width:400px){
+  section{padding:2rem .9rem!important}
+  .hero{padding:4.5rem .9rem 2rem!important}
+  .ht{font-size:clamp(1.75rem,7vw,2.2rem)!important}
+  .cn{font-size:1.75rem}
+  .cbi{grid-template-columns:1fr 1fr;gap:.75rem}
+  .rp-metrics{grid-template-columns:1fr 1fr!important;gap:.4rem!important}
+  #exitPopupBox .ep-preview{grid-template-columns:1fr}
+  .bp,.bs{font-size:.88rem;padding:.75rem 1.25rem}
+  .sh{margin-bottom:2rem}
+  .sh p{font-size:.88rem}
 }
 </style>
 </head>
@@ -1728,6 +1838,8 @@ hmPaint(); hmRank();
   </div>
 </div>
 <p style="text-align:center;font-size:.8rem;color:var(--t3);margin-top:1.5rem">Real data from the Dublin report &bull; Last rows blurred to show report depth</p>
+<p style="text-align:center;font-size:.75rem;color:var(--t3);margin-top:.4rem;display:none;" class="mobile-swipe-hint">← Swipe table to see all columns →</p>
+<style>@media(max-width:600px){.mobile-swipe-hint{display:block!important}}</style>
 <p style="text-align:center;font-size:.78rem;color:#f97316;margin-top:.5rem;max-width:600px;margin-left:auto;margin-right:auto;">⚠ <strong>RPZ Note:</strong> All 4 areas above are in Rent Pressure Zones — annual rent increases are legally capped at 2%. Factor this into yield projections for existing tenancies.</p>
 </section>
 <section><div class="sh fade-in"><div class="ol">Investment Intelligence</div><h2>Three questions every Irish property investor needs answered</h2><p>Our reports score every micro-area on the metrics that actually matter for property investment decisions.</p></div><div class="pg"><div class="pc fade-in"><div class="pi">📈</div><h3>Where is growth strong?</h3><p>5-year compound growth rates for every micro-area, benchmarked against county and national averages.</p></div><div class="pc fade-in"><div class="pi">🛡️</div><h3>Where is risk low?</h3><p>Volatility scoring, transaction volume analysis, and price consistency metrics.</p></div><div class="pc fade-in"><div class="pi">💰</div><h3>What return will I get?</h3><p>Gross rental yield estimates using official RTB rent data, mapped to micro-area median prices.</p></div></div></section>
