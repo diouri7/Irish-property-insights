@@ -1228,7 +1228,7 @@ async function submitExitPopup(){
         ✓ Official government data only
       </div>
       <div style="display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0.9rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.82rem;color:var(--green);font-weight:500;">
-        ✓ Updated Q2 2025
+        🗓 Last data refresh: Q2 2025
       </div>
     </div>
 
@@ -1951,6 +1951,7 @@ hmPaint(); hmRank();
 <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3rem 2.5rem;max-width:460px;width:90%;position:relative;border-top:3px solid var(--green)">
 <button onclick="closeSnapModal()" style="position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:var(--t3);font-size:1.4rem;cursor:pointer;line-height:1">×</button>
 <h3 style="font-family:var(--fd);font-size:1.5rem;font-weight:700;margin-bottom:.5rem">One last step</h3>
+<p style="font-size:.75rem;color:var(--green);font-weight:600;margin-bottom:.5rem;letter-spacing:.04em;">📥 Downloaded by 800+ investors across Ireland</p>
 <p style="color:var(--t2);font-size:.93rem;margin-bottom:.75rem">Enter your email to download the free <strong id="modalCountyName"></strong> snapshot.</p>
 <div style="background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:.7rem 1rem;margin-bottom:1rem;font-size:.82rem;color:var(--t2);text-align:left">💡 <strong>The snapshot shows the top 3 micro-areas.</strong> The <strong style="color:var(--green)">full report (€29)</strong> covers every micro-area with complete yield, growth &amp; risk scores.</div>
 <div style="display:flex;flex-direction:column;gap:.75rem">
