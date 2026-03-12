@@ -1896,6 +1896,184 @@ hmPaint(); hmRank();
 </section>
 <!-- ── END FULL REPORT PREVIEW ── -->
 
+<!-- ── COMPARE COUNTIES ── -->
+<section id="compare" style="padding:5rem 2rem;background:var(--bg2);border-top:1px solid var(--border);">
+<style>
+#compare .cc-wrap{max-width:1000px;margin:0 auto;}
+#compare .cc-selectors{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;}
+#compare .cc-sel{padding:.7rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.92rem;cursor:pointer;flex:1;max-width:220px;}
+#compare .cc-sel:focus{outline:none;border-color:var(--green);}
+#compare .cc-add{background:none;border:1px dashed rgba(16,185,129,.4);color:var(--green);border-radius:10px;padding:.7rem 1.2rem;font-family:var(--fb);font-size:.88rem;cursor:pointer;flex:1;max-width:220px;transition:background .2s;}
+#compare .cc-add:hover{background:rgba(16,185,129,.06);}
+#compare .cc-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+#compare .cc-table{width:100%;border-collapse:collapse;min-width:500px;}
+#compare .cc-table th{padding:.75rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);text-align:left;border-bottom:1px solid var(--border);}
+#compare .cc-table th.cc-metric{text-align:right;}
+#compare .cc-table td{padding:.9rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);font-size:.9rem;vertical-align:middle;}
+#compare .cc-table td.cc-metric{text-align:right;}
+#compare .cc-table tr:last-child td{border-bottom:none;}
+#compare .cc-table tr:hover td{background:rgba(255,255,255,.02);}
+#compare .cc-county-head{font-weight:700;color:var(--t1);}
+#compare .cc-winner{color:var(--green);font-weight:700;}
+#compare .cc-bar-wrap{display:flex;align-items:center;gap:.5rem;justify-content:flex-end;}
+#compare .cc-bar{height:6px;border-radius:3px;background:var(--green);transition:width .4s ease;}
+#compare .cc-bar.amber{background:#f59e0b;}
+#compare .cc-bar.red{background:#ef4444;}
+#compare .cc-sig{display:inline-block;font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;}
+#compare .cc-sig.hp{background:rgba(26,107,60,.3);color:#4ade80;}
+#compare .cc-sig.mo{background:rgba(245,158,11,.15);color:#f59e0b;}
+#compare .cc-sig.av{background:rgba(239,68,68,.15);color:#ef4444;}
+#compare .cc-risk-low{color:#4ade80;}
+#compare .cc-risk-med{color:#f59e0b;}
+#compare .cc-risk-high{color:#ef4444;}
+#compare .cc-rpz-yes{color:#f97316;font-size:.75rem;font-weight:700;}
+#compare .cc-rpz-no{color:var(--t3);font-size:.75rem;}
+#compare .cc-empty{text-align:center;padding:3rem;color:var(--t3);font-size:.9rem;}
+#compare .cc-remove{background:none;border:none;color:var(--t3);cursor:pointer;font-size:1rem;padding:0 .3rem;line-height:1;margin-left:.4rem;vertical-align:middle;}
+#compare .cc-remove:hover{color:#ef4444;}
+#compare .cc-hint{text-align:center;font-size:.8rem;color:var(--t3);margin-bottom:1.5rem;}
+#compare .cc-cta-row{text-align:center;margin-top:2rem;}
+@media(max-width:600px){#compare .cc-selectors{flex-direction:column;align-items:stretch;}#compare .cc-sel,#compare .cc-add{max-width:100%;}}
+</style>
+<div class="cc-wrap">
+  <div class="sh fade-in" style="margin-bottom:2rem;">
+    <div class="ol">Compare</div>
+    <h2>Compare counties side-by-side</h2>
+    <p>Pick up to 4 counties and see yield, growth, risk and price compared instantly.</p>
+  </div>
+  <div class="cc-hint">Select counties below — the best value on each metric is highlighted in green</div>
+  <div class="cc-selectors" id="ccSelectors">
+    <select class="cc-sel" onchange="ccUpdate()">
+      <option value="">— County 1 —</option>
+    </select>
+    <select class="cc-sel" onchange="ccUpdate()">
+      <option value="">— County 2 —</option>
+    </select>
+    <button class="cc-add" onclick="ccAddSlot()" id="ccAddBtn">+ Add county</button>
+  </div>
+  <div class="cc-table-wrap">
+    <div id="ccOutput" class="cc-empty">Select at least one county above to begin comparing.</div>
+  </div>
+  <div class="cc-cta-row" id="ccCta" style="display:none;">
+    <a href="#reports" class="bp" style="font-size:.95rem;padding:.85rem 2rem;">Get the Full Report — €29 →</a>
+    <p style="font-size:.78rem;color:var(--t3);margin-top:.6rem;">Full micro-area rankings, yield estimates &amp; RPZ flags for your chosen county</p>
+  </div>
+</div>
+<script>
+(function(){
+  // Populate all selects with county names from hmD
+  var counties=Object.keys(hmD).sort();
+  function populateSel(sel){
+    var cur=sel.value;
+    // keep blank option
+    while(sel.options.length>1) sel.remove(1);
+    counties.forEach(function(c){
+      var o=document.createElement('option');
+      o.value=c; o.textContent=c;
+      sel.appendChild(o);
+    });
+    if(cur) sel.value=cur;
+  }
+  document.querySelectorAll('#ccSelectors .cc-sel').forEach(populateSel);
+
+  window.ccAddSlot=function(){
+    var wrap=document.getElementById('ccSelectors');
+    var sels=wrap.querySelectorAll('.cc-sel');
+    if(sels.length>=4){showToast('Maximum 4 counties at once.');return;}
+    var sel=document.createElement('select');
+    sel.className='cc-sel';
+    sel.onchange=ccUpdate;
+    populateSel(sel);
+    // Insert before the add button
+    var btn=document.getElementById('ccAddBtn');
+    wrap.insertBefore(sel,btn);
+    if(sels.length+1>=4) btn.style.display='none';
+  };
+
+  window.ccUpdate=function(){
+    var sels=document.querySelectorAll('#ccSelectors .cc-sel');
+    var chosen=[];
+    sels.forEach(function(s){if(s.value) chosen.push(s.value);});
+    var out=document.getElementById('ccOutput');
+    var cta=document.getElementById('ccCta');
+    if(chosen.length===0){
+      out.className='cc-empty';
+      out.innerHTML='Select at least one county above to begin comparing.';
+      cta.style.display='none';
+      return;
+    }
+    cta.style.display='block';
+
+    // Find best value per metric for highlighting
+    var best={yield:-Infinity,growth:-Infinity,price:Infinity,risk:{'Low':0,'Medium':1,'High':2}};
+    var bestYield='',bestGrowth='',bestPrice='',bestRisk='';
+    chosen.forEach(function(c){
+      var d=hmD[c];
+      if(d.yield>best.yield){best.yield=d.yield;bestYield=c;}
+      if(d.growth>best.growth){best.growth=d.growth;bestGrowth=c;}
+      if(d.price<best.price){best.price=d.price;bestPrice=c;}
+      if(best.risk[d.risk]<best.risk[bestRisk]||bestRisk===''){bestRisk=c;}
+    });
+
+    // Max values for bar scaling
+    var maxYield=Math.max.apply(null,chosen.map(function(c){return hmD[c].yield;}));
+    var maxGrowth=Math.max.apply(null,chosen.map(function(c){return hmD[c].growth;}));
+    var maxPrice=Math.max.apply(null,chosen.map(function(c){return hmD[c].price;}));
+
+    // Build table
+    var rows=[
+      {label:'Gross Yield',key:'yield',fmt:function(v){return v+'%';},bar:true,barMax:maxYield,barColor:function(v){return v>=6?'red':v>=5?'amber':''},winner:bestYield},
+      {label:'5yr Growth',key:'growth',fmt:function(v){return '+'+v+'%';},bar:true,barMax:maxGrowth,barColor:function(){return''},winner:bestGrowth},
+      {label:'Median Price',key:'price',fmt:function(v){return'€'+v.toLocaleString();},bar:false,winner:bestPrice},
+      {label:'Risk',key:'risk',fmt:null,bar:false,winner:bestRisk},
+      {label:'Signal',key:'signal',fmt:null,bar:false,winner:''},
+      {label:'RPZ Status',key:'rpz',fmt:null,bar:false,winner:''},
+    ];
+
+    var html='<table class="cc-table"><thead><tr><th>Metric</th>';
+    chosen.forEach(function(c){html+='<th class="cc-metric cc-county-head">'+c+'</th>';});
+    html+='</tr></thead><tbody>';
+
+    rows.forEach(function(row){
+      html+='<tr><td style="color:var(--t3);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">'+row.label+'</td>';
+      chosen.forEach(function(c){
+        var d=hmD[c];
+        var v=d[row.key];
+        var isWinner=(row.winner===c);
+        var cell='';
+
+        if(row.key==='risk'){
+          var rc=v==='Low'?'cc-risk-low':v==='Medium'?'cc-risk-med':'cc-risk-high';
+          cell='<span class="'+rc+'">'+v+'</span>';
+        } else if(row.key==='signal'){
+          var sc=v==='HIGH POTENTIAL'?'hp':v==='MODERATE'||v==='MODERATE POTENTIAL'?'mo':'av';
+          var sl=v==='HIGH POTENTIAL'?'HIGH POT.':v==='MODERATE'||v==='MODERATE POTENTIAL'?'MODERATE':'AVOID';
+          cell='<span class="cc-sig '+sc+'">'+sl+'</span>';
+        } else if(row.key==='rpz'){
+          cell=v?'<span class="cc-rpz-yes">⚠ RPZ</span>':'<span class="cc-rpz-no">No</span>';
+        } else if(row.bar){
+          var pct=maxYield>0?(v/row.barMax*100):0;
+          var bc=row.barColor(v);
+          cell='<div class="cc-bar-wrap"><span'+(isWinner?' class="cc-winner"':'')+'>'+row.fmt(v)+'</span><div class="cc-bar'+(bc?' '+bc:'')+'" style="width:'+pct+'px;max-width:80px;"></div></div>';
+        } else {
+          cell='<span'+(isWinner?' class="cc-winner"':'')+'>'+row.fmt(v)+'</span>';
+        }
+        html+='<td class="cc-metric">'+cell+'</td>';
+      });
+      html+='</tr>';
+    });
+    html+='</tbody></table>';
+    out.className='';
+    out.innerHTML=html;
+  };
+
+  // Init
+  document.querySelectorAll('#ccSelectors .cc-sel').forEach(populateSel);
+})();
+</script>
+</section>
+<!-- ── END COMPARE COUNTIES ── -->
+
 <section class="rs" id="reports"><div class="sh fade-in"><div class="ol">Full Reports</div><h2>Unlock the full county report</h2><p>Every micro-area in your chosen county — ranked by yield, growth, and risk. Built for investors who want data, not guesswork.</p><div style="margin-top:1.25rem;display:inline-flex;align-items:baseline;gap:.5rem"><span style="font-family:var(--fd);font-size:1.2rem;color:var(--t3);text-decoration:line-through">€49</span><span style="font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--green)">€29</span><span style="font-size:.88rem;color:var(--t3)">per county</span></div><p style="font-size:.82rem;color:var(--gold);margin-top:.5rem;font-weight:600">🚀 Founding price — locks in <span id="cdTimer">calculating...</span></p><script>(function(){var d=new Date("2026-04-01T23:59:59");function p(n){return n<10?"0"+n:n;}function u(){var n=new Date(),diff=d-n;if(diff<=0){document.getElementById("cdTimer").textContent="soon";return;}var dy=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);document.getElementById("cdTimer").textContent="in "+dy+"d "+p(h)+"h "+p(m)+"m "+p(s)+"s";}u();setInterval(u,1000);})();</script></div><div class="fade-in" style="max-width:480px;margin:0 auto;text-align:center"><div style="margin-bottom:1.5rem"><label style="display:block;font-size:.85rem;color:var(--t3);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.08em">Select your county</label><select id="countyBuySelect" style="width:100%;padding:1rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:1rem;cursor:pointer"><option value="">— Choose a county —</option><optgroup label="✅ Available Now"><option value="https://diourielouafi.gumroad.com/l/dqfeno">Dublin</option><option value="https://diourielouafi.gumroad.com/l/nsofqi">Cork</option><option value="https://diourielouafi.gumroad.com/l/khbhp">Galway</option><option value="https://diourielouafi.gumroad.com/l/qzexsg">Kildare</option><option value="https://diourielouafi.gumroad.com/l/pqllej">Kerry</option><option value="https://diourielouafi.gumroad.com/l/jlixrl">Meath</option><option value="https://diourielouafi.gumroad.com/l/qjecas">Wicklow</option></optgroup><optgroup label="⏳ Coming Soon"><option value="coming">Carlow</option><option value="coming">Cavan</option><option value="coming">Clare</option><option value="coming">Donegal</option><option value="coming">Kilkenny</option><option value="coming">Laois</option><option value="coming">Leitrim</option><option value="coming">Limerick</option><option value="coming">Longford</option><option value="coming">Louth</option><option value="coming">Mayo</option><option value="coming">Monaghan</option><option value="coming">Offaly</option><option value="coming">Roscommon</option><option value="coming">Sligo</option><option value="coming">Tipperary</option><option value="coming">Waterford</option><option value="coming">Westmeath</option><option value="coming">Wexford</option></optgroup></select></div><button id="countyBuyBtn" onclick="(function(){var s=document.getElementById(\'countyBuySelect\');if(!s.value)return;if(s.value===\'coming\'){var n=s.options[s.selectedIndex].text;document.getElementById(\'reqCounty\').value=n;document.querySelector(\'#countyRequestForm input[type=email]\').focus();document.getElementById(\'countyRequestForm\').scrollIntoView({behavior:\'smooth\'});showToast(\'Enter your email below to be notified when \'+n+\' launches!\');return;}window.open(s.value,\'_blank\');})()" class="bp" style="width:100%;justify-content:center;padding:1rem 2rem;font-size:1.1rem">Get Instant Access — €29 →</button><p style="font-size:.82rem;color:var(--t3);margin-top:.75rem">7 counties live now — more added weekly. Can\'t see yours?</p><form class="ef" style="margin-top:.75rem" id="countyRequestForm"><input type="email" placeholder="your@email.com" required id="reqEmail" style="flex:1;padding:.85rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem"><select id="reqCounty" style="padding:.85rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.9rem">%COUNTY_OPTIONS_FULL%</select><button type="submit" class="bs" style="white-space:nowrap">Request County</button></form><p style="font-size:.78rem;color:var(--t3);margin-top:.5rem">We'll email you when your county report is ready.</p></div></section>
 <section id="meth"><div class="sh fade-in"><div class="ol">Methodology</div><h2>Transparent, data-driven scoring</h2><p>No black boxes. Here's exactly how we analyse the market.</p></div><div class="mg fade-in"><div class="mc"><h4>📊 Property Price Register</h4><p>Every residential transaction since 2010 — cleaned, deduplicated, and analysed.</p></div><div class="mc"><h4>🏠 RTB Rental Data</h4><p>Official Q2 2025 rent figures providing the most current yield data available.</p></div><div class="mc"><h4>📐 Growth Scoring</h4><p>CAGR at micro-area level with volume weighting to penalise thin markets.</p></div><div class="mc"><h4>⚖️ Risk Model</h4><p>Coefficient of variation, transaction frequency, and price consistency combined.</p></div></div></section>
 <section style="padding:5rem 2rem;background:var(--bg2);border-top:1px solid var(--border)">
