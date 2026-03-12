@@ -2339,6 +2339,57 @@ function closeSnapModal(){document.getElementById('snapModal').style.display='no
 async function submitSnapModal(){const em=document.getElementById('snapEmail').value;const co=document.getElementById('snapCounty').value;if(!em||!em.includes('@')){showToast('Please enter a valid email.');return;}try{await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,county:co,type:'snapshot_download',message:'Free snapshot downloaded: '+co+' by '+em})});}catch(e){}closeSnapModal();showToast('✓ Downloading your '+co+' snapshot...');setTimeout(()=>{window.location.href='/snapshot?county='+encodeURIComponent(co);},600);setTimeout(()=>{const reportsEl=document.getElementById('reports');if(reportsEl){const sel=document.getElementById('countyBuySelect');if(sel){for(let i=0;i<sel.options.length;i++){if(sel.options[i].text===co){sel.value=sel.options[i].value;break;}}}showToast('📊 Want all micro-areas for '+co+'? Scroll to Full Reports — €29');reportsEl.scrollIntoView({behavior:'smooth'});}},4000);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSnapModal();});
 </script>
+
+<!-- ── COOKIE CONSENT BANNER ── -->
+<div id="cookieBanner" style="display:none;">
+  <div id="cookieBannerInner">
+    <div id="cookieText">
+      <strong style="color:var(--t1);display:block;margin-bottom:.3rem;">🍪 Cookie notice</strong>
+      <span>We use minimal cookies — only session storage to remember your preferences (e.g. dismissed popups). No advertising or tracking cookies. Read our <a href="/privacy" style="color:var(--green);text-decoration:underline;">Privacy Policy</a>.</span>
+    </div>
+    <div id="cookieActions">
+      <button id="cookieDecline" onclick="cookieRespond(false)">Decline</button>
+      <button id="cookieAccept" onclick="cookieRespond(true)">Accept</button>
+    </div>
+  </div>
+</div>
+<style>
+#cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:300;padding:.9rem 1.5rem;background:rgba(15,20,35,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(16,185,129,.2);animation:slideUpCookie .35s ease forwards;}
+@keyframes slideUpCookie{from{transform:translateY(100%);}to{transform:translateY(0);}}
+#cookieBannerInner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+#cookieText{flex:1;min-width:220px;font-size:.82rem;color:var(--t2);line-height:1.5;}
+#cookieActions{display:flex;gap:.6rem;flex-shrink:0;}
+#cookieDecline{background:none;border:1px solid var(--border);color:var(--t3);padding:.5rem 1.1rem;border-radius:8px;font-family:var(--fb);font-size:.82rem;cursor:pointer;transition:border-color .2s,color .2s;}
+#cookieDecline:hover{border-color:var(--t2);color:var(--t1);}
+#cookieAccept{background:var(--green);border:none;color:#0b1120;padding:.5rem 1.25rem;border-radius:8px;font-family:var(--fb);font-size:.82rem;font-weight:700;cursor:pointer;transition:opacity .2s;}
+#cookieAccept:hover{opacity:.88;}
+@media(max-width:500px){
+  #cookieBanner{padding:.75rem 1rem;}
+  #cookieBannerInner{gap:.75rem;}
+  #cookieText{font-size:.78rem;}
+  #cookieDecline,#cookieAccept{padding:.45rem .9rem;font-size:.78rem;}
+}
+</style>
+<script>
+(function(){
+  // Show banner only if user hasn't responded yet
+  if(!localStorage.getItem('cookieConsent')){
+    // Small delay so it doesn't flash on load
+    setTimeout(function(){
+      document.getElementById('cookieBanner').style.display='block';
+    }, 1200);
+  }
+})();
+function cookieRespond(accepted){
+  localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+  var b=document.getElementById('cookieBanner');
+  b.style.transition='transform .3s ease, opacity .3s ease';
+  b.style.transform='translateY(100%)';
+  b.style.opacity='0';
+  setTimeout(function(){b.style.display='none';},320);
+  if(accepted) showToast('✓ Preferences saved');
+}
+</script>
 <div style="text-align:center;padding:1.5rem 2rem;border-top:1px solid #e8e4dc;margin-top:2rem;font-size:.76rem;color:#9a9690;line-height:1.6;">
   IrishPropertyInsights provides data analysis based on public records. It is not financial advice.<br>
   <a href="/" style="color:#9a9690">Home</a> · <a href="/methodology" style="color:#9a9690">Methodology</a>
