@@ -2307,7 +2307,7 @@ hmPaint(); hmRank();
   </div>
 </section>
 <footer>
-  <p>© 2025 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/methodology">Methodology</a></p>
+  <p>© 2025 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/methodology">Methodology</a> · <a href="/privacy">Privacy Policy</a></p>
   <p style="margin-top:.4rem;font-size:.76rem;color:var(--t3)">IrishPropertyInsights provides data analysis based on public records. It is not financial advice. Always consult a qualified advisor before making investment decisions.</p>
 </footer>
 <div class="toast" id="toast"></div>
@@ -2819,6 +2819,155 @@ footer a{color:#64748B;text-decoration:none}
 </body>
 </html>"""
 
+
+
+@app.route("/privacy")
+def privacy():
+    return """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — IrishPropertyInsights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0b1120;--bg2:#111827;--border:rgba(255,255,255,.08);--t1:#f1f5f9;--t2:#94a3b8;--t3:#475569;--green:#10b981;--gold:#c9a84c;--fd:'DM Serif Display',serif;--fb:'DM Sans',sans-serif}
+body{font-family:var(--fb);background:var(--bg);color:var(--t1);line-height:1.7}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,17,32,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+nav a.logo{font-family:var(--fd);font-size:1.2rem;text-decoration:none;color:var(--t1)}
+nav a.logo span{color:var(--green)}
+nav a.back{font-size:.85rem;color:var(--t2);text-decoration:none;transition:color .2s}
+nav a.back:hover{color:var(--green)}
+main{max-width:720px;margin:0 auto;padding:4rem 2rem 6rem}
+.badge{display:inline-block;background:rgba(16,185,129,.1);color:var(--green);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;border:1px solid rgba(16,185,129,.2);margin-bottom:1.5rem}
+h1{font-family:var(--fd);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:1rem;color:var(--t1)}
+.meta{font-size:.82rem;color:var(--t3);margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+h2{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--t1);margin:2.5rem 0 .75rem}
+p{color:var(--t2);margin-bottom:1rem;font-size:.95rem}
+ul{color:var(--t2);font-size:.95rem;padding-left:1.5rem;margin-bottom:1rem}
+ul li{margin-bottom:.4rem}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
+.highlight{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:1.25rem 1.5rem;margin:1.5rem 0}
+.highlight p{margin-bottom:0;color:var(--t2)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--t3)}
+footer a{color:var(--t2)}
+@media(max-width:600px){main{padding:2.5rem 1.25rem 4rem}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">Irish<span>Property</span>Insights</a>
+  <a href="/" class="back">← Back to site</a>
+</nav>
+<main>
+  <div class="badge">Legal</div>
+  <h1>Privacy Policy</h1>
+  <div class="meta">
+    Last updated: March 2026 &nbsp;·&nbsp; IrishPropertyInsights &nbsp;·&nbsp; Questions? <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a>
+  </div>
+
+  <div class="highlight">
+    <p><strong style="color:var(--t1)">The short version:</strong> We collect only what we need (your email, when you request a report or snapshot), we never sell your data, we don't use advertising trackers, and you can ask us to delete your data at any time.</p>
+  </div>
+
+  <h2>1. Who We Are</h2>
+  <p>IrishPropertyInsights is an independent data analysis service built on official Irish government records — the Property Price Register (PPR) and the Residential Tenancies Board (RTB). We provide property investment intelligence reports for the Irish market.</p>
+  <p>For the purposes of data protection, the data controller is IrishPropertyInsights, operated as a sole trader based in Ireland.</p>
+
+  <h2>2. What Data We Collect</h2>
+  <p>We collect minimal personal data. Specifically:</p>
+  <ul>
+    <li><strong>Email address</strong> — when you request a free snapshot, purchase a full report, or sign up to be notified when a county launches. This is collected via our email form and processed through Formspree.</li>
+    <li><strong>County selection</strong> — the Irish county you select when requesting a report or snapshot. This is not personally identifying on its own.</li>
+    <li><strong>Usage data</strong> — basic server logs (IP address, browser type, pages visited) retained for up to 30 days for security and debugging. We do not use this for profiling.</li>
+  </ul>
+  <p>We do <strong>not</strong> collect: payment card details (handled entirely by Gumroad), names, addresses, phone numbers, or any sensitive personal data.</p>
+
+  <h2>3. How We Use Your Data</h2>
+  <ul>
+    <li>To send you the free snapshot or full report you requested</li>
+    <li>To notify you when a requested county report becomes available</li>
+    <li>To send occasional product updates if you opted in (you can unsubscribe at any time)</li>
+    <li>To understand how the site is used and improve it</li>
+  </ul>
+  <p>We do <strong>not</strong> use your data for advertising, profiling, or automated decision-making.</p>
+
+  <h2>4. Legal Basis (GDPR)</h2>
+  <p>We process your personal data under the following legal bases:</p>
+  <ul>
+    <li><strong>Contract performance</strong> — to deliver the snapshot or report you requested</li>
+    <li><strong>Legitimate interests</strong> — to improve the service and prevent abuse</li>
+    <li><strong>Consent</strong> — for any optional marketing emails (you can withdraw consent at any time)</li>
+  </ul>
+
+  <h2>5. Third-Party Services</h2>
+  <p>We use a small number of trusted third-party services to operate this site:</p>
+  <ul>
+    <li><strong>Formspree</strong> — processes email form submissions. <a href="https://formspree.io/legal/privacy-policy" target="_blank">Formspree Privacy Policy →</a></li>
+    <li><strong>Gumroad</strong> — processes payments for full reports. We never see your card details. <a href="https://gumroad.com/privacy" target="_blank">Gumroad Privacy Policy →</a></li>
+    <li><strong>Railway</strong> — hosts this application. <a href="https://railway.app/legal/privacy" target="_blank">Railway Privacy Policy →</a></li>
+    <li><strong>Google Fonts</strong> — loads fonts from Google's CDN. This may log your IP address. <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy →</a></li>
+  </ul>
+  <p>We do not use Google Analytics, Facebook Pixel, or any advertising trackers.</p>
+
+  <h2>6. Data Sources</h2>
+  <p>The property and rental data used in our reports comes entirely from official Irish government sources:</p>
+  <ul>
+    <li><a href="https://www.propertypriceregister.ie" target="_blank">Property Price Register</a> — published by the Revenue Commissioners and Property Services Regulatory Authority</li>
+    <li><a href="https://www.rtb.ie" target="_blank">Residential Tenancies Board (RTB)</a> — official rental market data</li>
+  </ul>
+  <p>This data is publicly available and used in accordance with its open data licence. No personal data of property buyers or tenants is included in our reports.</p>
+
+  <h2>7. Data Retention</h2>
+  <ul>
+    <li>Email addresses collected via Formspree: retained until you request deletion</li>
+    <li>Server logs: deleted after 30 days</li>
+    <li>Gumroad purchase records: governed by Gumroad's own retention policy</li>
+  </ul>
+
+  <h2>8. Your Rights (GDPR)</h2>
+  <p>If you are based in the EU or EEA, you have the following rights under GDPR:</p>
+  <ul>
+    <li><strong>Access</strong> — request a copy of the personal data we hold about you</li>
+    <li><strong>Rectification</strong> — ask us to correct inaccurate data</li>
+    <li><strong>Erasure</strong> — ask us to delete your data ("right to be forgotten")</li>
+    <li><strong>Restriction</strong> — ask us to limit how we use your data</li>
+    <li><strong>Portability</strong> — request your data in a machine-readable format</li>
+    <li><strong>Objection</strong> — object to processing based on legitimate interests</li>
+  </ul>
+  <p>To exercise any of these rights, email us at <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a>. We will respond within 30 days.</p>
+  <p>You also have the right to lodge a complaint with the <a href="https://www.dataprotection.ie" target="_blank">Data Protection Commission (DPC)</a>, Ireland's supervisory authority.</p>
+
+  <h2>9. Cookies</h2>
+  <p>This site uses minimal cookies:</p>
+  <ul>
+    <li><strong>Session storage</strong> — used to remember if you've dismissed the exit popup (stored in your browser only, not sent to our servers, cleared when you close the tab)</li>
+    <li><strong>No advertising or tracking cookies</strong> — we do not use any third-party tracking cookies</li>
+  </ul>
+  <p>You can clear cookies at any time via your browser settings.</p>
+
+  <h2>10. Children's Privacy</h2>
+  <p>This service is intended for adults making property investment decisions. We do not knowingly collect data from anyone under 18. If you believe we have inadvertently collected data from a minor, please contact us immediately.</p>
+
+  <h2>11. Changes to This Policy</h2>
+  <p>We may update this policy from time to time. When we do, we'll update the "Last updated" date at the top of this page. We encourage you to review this page periodically.</p>
+
+  <h2>12. Contact</h2>
+  <p>If you have any questions about this privacy policy or how we handle your data, please contact us:</p>
+  <div class="highlight">
+    <p>📧 <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a><br>
+    🌐 <a href="/">www.irishpropertyinsights.ie</a><br>
+    🏢 IrishPropertyInsights, Ireland</p>
+  </div>
+</main>
+<footer>
+  <p>© 2025 IrishPropertyInsights · <a href="/">Home</a> · <a href="/methodology">Methodology</a> · <a href="/privacy">Privacy Policy</a></p>
+</footer>
+</body>
+</html>"""
 
 
 if __name__ == "__main__":
