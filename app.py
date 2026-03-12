@@ -1247,12 +1247,11 @@ function masSearch(q){
   });
   none.style.display='none';
   if(matches.length===0){res.classList.remove('show');res.innerHTML='';none.style.display='block';return;}
-  // Use onmousedown instead of onclick — fires before input blur so results don't vanish
+  // Build rows using data-county attribute — no inline JS escaping needed
   res.innerHTML=matches.slice(0,8).map(function(d){
     var sc=d.sig==='HIGH POTENTIAL'?'sb':'mo';
     var sigShort=d.sig==='HIGH POTENTIAL'?'HIGH POTENTIAL':'MODERATE';
-    var safeCounty=d.county.replace(/'/g,"\\'");
-    return '<div class="mas-row" onmousedown="event.preventDefault();masClick(\''+safeCounty+'\')" style="cursor:pointer;">'
+    return '<div class="mas-row" data-county="'+d.county+'" data-name="'+d.name+'">'
       +'<div><div class="mr-name">'+d.name+'</div><div class="mr-county">'+d.county+'</div></div>'
       +'<div class="mr-yield">'+d.yield+'%</div>'
       +'<div class="mr-growth">+'+d.growth+'%</div>'
@@ -1262,33 +1261,50 @@ function masSearch(q){
   }).join('');
   res.classList.add('show');
 }
-// Hide results on blur
+// Wire up clicks via event delegation on the results container
+// Using mousedown so it fires before the input blur hides the list
 document.addEventListener('DOMContentLoaded',function(){
+  var res=document.getElementById('masResults');
   var inp=document.getElementById('masInput');
+  if(res){
+    res.addEventListener('mousedown',function(e){
+      // Prevent input from losing focus before we process the click
+      e.preventDefault();
+      var row=e.target.closest('.mas-row');
+      if(row){
+        masClick(row.getAttribute('data-county'), row.getAttribute('data-name'));
+      }
+    });
+  }
   if(inp){
     inp.addEventListener('blur',function(){
       setTimeout(function(){
-        var res=document.getElementById('masResults');
         if(res) res.classList.remove('show');
-      },200);
+      },150);
+    });
+    // Also hide on Escape
+    inp.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){res.classList.remove('show');inp.blur();}
     });
   }
 });
-function masClick(county){
-  // Hide results and clear input
+function masClick(county, areaName){
   var res=document.getElementById('masResults');
   var inp=document.getElementById('masInput');
   if(res) res.classList.remove('show');
-  if(inp) inp.value='';
-  // Try to match county to dropdown — check partial match against base county name
+  if(inp){inp.value='';inp.blur();}
+  // Extract base county name: "Dublin 15" → "Dublin", "Co. Kildare" → "Kildare"
+  var countyBase=county.replace(/\s*(dublin)\s*\d*/i,'Dublin')
+                       .replace(/^co[.]\s*/i,'')
+                       .replace(/\s+\d+$/,'')
+                       .trim();
   var sel=document.getElementById('countyBuySelect');
-  var countyBase=county.replace(/dublin.*/i,'Dublin').replace(/co\.\s*/i,'').trim();
+  var matched=false;
   if(sel){
-    var matched=false;
     for(var i=0;i<sel.options.length;i++){
       var opt=sel.options[i].text.toLowerCase();
       var cb=countyBase.toLowerCase();
-      if(opt===cb||opt.includes(cb)||cb.includes(opt)){
+      if(opt===cb||opt===cb.toLowerCase()||opt.includes(cb)||cb.includes(opt)){
         if(sel.options[i].value&&sel.options[i].value!=='coming'){
           sel.value=sel.options[i].value;
           matched=true;
@@ -1296,15 +1312,12 @@ function masClick(county){
         }
       }
     }
-    // If county available, scroll to buy section
-    if(matched){
-      document.getElementById('reports').scrollIntoView({behavior:'smooth'});
-      showToast('✓ '+county+' selected — get the full report below');
-    } else {
-      // County exists but not yet available — scroll to request form
-      document.getElementById('reports').scrollIntoView({behavior:'smooth'});
-      showToast(''+county+' report coming soon — request it below!');
-    }
+  }
+  document.getElementById('reports').scrollIntoView({behavior:'smooth'});
+  if(matched){
+    showToast('✓ '+countyBase+' selected — get the full report below');
+  } else {
+    showToast(countyBase+' report coming soon — request it below!');
   }
 }
 </script>
