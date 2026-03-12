@@ -938,6 +938,59 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 #stickyCTA .sc-actions{display:flex;gap:.6rem;align-items:center;flex-shrink:0;}
 #stickyCTA .sc-dismiss{background:none;border:none;color:var(--t3);cursor:pointer;font-size:1.2rem;padding:.2rem .5rem;line-height:1;}
 @media(max-width:480px){#stickyCTA{padding:.6rem 1rem;}#stickyCTA .sc-msg{font-size:.8rem;}}
+
+/* ── EXIT INTENT POPUP ── */
+#exitPopup{position:fixed;inset:0;background:rgba(11,17,32,.88);backdrop-filter:blur(10px);z-index:600;display:none;align-items:center;justify-content:center;padding:1rem;}
+#exitPopup.show{display:flex;}
+#exitPopupBox{background:var(--bg2);border:1px solid rgba(16,185,129,.3);border-radius:18px;max-width:480px;width:100%;padding:2.5rem 2rem;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6);text-align:center;}
+#exitPopupBox .ep-badge{display:inline-block;background:rgba(16,185,129,.12);color:var(--green);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;border:1px solid rgba(16,185,129,.25);margin-bottom:1.25rem;}
+#exitPopupBox h3{font-family:var(--fd);font-size:clamp(1.4rem,3vw,1.8rem);font-weight:700;line-height:1.2;margin-bottom:.75rem;color:var(--t1);}
+#exitPopupBox p{font-size:.9rem;color:var(--t2);margin-bottom:1.5rem;line-height:1.6;}
+#exitPopupBox .ep-preview{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:1.5rem;}
+#exitPopupBox .ep-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.65rem .5rem;font-size:.72rem;color:var(--t2);text-align:center;}
+#exitPopupBox .ep-card strong{display:block;color:var(--green);font-size:1rem;font-weight:700;margin-bottom:.2rem;}
+#exitPopupBox .ep-form{display:flex;flex-direction:column;gap:.75rem;}
+#exitPopupBox .ep-input{padding:.9rem 1.1rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem;outline:none;transition:border-color .2s;}
+#exitPopupBox .ep-input:focus{border-color:var(--green);}
+#exitPopupBox .ep-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:var(--t3);font-size:1.4rem;cursor:pointer;line-height:1;padding:.2rem;}
+#exitPopupBox .ep-skip{font-size:.78rem;color:var(--t3);margin-top:.75rem;cursor:pointer;text-decoration:underline;background:none;border:none;}
+/* ── TRUST LOGOS SECTION ── */
+.trust-bar{padding:2.5rem 2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);}
+.trust-bar-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+.trust-logo{display:flex;align-items:center;gap:.6rem;opacity:.7;transition:opacity .2s;}
+.trust-logo:hover{opacity:1;}
+.trust-logo span{font-size:.75rem;font-weight:600;color:var(--t2);letter-spacing:.04em;text-transform:uppercase;}
+.trust-divider{width:1px;height:28px;background:var(--border);flex-shrink:0;}
+.trust-used-by{font-size:.78rem;color:var(--t3);text-align:center;margin-top:1rem;width:100%;}
+/* ── MICRO-AREA SEARCH ── */
+#maSearch{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2rem;}
+#maSearch .mas-inner{max-width:680px;margin:0 auto;}
+#maSearch .mas-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem;}
+#maSearch h3{font-family:var(--fd);font-size:1.4rem;font-weight:700;margin-bottom:1.25rem;color:var(--t1);}
+#masInput{width:100%;padding:1rem 1.25rem 1rem 3rem;background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--t1);font-family:var(--fb);font-size:1rem;outline:none;transition:border-color .2s;box-sizing:border-box;}
+#masInput:focus{border-color:var(--green);}
+#masWrap{position:relative;}
+#masWrap svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);pointer-events:none;}
+#masResults{margin-top:.75rem;display:none;flex-direction:column;gap:.4rem;max-height:320px;overflow-y:auto;}
+#masResults.show{display:flex;}
+.mas-row{display:grid;grid-template-columns:1fr auto auto auto auto;align-items:center;gap:.75rem;padding:.75rem 1rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .15s;}
+.mas-row:hover{border-color:var(--green);}
+.mas-row .mr-name{font-size:.9rem;font-weight:600;color:var(--t1);}
+.mas-row .mr-county{font-size:.72rem;color:var(--t3);}
+.mas-row .mr-yield{font-size:.82rem;font-weight:700;color:var(--green);}
+.mas-row .mr-growth{font-size:.82rem;color:var(--t2);}
+.mas-row .mr-sig{font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;}
+.mas-row .mr-sig.sb{background:rgba(26,107,60,.3);color:#4ade80;}
+.mas-row .mr-sig.mo{background:rgba(245,158,11,.15);color:#f59e0b;}
+#masNoResult{display:none;padding:1rem;text-align:center;color:var(--t3);font-size:.88rem;}
+/* ── MOBILE TABLE SCROLL ── */
+@media(max-width:700px){
+  .rp-doc table,.itable{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .rp-doc table thead,.itable thead{white-space:nowrap;}
+  .eb>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+  section{padding:3rem 1.25rem!important;}
+  .sh h2{font-size:clamp(1.5rem,5vw,2rem)!important;}
+}
 </style>
 </head>
 <body>
@@ -951,6 +1004,79 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
   </div>
 </div>
 <script>(function(){var b=document.getElementById("stickyCTA");window.addEventListener("scroll",function(){b.style.display!=="none"&&(window.scrollY>500?b.classList.add("visible"):b.classList.remove("visible"));},{passive:true});})();</script>
+
+<!-- ── EXIT INTENT POPUP ── -->
+<div id="exitPopup">
+  <div id="exitPopupBox">
+    <button class="ep-close" onclick="closeExitPopup()" title="Close">&times;</button>
+    <div class="ep-badge">Wait — Free Offer</div>
+    <h3>Before you go — get your free county snapshot</h3>
+    <p>See the top 3 investment areas in any Irish county. No credit card, no commitment.</p>
+    <div class="ep-preview">
+      <div class="ep-card"><strong>Top 3</strong>Micro-areas ranked</div>
+      <div class="ep-card"><strong>Yield</strong>Per area estimate</div>
+      <div class="ep-card"><strong>Risk</strong>Low / Med / High</div>
+    </div>
+    <div class="ep-form">
+      <select id="epCounty" class="ep-input" style="cursor:pointer;">
+        <option value="" disabled selected>Select your county...</option>
+        <option>Carlow</option><option>Cavan</option><option>Clare</option>
+        <option>Cork</option><option>Donegal</option><option>Dublin</option>
+        <option>Galway</option><option>Kerry</option><option>Kildare</option>
+        <option>Kilkenny</option><option>Laois</option><option>Leitrim</option>
+        <option>Limerick</option><option>Longford</option><option>Louth</option>
+        <option>Mayo</option><option>Meath</option><option>Monaghan</option>
+        <option>Offaly</option><option>Roscommon</option><option>Sligo</option>
+        <option>Tipperary</option><option>Waterford</option><option>Westmeath</option>
+        <option>Wexford</option><option>Wicklow</option>
+      </select>
+      <input type="email" id="epEmail" class="ep-input" placeholder="your@email.com" />
+      <button class="bp" onclick="submitExitPopup()" style="justify-content:center;padding:1rem;font-size:1rem;">Get My Free Snapshot →</button>
+    </div>
+    <p style="font-size:.72rem;color:var(--t3);margin-top:.75rem;">🔒 No spam. Unsubscribe anytime. Your data is never sold.</p>
+    <button class="ep-skip" onclick="closeExitPopup()">No thanks, I'll skip the free snapshot</button>
+  </div>
+</div>
+<script>
+(function(){
+  var shown=false;
+  function show(){
+    if(shown)return;
+    var dismissed=sessionStorage.getItem('exitDismissed');
+    if(dismissed)return;
+    shown=true;
+    document.getElementById('exitPopup').classList.add('show');
+  }
+  // Desktop: mouse leaves viewport top
+  document.addEventListener('mouseleave',function(e){
+    if(e.clientY<=0) show();
+  });
+  // Mobile: back button / blur after 45s
+  var t=setTimeout(function(){
+    if(window.scrollY>300) show();
+  },45000);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeExitPopup();});
+})();
+function closeExitPopup(){
+  document.getElementById('exitPopup').classList.remove('show');
+  sessionStorage.setItem('exitDismissed','1');
+}
+async function submitExitPopup(){
+  var em=document.getElementById('epEmail').value;
+  var co=document.getElementById('epCounty').value;
+  if(!em||!em.includes('@')){showToast('Please enter a valid email.');return;}
+  if(!co){showToast('Please select a county.');return;}
+  try{
+    await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:em,county:co,type:'exit_intent_snapshot',message:'Exit intent snapshot: '+co+' by '+em})});
+  }catch(e){}
+  closeExitPopup();
+  showToast('✓ Downloading your '+co+' snapshot...');
+  setTimeout(function(){window.location.href='/snapshot?county='+encodeURIComponent(co);},600);
+}
+</script>
+
 <nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
 
 <!-- ── HERO ── -->
@@ -1033,6 +1159,120 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
     Data source: <a href="https://www.propertypriceregister.ie" target="_blank" style="color:var(--t2);text-decoration:none;">Property Price Register</a> &amp; <a href="https://www.rtb.ie" target="_blank" style="color:var(--t2);text-decoration:none;">Residential Tenancies Board</a> — official Irish government records.
   </p>
 </div>
+
+<!-- ── TRUST BAR ── -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <span style="font-size:.72rem;font-weight:600;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;">Data sourced from</span>
+    <div class="trust-divider"></div>
+    <!-- PPR logo -->
+    <a href="https://www.propertypriceregister.ie" target="_blank" class="trust-logo" style="text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#1A4D8F"/><path d="M4 20V10l8-6 8 6v10H15v-6h-6v6H4z" fill="white"/></svg>
+      <span>Property Price Register</span>
+    </a>
+    <div class="trust-divider"></div>
+    <!-- RTB logo -->
+    <a href="https://www.rtb.ie" target="_blank" class="trust-logo" style="text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#006747"/><text x="3" y="16" font-size="9" fill="white" font-weight="bold" font-family="sans-serif">RTB</text></svg>
+      <span>Residential Tenancies Board</span>
+    </a>
+    <div class="trust-divider"></div>
+    <!-- Gov.ie -->
+    <a href="https://www.gov.ie" target="_blank" class="trust-logo" style="text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#169B62"/><text x="3" y="16" font-size="7.5" fill="white" font-weight="bold" font-family="sans-serif">GOV</text></svg>
+      <span>Irish Government Data</span>
+    </a>
+    <div class="trust-used-by">Trusted by landlords, mortgage advisors &amp; buy-to-let investors across Ireland</div>
+  </div>
+</div>
+
+<!-- ── MICRO-AREA SEARCH ── -->
+<div id="maSearch">
+  <div class="mas-inner">
+    <div class="mas-label">Quick Search</div>
+    <h3>Find any micro-area instantly</h3>
+    <div id="masWrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="masInput" placeholder="Type a town or area — e.g. Ballymun, Salthill, Clondalkin..." oninput="masSearch(this.value)" autocomplete="off" />
+    </div>
+    <div id="masResults"></div>
+    <div id="masNoResult">No areas found matching that search. Try a different spelling or area name.</div>
+  </div>
+</div>
+<script>
+var MAS_DATA=[
+  {name:"Snugborough Rd",county:"Dublin 15",yield:13.6,growth:6.4,sig:"HIGH POTENTIAL"},
+  {name:"Ballymun",county:"Dublin 11",yield:13.2,growth:16.0,sig:"HIGH POTENTIAL"},
+  {name:"Clondalkin",county:"Dublin 22",yield:11.9,growth:3.9,sig:"HIGH POTENTIAL"},
+  {name:"Main St",county:"Blanchardstown",yield:11.7,growth:6.2,sig:"HIGH POTENTIAL"},
+  {name:"Northwood",county:"Santry D9",yield:11.5,growth:16.2,sig:"HIGH POTENTIAL"},
+  {name:"Monastery Rd",county:"Dublin 22",yield:10.8,growth:10.3,sig:"HIGH POTENTIAL"},
+  {name:"Coolock",county:"Dublin 17",yield:10.7,growth:8.1,sig:"HIGH POTENTIAL"},
+  {name:"Finglas Rd",county:"Dublin 11",yield:10.7,growth:7.3,sig:"HIGH POTENTIAL"},
+  {name:"Swords",county:"Dublin 17",yield:8.2,growth:8.2,sig:"HIGH POTENTIAL"},
+  {name:"Ballincollig",county:"Cork",yield:7.5,growth:7.5,sig:"HIGH POTENTIAL"},
+  {name:"Salthill",county:"Co. Galway",yield:4.2,growth:5.1,sig:"MODERATE POTENTIAL"},
+  {name:"Castletroy",county:"Co. Limerick",yield:5.4,growth:6.9,sig:"HIGH POTENTIAL"},
+  {name:"Drogheda",county:"Co. Louth",yield:5.0,growth:7.1,sig:"HIGH POTENTIAL"},
+  {name:"Naas",county:"Co. Kildare",yield:4.8,growth:7.4,sig:"HIGH POTENTIAL"},
+  {name:"Newbridge",county:"Co. Kildare",yield:4.6,growth:6.8,sig:"HIGH POTENTIAL"},
+  {name:"Maynooth",county:"Co. Kildare",yield:4.5,growth:7.1,sig:"HIGH POTENTIAL"},
+  {name:"Bray",county:"Co. Wicklow",yield:3.9,growth:5.2,sig:"MODERATE POTENTIAL"},
+  {name:"Greystones",county:"Co. Wicklow",yield:3.7,growth:5.8,sig:"MODERATE POTENTIAL"},
+  {name:"Navan",county:"Co. Meath",yield:4.6,growth:7.5,sig:"HIGH POTENTIAL"},
+  {name:"Trim",county:"Co. Meath",yield:4.8,growth:6.9,sig:"HIGH POTENTIAL"},
+  {name:"Blackrock",county:"Dublin South",yield:3.2,growth:4.1,sig:"MODERATE POTENTIAL"},
+  {name:"Rathmines",county:"Dublin 6",yield:4.1,growth:3.8,sig:"MODERATE POTENTIAL"},
+  {name:"Tallaght",county:"Dublin 24",yield:9.8,growth:5.6,sig:"HIGH POTENTIAL"},
+  {name:"Lucan",county:"Co. Dublin",yield:7.2,growth:6.1,sig:"HIGH POTENTIAL"},
+  {name:"Portlaoise",county:"Co. Laois",yield:6.4,growth:5.2,sig:"HIGH POTENTIAL"},
+  {name:"Mullingar",county:"Co. Westmeath",yield:6.1,growth:4.8,sig:"HIGH POTENTIAL"},
+  {name:"Athlone",county:"Co. Westmeath",yield:5.8,growth:5.1,sig:"HIGH POTENTIAL"},
+  {name:"Carlow Town",county:"Co. Carlow",yield:6.2,growth:5.4,sig:"HIGH POTENTIAL"},
+  {name:"Wexford Town",county:"Co. Wexford",yield:5.5,growth:6.0,sig:"HIGH POTENTIAL"},
+  {name:"Waterford City",county:"Co. Waterford",yield:5.8,growth:5.3,sig:"HIGH POTENTIAL"},
+  {name:"Tralee",county:"Co. Kerry",yield:5.6,growth:5.8,sig:"HIGH POTENTIAL"},
+  {name:"Killarney",county:"Co. Kerry",yield:4.9,growth:6.5,sig:"HIGH POTENTIAL"},
+  {name:"Ennis",county:"Co. Clare",yield:5.4,growth:5.9,sig:"HIGH POTENTIAL"},
+  {name:"Sligo Town",county:"Co. Sligo",yield:5.9,growth:4.1,sig:"MODERATE POTENTIAL"},
+  {name:"Letterkenny",county:"Co. Donegal",yield:6.5,growth:3.5,sig:"MODERATE POTENTIAL"},
+];
+function masSearch(q){
+  var res=document.getElementById('masResults');
+  var none=document.getElementById('masNoResult');
+  q=q.trim().toLowerCase();
+  if(q.length<2){res.classList.remove('show');res.innerHTML='';none.style.display='none';return;}
+  var matches=MAS_DATA.filter(function(d){
+    return d.name.toLowerCase().includes(q)||d.county.toLowerCase().includes(q);
+  });
+  none.style.display='none';
+  if(matches.length===0){res.classList.remove('show');res.innerHTML='';none.style.display='block';return;}
+  res.innerHTML=matches.slice(0,8).map(function(d){
+    var sc=d.sig==='HIGH POTENTIAL'?'sb':'mo';
+    var sigShort=d.sig==='HIGH POTENTIAL'?'HIGH POTENTIAL':'MODERATE';
+    return '<div class="mas-row" onclick="masClick(\''+d.county+'\')">'
+      +'<div><div class="mr-name">'+d.name+'</div><div class="mr-county">'+d.county+'</div></div>'
+      +'<div class="mr-yield">'+d.yield+'%</div>'
+      +'<div class="mr-growth">+'+d.growth+'%</div>'
+      +'<div class="mr-sig '+sc+'">'+sigShort+'</div>'
+      +'<div style="font-size:.7rem;color:var(--green);white-space:nowrap;">Get Report →</div>'
+      +'</div>';
+  }).join('');
+  res.classList.add('show');
+}
+function masClick(county){
+  var sel=document.getElementById('countyBuySelect');
+  if(sel){
+    for(var i=0;i<sel.options.length;i++){
+      if(sel.options[i].text.toLowerCase()===county.split(',')[0].trim().toLowerCase()){
+        sel.value=sel.options[i].value;break;
+      }
+    }
+  }
+  document.getElementById('reports').scrollIntoView({behavior:'smooth'});
+  showToast('Showing full report for '+county+' — €29');
+}
+</script>
 
 <!-- Add responsive style for the 3-card grid -->
 <style>
