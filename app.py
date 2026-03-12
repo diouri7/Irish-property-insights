@@ -1151,8 +1151,11 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 <script>
 (function(){
   var shown=false;
+  // Only show once per session AND only if user has scrolled (engaged)
+  var readyToShow=false;
+  setTimeout(function(){readyToShow=true;},8000); // min 8s on page before eligible
   function show(){
-    if(shown)return;
+    if(shown||!readyToShow)return;
     var dismissed=sessionStorage.getItem('exitDismissed');
     if(dismissed)return;
     shown=true;
@@ -1162,10 +1165,10 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
   document.addEventListener('mouseleave',function(e){
     if(e.clientY<=0) show();
   });
-  // Mobile: back button / blur after 45s
+  // Mobile: after 60s if scrolled past hero
   var t=setTimeout(function(){
-    if(window.scrollY>300) show();
-  },45000);
+    if(window.scrollY>600) show();
+  },60000);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeExitPopup();});
 })();
 function closeExitPopup(){
