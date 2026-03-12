@@ -1108,6 +1108,7 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 <div id="stickyCTA">
   <p class="sc-msg"><strong>IrishPropertyInsights</strong> &mdash; free micro-area data for every Irish county</p>
   <div class="sc-actions">
+    <a href="#compare" class="bs" style="padding:.6rem 1.2rem;font-size:.85rem;">⚖ Compare</a>
     <a href="#snap" class="bp" style="padding:.6rem 1.2rem;font-size:.85rem;">Free Snapshot &rarr;</a>
     <a href="#reports" class="bs" style="padding:.6rem 1.2rem;font-size:.85rem;">Full Report &euro;29</a>
     <button class="sc-dismiss" onclick="var e=document.getElementById(&quot;stickyCTA&quot;);e.style.display=&quot;none&quot;;" title="Dismiss">&times;</button>
@@ -1187,7 +1188,7 @@ async function submitExitPopup(){
 }
 </script>
 
-<nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
+<nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#compare">Compare Counties</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
 
 <!-- ── HERO ── -->
 <section class="hero" style="padding:7rem 2rem 3rem;">
