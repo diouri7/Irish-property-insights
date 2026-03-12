@@ -2866,7 +2866,7 @@ footer a{color:var(--t2)}
   <div class="badge">Legal</div>
   <h1>Privacy Policy</h1>
   <div class="meta">
-    Last updated: March 2026 &nbsp;·&nbsp; IrishPropertyInsights &nbsp;·&nbsp; Questions? <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a>
+    Last updated: March 2026 &nbsp;·&nbsp; IrishPropertyInsights &nbsp;·&nbsp; Questions? <a href="mailto:diouri@outlook.com">diouri@outlook.com</a>
   </div>
 
   <div class="highlight">
@@ -2938,7 +2938,7 @@ footer a{color:var(--t2)}
     <li><strong>Portability</strong> — request your data in a machine-readable format</li>
     <li><strong>Objection</strong> — object to processing based on legitimate interests</li>
   </ul>
-  <p>To exercise any of these rights, email us at <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a>. We will respond within 30 days.</p>
+  <p>To exercise any of these rights, email us at <a href="mailto:diouri@outlook.com">diouri@outlook.com</a>. We will respond within 30 days.</p>
   <p>You also have the right to lodge a complaint with the <a href="https://www.dataprotection.ie" target="_blank">Data Protection Commission (DPC)</a>, Ireland's supervisory authority.</p>
 
   <h2>9. Cookies</h2>
@@ -2958,7 +2958,7 @@ footer a{color:var(--t2)}
   <h2>12. Contact</h2>
   <p>If you have any questions about this privacy policy or how we handle your data, please contact us:</p>
   <div class="highlight">
-    <p>📧 <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a><br>
+    <p>📧 <a href="diouri@outlook.com">diouri@outlook.com</a><br>
     🌐 <a href="/">www.irishpropertyinsights.ie</a><br>
     🏢 IrishPropertyInsights, Ireland</p>
   </div>
