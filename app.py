@@ -2311,6 +2311,25 @@ hmPaint(); hmRank();
   <p style="margin-top:.4rem;font-size:.76rem;color:var(--t3)">IrishPropertyInsights provides data analysis based on public records. It is not financial advice. Always consult a qualified advisor before making investment decisions.</p>
 </footer>
 <div class="toast" id="toast"></div>
+
+<!-- ── BACK TO TOP ── -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+<style>
+#btt{position:fixed;bottom:5.5rem;right:1.5rem;z-index:190;width:42px;height:42px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,background .2s,border-color .2s;pointer-events:none;}
+#btt.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+#btt:hover{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.4);color:var(--green);}
+@media(max-width:480px){#btt{bottom:4.5rem;right:1rem;width:38px;height:38px;}}
+</style>
+<script>
+(function(){
+  var b=document.getElementById('btt');
+  window.addEventListener('scroll',function(){
+    window.scrollY>400?b.classList.add('visible'):b.classList.remove('visible');
+  },{passive:true});
+})();
+</script>
 <script>
 const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('visible')})},{threshold:.15});
 document.querySelectorAll('.fade-in').forEach(e=>o.observe(e));
