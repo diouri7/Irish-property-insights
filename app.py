@@ -1188,7 +1188,7 @@ async function submitExitPopup(){
 }
 </script>
 
-<nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#compare">Compare Counties</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
+<nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><span style="font-size:.72rem;color:var(--green);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);padding:.25rem .65rem;border-radius:20px;font-weight:600;margin-left:.5rem;">🗓 Data: Q2 2025</span><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#compare">Compare Counties</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
 
 <!-- ── HERO ── -->
 <section class="hero" style="padding:7rem 2rem 3rem;">
@@ -1876,7 +1876,7 @@ hmPaint(); hmRank();
     <tr>
       <th class="pct-feature" style="text-align:left;color:var(--t3);">Feature</th>
       <th class="pct-free">Free Snapshot</th>
-      <th class="pct-paid">Full Report <span class="pct-badge">€29</span></th>
+      <th class="pct-paid">Full Report <span class="pct-badge">€29</span> <span style="display:inline-block;background:var(--green);color:#0b1120;font-size:.58rem;font-weight:800;padding:.15rem .5rem;border-radius:20px;margin-left:.3rem;vertical-align:middle;letter-spacing:.05em;">★ MOST POPULAR</span></th>
     </tr>
   </thead>
   <tbody>
