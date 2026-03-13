@@ -1309,48 +1309,69 @@ async function submitExitPopup(){
   </div>
 </div>
 
-<!-- ── TESTIMONIALS ── -->
+<!-- ── COMMUNITY PROOF ── -->
 <section style="padding:3.5rem 2rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div style="max-width:1000px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:2rem;">
-      <div style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;">What People Are Saying</div>
-      <h3 style="font-family:var(--fd);font-size:1.4rem;color:var(--t1);">From the Irish property community</h3>
-      <a href="https://www.reddit.com/r/HousingIreland" target="_blank" style="font-size:.78rem;color:var(--t3);text-decoration:none;">via r/HousingIreland</a>
+
+    <!-- Reach stats bar -->
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem;">Discussed Across the Irish Property Community</div>
+      <div style="display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <div style="text-align:center;">
+          <div style="font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--t1);">37K+</div>
+          <div style="font-size:.78rem;color:var(--t3);">Reddit views</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--t1);">2</div>
+          <div style="font-size:.78rem;color:var(--t3);">Active threads</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--t1);">55+</div>
+          <div style="font-size:.78rem;color:var(--t3);">Comments & questions</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap;">
+        <span style="font-size:.75rem;color:var(--t3);background:var(--card);border:1px solid var(--border);padding:.3rem .8rem;border-radius:20px;">r/irishpersonalfinance · 31K views</span>
+        <span style="font-size:.75rem;color:var(--t3);background:var(--card);border:1px solid var(--border);padding:.3rem .8rem;border-radius:20px;">r/HousingIreland · 6.8K views</span>
+      </div>
     </div>
+
+    <!-- Community quotes — third party only -->
+    <div style="margin-bottom:1rem;font-size:.78rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;text-align:center;">What the community said about micro-area data analysis</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;">
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
-        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"County averages hide a lot of variation. That's partly why I built this tool — to explain patterns that aren't obvious in county-level statistics."</p>
-        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 94 upvotes</div>
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"Interesting find! It's wild how some overlooked areas can really yield better returns than the fancy D4."</p>
+        <div style="font-size:.75rem;color:var(--t3);">krystvey · r/irishpersonalfinance</div>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
-        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"This is really cool but it's an ad. You need to pay for the full data set." — <em style="color:var(--t2);">Founder replied:</em> "Fair point — most of the underlying datasets are public and free. The tool organises them so patterns across micro-areas are easier to explore."</p>
-        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · community exchange</div>
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"I got a 9.8% yield buying in D2 and then a +50% capital gain increase on sale in less than 4.5 years. The management fees was lower than LPT."</p>
+        <div style="font-size:.75rem;color:var(--t3);">Professional_Elk_483 · r/irishpersonalfinance</div>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
-        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"If you leverage with mortgage, the yield can be used significantly?" — <em style="color:var(--t2);">Yes. Leverage can definitely increase the return on equity. The yields shown are gross property yields — financing strategy can amplify or reduce the final return."</em></p>
-        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 64 upvotes</div>
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"100%, yield reflects risk so makes perfect sense."</p>
+        <div style="font-size:.75rem;color:var(--t3);">ZealousidealFloor2 · r/irishpersonalfinance</div>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
-        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"Snugborough Rd D15 STRONG BUY" — real user spotting their area in the Dublin data table.</p>
-        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 2 upvotes</div>
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"I'm not surprised by that at all. It's a risk reward point. In a recession the outer areas will swing down more as well. It's the classic example that you pay more for less risk."</p>
+        <div style="font-size:.75rem;color:var(--t3);">commodoredundrum · r/irishpersonalfinance · 38 upvotes</div>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
-        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"The goal isn't to predict the exact yield of a specific house, but to compare areas on the same basis to see where patterns appear."</p>
-        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 41 upvotes</div>
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"You buy in D4 for the opportunities not the rental yield. Instead of one 1 million euro house you just buy 9 apartments in Finglas and lease them out."</p>
+        <div style="font-size:.75rem;color:var(--t3);">Bog_warrior · r/irishpersonalfinance · 5 upvotes</div>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
-        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"Looking at the data made me realise something interesting — high yield and strong price-growth rarely happen in the same micro-area. Most places seem to be one or the other."</p>
-        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 4 upvotes</div>
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"I think there's something to this. My wife and I have bought and sold twice in D4 — a big part of our choice was avoiding price depreciation as opposed to maximising growth."</p>
+        <div style="font-size:.75rem;color:var(--t3);">fencing123 · r/irishpersonalfinance · 8 upvotes</div>
       </div>
 
     </div>
-    <p style="text-align:center;margin-top:1.5rem;font-size:.78rem;color:var(--t3);">648 views · 24 upvotes · <a href="https://www.reddit.com/r/HousingIreland" target="_blank" style="color:var(--green);text-decoration:none;">Read the full thread on Reddit →</a></p>
+    <p style="text-align:center;margin-top:1.5rem;font-size:.78rem;color:var(--t3);">Comments are from public Reddit threads discussing Irish property micro-area data analysis.</p>
   </div>
 </section>
 
