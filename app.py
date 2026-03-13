@@ -1375,141 +1375,7 @@ async function submitExitPopup(){
   </div>
 </section>
 
-<!-- ── MICRO-AREA SEARCH ── -->
-<div id="maSearch">
-  <div class="mas-inner">
-    <div class="mas-label">Quick Search</div>
-    <h3>Find any micro-area instantly</h3>
-    <div id="masWrap">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="masInput" placeholder="Type a town or area — e.g. Ballymun, Salthill, Clondalkin..." oninput="masSearch(this.value)" autocomplete="off" />
-    </div>
-    <div id="masResults"></div>
-    <div id="masNoResult">No areas found. Try: <span style="color:var(--green);cursor:pointer;" onclick="document.getElementById('masInput').value='Swords';masSearch('Swords')">Swords</span>, <span style="color:var(--green);cursor:pointer;" onclick="document.getElementById('masInput').value='Rathmines';masSearch('Rathmines')">Rathmines</span>, <span style="color:var(--green);cursor:pointer;" onclick="document.getElementById('masInput').value='Salthill';masSearch('Salthill')">Salthill</span>, or <span style="color:var(--green);cursor:pointer;" onclick="document.getElementById('masInput').value='Clondalkin';masSearch('Clondalkin')">Clondalkin</span></div>
-  </div>
-</div>
-<script>
-var MAS_DATA=[
-  {name:"Snugborough Rd",county:"Dublin 15",yield:13.6,growth:6.4,sig:"HIGH POTENTIAL"},
-  {name:"Ballymun",county:"Dublin 11",yield:13.2,growth:16.0,sig:"HIGH POTENTIAL"},
-  {name:"Clondalkin",county:"Dublin 22",yield:11.9,growth:3.9,sig:"HIGH POTENTIAL"},
-  {name:"Main St",county:"Blanchardstown",yield:11.7,growth:6.2,sig:"HIGH POTENTIAL"},
-  {name:"Northwood",county:"Santry D9",yield:11.5,growth:16.2,sig:"HIGH POTENTIAL"},
-  {name:"Monastery Rd",county:"Dublin 22",yield:10.8,growth:10.3,sig:"HIGH POTENTIAL"},
-  {name:"Coolock",county:"Dublin 17",yield:10.7,growth:8.1,sig:"HIGH POTENTIAL"},
-  {name:"Finglas Rd",county:"Dublin 11",yield:10.7,growth:7.3,sig:"HIGH POTENTIAL"},
-  {name:"Swords",county:"Dublin 17",yield:8.2,growth:8.2,sig:"HIGH POTENTIAL"},
-  {name:"Ballincollig",county:"Cork",yield:7.5,growth:7.5,sig:"HIGH POTENTIAL"},
-  {name:"Salthill",county:"Co. Galway",yield:4.2,growth:5.1,sig:"MODERATE POTENTIAL"},
-  {name:"Castletroy",county:"Co. Limerick",yield:5.4,growth:6.9,sig:"HIGH POTENTIAL"},
-  {name:"Drogheda",county:"Co. Louth",yield:5.0,growth:7.1,sig:"HIGH POTENTIAL"},
-  {name:"Naas",county:"Co. Kildare",yield:4.8,growth:7.4,sig:"HIGH POTENTIAL"},
-  {name:"Newbridge",county:"Co. Kildare",yield:4.6,growth:6.8,sig:"HIGH POTENTIAL"},
-  {name:"Maynooth",county:"Co. Kildare",yield:4.5,growth:7.1,sig:"HIGH POTENTIAL"},
-  {name:"Bray",county:"Co. Wicklow",yield:3.9,growth:5.2,sig:"MODERATE POTENTIAL"},
-  {name:"Greystones",county:"Co. Wicklow",yield:3.7,growth:5.8,sig:"MODERATE POTENTIAL"},
-  {name:"Navan",county:"Co. Meath",yield:4.6,growth:7.5,sig:"HIGH POTENTIAL"},
-  {name:"Trim",county:"Co. Meath",yield:4.8,growth:6.9,sig:"HIGH POTENTIAL"},
-  {name:"Blackrock",county:"Dublin South",yield:3.2,growth:4.1,sig:"MODERATE POTENTIAL"},
-  {name:"Rathmines",county:"Dublin 6",yield:4.1,growth:3.8,sig:"MODERATE POTENTIAL"},
-  {name:"Tallaght",county:"Dublin 24",yield:9.8,growth:5.6,sig:"HIGH POTENTIAL"},
-  {name:"Lucan",county:"Co. Dublin",yield:7.2,growth:6.1,sig:"HIGH POTENTIAL"},
-  {name:"Portlaoise",county:"Co. Laois",yield:6.4,growth:5.2,sig:"HIGH POTENTIAL"},
-  {name:"Mullingar",county:"Co. Westmeath",yield:6.1,growth:4.8,sig:"HIGH POTENTIAL"},
-  {name:"Athlone",county:"Co. Westmeath",yield:5.8,growth:5.1,sig:"HIGH POTENTIAL"},
-  {name:"Carlow Town",county:"Co. Carlow",yield:6.2,growth:5.4,sig:"HIGH POTENTIAL"},
-  {name:"Wexford Town",county:"Co. Wexford",yield:5.5,growth:6.0,sig:"HIGH POTENTIAL"},
-  {name:"Waterford City",county:"Co. Waterford",yield:5.8,growth:5.3,sig:"HIGH POTENTIAL"},
-  {name:"Tralee",county:"Co. Kerry",yield:5.6,growth:5.8,sig:"HIGH POTENTIAL"},
-  {name:"Killarney",county:"Co. Kerry",yield:4.9,growth:6.5,sig:"HIGH POTENTIAL"},
-  {name:"Ennis",county:"Co. Clare",yield:5.4,growth:5.9,sig:"HIGH POTENTIAL"},
-  {name:"Sligo Town",county:"Co. Sligo",yield:5.9,growth:4.1,sig:"MODERATE POTENTIAL"},
-  {name:"Letterkenny",county:"Co. Donegal",yield:6.5,growth:3.5,sig:"MODERATE POTENTIAL"},
-];
-function masSearch(q){
-  var res=document.getElementById('masResults');
-  var none=document.getElementById('masNoResult');
-  q=q.trim().toLowerCase();
-  if(q.length<2){res.classList.remove('show');res.innerHTML='';none.style.display='none';return;}
-  var matches=MAS_DATA.filter(function(d){
-    return d.name.toLowerCase().includes(q)||d.county.toLowerCase().includes(q);
-  });
-  none.style.display='none';
-  if(matches.length===0){res.classList.remove('show');res.innerHTML='';none.style.display='block';return;}
-  // Build rows using data-county attribute — no inline JS escaping needed
-  res.innerHTML=matches.slice(0,8).map(function(d){
-    var sc=d.sig==='HIGH POTENTIAL'?'sb':'mo';
-    var sigShort=d.sig==='HIGH POTENTIAL'?'HIGH POTENTIAL':'MODERATE';
-    return '<div class="mas-row" data-county="'+d.county+'" data-name="'+d.name+'">'
-      +'<div><div class="mr-name">'+d.name+'</div><div class="mr-county">'+d.county+'</div></div>'
-      +'<div class="mr-yield">'+d.yield+'%</div>'
-      +'<div class="mr-growth">+'+d.growth+'%</div>'
-      +'<div class="mr-sig '+sc+'">'+sigShort+'</div>'
-      +'<div style="font-size:.7rem;color:var(--green);white-space:nowrap;">Get Report →</div>'
-      +'</div>';
-  }).join('');
-  res.classList.add('show');
-}
-// Wire up clicks via event delegation on the results container
-// Using mousedown so it fires before the input blur hides the list
-document.addEventListener('DOMContentLoaded',function(){
-  var res=document.getElementById('masResults');
-  var inp=document.getElementById('masInput');
-  if(res){
-    res.addEventListener('mousedown',function(e){
-      // Prevent input from losing focus before we process the click
-      e.preventDefault();
-      var row=e.target.closest('.mas-row');
-      if(row){
-        masClick(row.getAttribute('data-county'), row.getAttribute('data-name'));
-      }
-    });
-  }
-  if(inp){
-    inp.addEventListener('blur',function(){
-      setTimeout(function(){
-        if(res) res.classList.remove('show');
-      },150);
-    });
-    // Also hide on Escape
-    inp.addEventListener('keydown',function(e){
-      if(e.key==='Escape'){res.classList.remove('show');inp.blur();}
-    });
-  }
-});
-function masClick(county, areaName){
-  var res=document.getElementById('masResults');
-  var inp=document.getElementById('masInput');
-  if(res) res.classList.remove('show');
-  if(inp){inp.value='';inp.blur();}
-  // Extract base county name: "Dublin 15" → "Dublin", "Co. Kildare" → "Kildare"
-  var countyBase=county.replace(/\s*(dublin)\s*\d*/i,'Dublin')
-                       .replace(/^co[.]\s*/i,'')
-                       .replace(/\s+\d+$/,'')
-                       .trim();
-  var sel=document.getElementById('countyBuySelect');
-  var matched=false;
-  if(sel){
-    for(var i=0;i<sel.options.length;i++){
-      var opt=sel.options[i].text.toLowerCase();
-      var cb=countyBase.toLowerCase();
-      if(opt===cb||opt===cb.toLowerCase()||opt.includes(cb)||cb.includes(opt)){
-        if(sel.options[i].value&&sel.options[i].value!=='coming'){
-          sel.value=sel.options[i].value;
-          matched=true;
-          break;
-        }
-      }
-    }
-  }
-  document.getElementById('reports').scrollIntoView({behavior:'smooth'});
-  if(matched){
-    showToast('✓ '+countyBase+' selected — get the full report below');
-  } else {
-    showToast(countyBase+' report coming soon — request it below!');
-  }
-}
-</script>
+
 
 <!-- Add responsive style for the 3-card grid -->
 <style>
@@ -1525,76 +1391,6 @@ function masClick(county, areaName){
 <section style="padding:5rem 2rem;background:var(--bg2)" id="sample">
 <div class="sh fade-in" style="margin-bottom:3rem">
   
-<!-- ── DEAL CHECKER SECTION ── -->
-<section style="background:#0f1014;padding:5rem 2rem;">
-  <div style="max-width:700px;margin:0 auto;text-align:center;">
-    <div style="display:inline-block;font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;border:1px solid #c9a84c;padding:0.3rem 0.8rem;border-radius:2px;margin-bottom:1.5rem;">Free Tool</div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:white;line-height:1.15;margin-bottom:1rem;">Is That Property a Good Deal?</h2>
-    <p style="color:#9a9690;font-size:1rem;font-weight:300;line-height:1.7;max-width:500px;margin:0 auto 2.5rem;">Enter any Irish property and we'll compare it against 700,000+ real PPR transactions instantly.</p>
-    <div style="background:#1a1c20;border:1px solid #2a2c30;border-radius:4px;padding:2rem 2rem;text-align:left;">
-      <style>
-        .dc-form{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
-        .dc-inp{width:100%;font-family:inherit;font-size:0.95rem;padding:0.75rem 1rem;border:1px solid #2a2c30;border-radius:3px;background:#0f1014;color:white;outline:none;}
-        .dc-inp:focus{border-color:#c9a84c;}
-        .dc-label{display:block;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6b6860;margin-bottom:0.4rem;}
-        .dc-btn{width:100%;margin-top:1rem;padding:0.85rem 1rem;background:#c9a84c;color:#0f1014;border:none;border-radius:3px;font-family:inherit;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
-        .dc-btn:hover{background:#d4b86a;}
-        @media(max-width:600px){.dc-form{grid-template-columns:1fr 1fr;}}
-        @media(max-width:400px){.dc-form{grid-template-columns:1fr;}}
-      </style>
-      <form method="POST" action="/deal-checker">
-        <div class="dc-form">
-          <div>
-            <label class="dc-label">County</label>
-            <select name="county" required class="dc-inp">
-              <option value="" disabled selected>Select county</option>
-              <option value="Carlow">Carlow</option>
-              <option value="Cavan">Cavan</option>
-              <option value="Clare">Clare</option>
-              <option value="Cork">Cork</option>
-              <option value="Donegal">Donegal</option>
-              <option value="Dublin">Dublin</option>
-              <option value="Galway">Galway</option>
-              <option value="Kerry">Kerry</option>
-              <option value="Kildare">Kildare</option>
-              <option value="Kilkenny">Kilkenny</option>
-              <option value="Laois">Laois</option>
-              <option value="Leitrim">Leitrim</option>
-              <option value="Limerick">Limerick</option>
-              <option value="Longford">Longford</option>
-              <option value="Louth">Louth</option>
-              <option value="Mayo">Mayo</option>
-              <option value="Meath">Meath</option>
-              <option value="Monaghan">Monaghan</option>
-              <option value="Offaly">Offaly</option>
-              <option value="Roscommon">Roscommon</option>
-              <option value="Sligo">Sligo</option>
-              <option value="Tipperary">Tipperary</option>
-              <option value="Waterford">Waterford</option>
-              <option value="Westmeath">Westmeath</option>
-              <option value="Wexford">Wexford</option>
-              <option value="Wicklow">Wicklow</option>
-            </select>
-          </div>
-          <div>
-            <label class="dc-label">Area / Town</label>
-            <input type="text" name="area" placeholder="e.g. Blackrock" required class="dc-inp">
-          </div>
-          <div>
-            <label class="dc-label">Asking Price</label>
-            <div style="position:relative;">
-              <span style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:#6b6860;pointer-events:none;">€</span>
-              <input type="number" name="asking_price" placeholder="350000" required class="dc-inp" style="padding-left:1.8rem;">
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="dc-btn">Analyse This Property →</button>
-      </form>
-      <p style="margin-top:0.75rem;font-size:0.75rem;color:#4a4845;text-align:center;">Not financial advice. Based on PPR data 2010–2024.</p>
-    </div>
-  </div>
-</section>
-<!-- ── END DEAL CHECKER SECTION ── -->
 
 <!-- ── HEATMAP SECTION ── -->
 <section style="background:#0a0c0f;padding:4rem 2rem;border-top:1px solid #1a1c20;">
@@ -1870,6 +1666,215 @@ function hmRank(){
 hmPaint(); hmRank();
 </script>
 <!-- ── END HEATMAP SECTION ── -->
+<div style="text-align:center;padding:1.5rem 2rem 2rem;background:#0a0c0f;">
+  <a href="#snap" style="display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;background:var(--green);color:#0b1120;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;">Explore full county insights →</a>
+</div>
+<!-- ── DEAL CHECKER SECTION ── -->
+<section style="background:#0f1014;padding:5rem 2rem;">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <div style="display:inline-block;font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;border:1px solid #c9a84c;padding:0.3rem 0.8rem;border-radius:2px;margin-bottom:1.5rem;">Free Tool</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:white;line-height:1.15;margin-bottom:1rem;">Is That Property a Good Deal?</h2>
+    <p style="color:#9a9690;font-size:1rem;font-weight:300;line-height:1.7;max-width:500px;margin:0 auto 2.5rem;">Enter any Irish property and we'll compare it against 700,000+ real PPR transactions instantly.</p>
+    <div style="background:#1a1c20;border:1px solid #2a2c30;border-radius:4px;padding:2rem 2rem;text-align:left;">
+      <style>
+        .dc-form{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
+        .dc-inp{width:100%;font-family:inherit;font-size:0.95rem;padding:0.75rem 1rem;border:1px solid #2a2c30;border-radius:3px;background:#0f1014;color:white;outline:none;}
+        .dc-inp:focus{border-color:#c9a84c;}
+        .dc-label{display:block;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#6b6860;margin-bottom:0.4rem;}
+        .dc-btn{width:100%;margin-top:1rem;padding:0.85rem 1rem;background:#c9a84c;color:#0f1014;border:none;border-radius:3px;font-family:inherit;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
+        .dc-btn:hover{background:#d4b86a;}
+        @media(max-width:600px){.dc-form{grid-template-columns:1fr 1fr;}}
+        @media(max-width:400px){.dc-form{grid-template-columns:1fr;}}
+      </style>
+      <form method="POST" action="/deal-checker">
+        <div class="dc-form">
+          <div>
+            <label class="dc-label">County</label>
+            <select name="county" required class="dc-inp">
+              <option value="" disabled selected>Select county</option>
+              <option value="Carlow">Carlow</option>
+              <option value="Cavan">Cavan</option>
+              <option value="Clare">Clare</option>
+              <option value="Cork">Cork</option>
+              <option value="Donegal">Donegal</option>
+              <option value="Dublin">Dublin</option>
+              <option value="Galway">Galway</option>
+              <option value="Kerry">Kerry</option>
+              <option value="Kildare">Kildare</option>
+              <option value="Kilkenny">Kilkenny</option>
+              <option value="Laois">Laois</option>
+              <option value="Leitrim">Leitrim</option>
+              <option value="Limerick">Limerick</option>
+              <option value="Longford">Longford</option>
+              <option value="Louth">Louth</option>
+              <option value="Mayo">Mayo</option>
+              <option value="Meath">Meath</option>
+              <option value="Monaghan">Monaghan</option>
+              <option value="Offaly">Offaly</option>
+              <option value="Roscommon">Roscommon</option>
+              <option value="Sligo">Sligo</option>
+              <option value="Tipperary">Tipperary</option>
+              <option value="Waterford">Waterford</option>
+              <option value="Westmeath">Westmeath</option>
+              <option value="Wexford">Wexford</option>
+              <option value="Wicklow">Wicklow</option>
+            </select>
+          </div>
+          <div>
+            <label class="dc-label">Area / Town</label>
+            <input type="text" name="area" placeholder="e.g. Blackrock" required class="dc-inp">
+          </div>
+          <div>
+            <label class="dc-label">Asking Price</label>
+            <div style="position:relative;">
+              <span style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:#6b6860;pointer-events:none;">€</span>
+              <input type="number" name="asking_price" placeholder="350000" required class="dc-inp" style="padding-left:1.8rem;">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="dc-btn">Analyse This Property →</button>
+      </form>
+      <p style="margin-top:0.75rem;font-size:0.75rem;color:#4a4845;text-align:center;">Not financial advice. Based on PPR data 2010–2024.</p>
+    </div>
+  </div>
+</section>
+<!-- ── END DEAL CHECKER SECTION ── -->
+
+<!-- ── MICRO-AREA SEARCH ── -->
+<div id="maSearch">
+  <div class="mas-inner">
+    <div class="mas-label">Quick Search</div>
+    <h3>Find any micro-area instantly</h3>
+    <div id="masWrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="masInput" placeholder="Type a town or area — e.g. Ballymun, Salthill, Clondalkin..." oninput="masSearch(this.value)" autocomplete="off" />
+    </div>
+    <div id="masResults"></div>
+    <div id="masNoResult">No areas found. Try: <span style="color:var(--green);cursor:pointer;" onclick="document.getElementById('masInput').value='Swords';masSearch('Swords')">Swords</span>, <span style="color:var(--green);cursor:pointer;" onclick="document.getElementById('masInput').value='Rathmines';masSearch('Rathmines')">Rathmines</span>, <span style="color:var(--green);cursor:pointer;" onclick="document.getElementById('masInput').value='Salthill';masSearch('Salthill')">Salthill</span>, or <span style="color:var(--green);cursor:pointer;" onclick="document.getElementById('masInput').value='Clondalkin';masSearch('Clondalkin')">Clondalkin</span></div>
+  </div>
+</div>
+<script>
+var MAS_DATA=[
+  {name:"Snugborough Rd",county:"Dublin 15",yield:13.6,growth:6.4,sig:"HIGH POTENTIAL"},
+  {name:"Ballymun",county:"Dublin 11",yield:13.2,growth:16.0,sig:"HIGH POTENTIAL"},
+  {name:"Clondalkin",county:"Dublin 22",yield:11.9,growth:3.9,sig:"HIGH POTENTIAL"},
+  {name:"Main St",county:"Blanchardstown",yield:11.7,growth:6.2,sig:"HIGH POTENTIAL"},
+  {name:"Northwood",county:"Santry D9",yield:11.5,growth:16.2,sig:"HIGH POTENTIAL"},
+  {name:"Monastery Rd",county:"Dublin 22",yield:10.8,growth:10.3,sig:"HIGH POTENTIAL"},
+  {name:"Coolock",county:"Dublin 17",yield:10.7,growth:8.1,sig:"HIGH POTENTIAL"},
+  {name:"Finglas Rd",county:"Dublin 11",yield:10.7,growth:7.3,sig:"HIGH POTENTIAL"},
+  {name:"Swords",county:"Dublin 17",yield:8.2,growth:8.2,sig:"HIGH POTENTIAL"},
+  {name:"Ballincollig",county:"Cork",yield:7.5,growth:7.5,sig:"HIGH POTENTIAL"},
+  {name:"Salthill",county:"Co. Galway",yield:4.2,growth:5.1,sig:"MODERATE POTENTIAL"},
+  {name:"Castletroy",county:"Co. Limerick",yield:5.4,growth:6.9,sig:"HIGH POTENTIAL"},
+  {name:"Drogheda",county:"Co. Louth",yield:5.0,growth:7.1,sig:"HIGH POTENTIAL"},
+  {name:"Naas",county:"Co. Kildare",yield:4.8,growth:7.4,sig:"HIGH POTENTIAL"},
+  {name:"Newbridge",county:"Co. Kildare",yield:4.6,growth:6.8,sig:"HIGH POTENTIAL"},
+  {name:"Maynooth",county:"Co. Kildare",yield:4.5,growth:7.1,sig:"HIGH POTENTIAL"},
+  {name:"Bray",county:"Co. Wicklow",yield:3.9,growth:5.2,sig:"MODERATE POTENTIAL"},
+  {name:"Greystones",county:"Co. Wicklow",yield:3.7,growth:5.8,sig:"MODERATE POTENTIAL"},
+  {name:"Navan",county:"Co. Meath",yield:4.6,growth:7.5,sig:"HIGH POTENTIAL"},
+  {name:"Trim",county:"Co. Meath",yield:4.8,growth:6.9,sig:"HIGH POTENTIAL"},
+  {name:"Blackrock",county:"Dublin South",yield:3.2,growth:4.1,sig:"MODERATE POTENTIAL"},
+  {name:"Rathmines",county:"Dublin 6",yield:4.1,growth:3.8,sig:"MODERATE POTENTIAL"},
+  {name:"Tallaght",county:"Dublin 24",yield:9.8,growth:5.6,sig:"HIGH POTENTIAL"},
+  {name:"Lucan",county:"Co. Dublin",yield:7.2,growth:6.1,sig:"HIGH POTENTIAL"},
+  {name:"Portlaoise",county:"Co. Laois",yield:6.4,growth:5.2,sig:"HIGH POTENTIAL"},
+  {name:"Mullingar",county:"Co. Westmeath",yield:6.1,growth:4.8,sig:"HIGH POTENTIAL"},
+  {name:"Athlone",county:"Co. Westmeath",yield:5.8,growth:5.1,sig:"HIGH POTENTIAL"},
+  {name:"Carlow Town",county:"Co. Carlow",yield:6.2,growth:5.4,sig:"HIGH POTENTIAL"},
+  {name:"Wexford Town",county:"Co. Wexford",yield:5.5,growth:6.0,sig:"HIGH POTENTIAL"},
+  {name:"Waterford City",county:"Co. Waterford",yield:5.8,growth:5.3,sig:"HIGH POTENTIAL"},
+  {name:"Tralee",county:"Co. Kerry",yield:5.6,growth:5.8,sig:"HIGH POTENTIAL"},
+  {name:"Killarney",county:"Co. Kerry",yield:4.9,growth:6.5,sig:"HIGH POTENTIAL"},
+  {name:"Ennis",county:"Co. Clare",yield:5.4,growth:5.9,sig:"HIGH POTENTIAL"},
+  {name:"Sligo Town",county:"Co. Sligo",yield:5.9,growth:4.1,sig:"MODERATE POTENTIAL"},
+  {name:"Letterkenny",county:"Co. Donegal",yield:6.5,growth:3.5,sig:"MODERATE POTENTIAL"},
+];
+function masSearch(q){
+  var res=document.getElementById('masResults');
+  var none=document.getElementById('masNoResult');
+  q=q.trim().toLowerCase();
+  if(q.length<2){res.classList.remove('show');res.innerHTML='';none.style.display='none';return;}
+  var matches=MAS_DATA.filter(function(d){
+    return d.name.toLowerCase().includes(q)||d.county.toLowerCase().includes(q);
+  });
+  none.style.display='none';
+  if(matches.length===0){res.classList.remove('show');res.innerHTML='';none.style.display='block';return;}
+  // Build rows using data-county attribute — no inline JS escaping needed
+  res.innerHTML=matches.slice(0,8).map(function(d){
+    var sc=d.sig==='HIGH POTENTIAL'?'sb':'mo';
+    var sigShort=d.sig==='HIGH POTENTIAL'?'HIGH POTENTIAL':'MODERATE';
+    return '<div class="mas-row" data-county="'+d.county+'" data-name="'+d.name+'">'
+      +'<div><div class="mr-name">'+d.name+'</div><div class="mr-county">'+d.county+'</div></div>'
+      +'<div class="mr-yield">'+d.yield+'%</div>'
+      +'<div class="mr-growth">+'+d.growth+'%</div>'
+      +'<div class="mr-sig '+sc+'">'+sigShort+'</div>'
+      +'<div style="font-size:.7rem;color:var(--green);white-space:nowrap;">Get Report →</div>'
+      +'</div>';
+  }).join('');
+  res.classList.add('show');
+}
+// Wire up clicks via event delegation on the results container
+// Using mousedown so it fires before the input blur hides the list
+document.addEventListener('DOMContentLoaded',function(){
+  var res=document.getElementById('masResults');
+  var inp=document.getElementById('masInput');
+  if(res){
+    res.addEventListener('mousedown',function(e){
+      // Prevent input from losing focus before we process the click
+      e.preventDefault();
+      var row=e.target.closest('.mas-row');
+      if(row){
+        masClick(row.getAttribute('data-county'), row.getAttribute('data-name'));
+      }
+    });
+  }
+  if(inp){
+    inp.addEventListener('blur',function(){
+      setTimeout(function(){
+        if(res) res.classList.remove('show');
+      },150);
+    });
+    // Also hide on Escape
+    inp.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){res.classList.remove('show');inp.blur();}
+    });
+  }
+});
+function masClick(county, areaName){
+  var res=document.getElementById('masResults');
+  var inp=document.getElementById('masInput');
+  if(res) res.classList.remove('show');
+  if(inp){inp.value='';inp.blur();}
+  // Extract base county name: "Dublin 15" → "Dublin", "Co. Kildare" → "Kildare"
+  var countyBase=county.replace(/\s*(dublin)\s*\d*/i,'Dublin')
+                       .replace(/^co[.]\s*/i,'')
+                       .replace(/\s+\d+$/,'')
+                       .trim();
+  var sel=document.getElementById('countyBuySelect');
+  var matched=false;
+  if(sel){
+    for(var i=0;i<sel.options.length;i++){
+      var opt=sel.options[i].text.toLowerCase();
+      var cb=countyBase.toLowerCase();
+      if(opt===cb||opt===cb.toLowerCase()||opt.includes(cb)||cb.includes(opt)){
+        if(sel.options[i].value&&sel.options[i].value!=='coming'){
+          sel.value=sel.options[i].value;
+          matched=true;
+          break;
+        }
+      }
+    }
+  }
+  document.getElementById('reports').scrollIntoView({behavior:'smooth'});
+  if(matched){
+    showToast('✓ '+countyBase+' selected — get the full report below');
+  } else {
+    showToast(countyBase+' report coming soon — request it below!');
+  }
+}
+</script>
 
 <div class="ol">Real Sample</div>
   <h2>Real data. Real areas. Real signals.</h2>
@@ -1927,7 +1932,7 @@ hmPaint(); hmRank();
 <style>@media(max-width:600px){.mobile-swipe-hint{display:block!important}}</style>
 <p style="text-align:center;font-size:.78rem;color:#f97316;margin-top:.5rem;max-width:600px;margin-left:auto;margin-right:auto;">⚠ <strong>RPZ Note:</strong> All 4 areas above are in Rent Pressure Zones — annual rent increases are legally capped at 2%. Factor this into yield projections for existing tenancies.</p>
 </section>
-<section><div class="sh fade-in"><div class="ol">Investment Intelligence</div><h2>Three questions every Irish property investor needs answered</h2><p>Our reports score every micro-area on the metrics that actually matter for property investment decisions.</p></div><div class="pg"><div class="pc fade-in"><div class="pi">📈</div><h3>Where is growth strong?</h3><p>5-year compound growth rates for every micro-area, benchmarked against county and national averages.</p></div><div class="pc fade-in"><div class="pi">🛡️</div><h3>Where is risk low?</h3><p>Volatility scoring, transaction volume analysis, and price consistency metrics.</p></div><div class="pc fade-in"><div class="pi">💰</div><h3>What return will I get?</h3><p>Gross rental yield estimates using official RTB rent data, mapped to micro-area median prices.</p></div></div></section>
+<section><div class="sh fade-in"><div class="ol">What You Get</div><h2>Three signals. Every micro-area.</h2></div><div class="pg"><div class="pc fade-in"><div class="pi">📈</div><h3>Growth</h3><p>5-year CAGR per micro-area vs county average.</p></div><div class="pc fade-in"><div class="pi">🛡️</div><h3>Risk</h3><p>Volatility + transaction volume, scored Low / Medium / High.</p></div><div class="pc fade-in"><div class="pi">💰</div><h3>Yield</h3><p>Gross rental yield from live RTB rent data.</p></div></div></section>
 <section class="is"><div class="ig fade-in"><div class="it"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Sample Data</div><h3>Micro-area precision — not vague county averages</h3><p>County-level data hides the real story. Our reports drill into individual areas — ranking them by growth, risk, and yield.</p><a href="#snap" class="bp" style="margin-top:.5rem">See Top Areas For Free →</a></div><div><table class="itable"><thead><tr><th>Micro-Area</th><th>Growth</th><th>Yield</th><th>RPZ</th><th>Signal</th></tr></thead><tbody><tr><td>Swords, Dublin 17</td><td style="color:var(--green)">+8.2%</td><td>5.1%</td><td><span style="color:#f97316;font-weight:700;font-size:.75rem;">⚠ Yes</span></td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr><td>Ballincollig, Cork</td><td style="color:var(--green)">+7.5%</td><td>4.8%</td><td><span style="color:#f97316;font-weight:700;font-size:.75rem;">⚠ Yes</span></td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr><td>Salthill, Co. Galway</td><td style="color:var(--gold)">+5.1%</td><td>4.2%</td><td><span style="color:#f97316;font-weight:700;font-size:.75rem;">⚠ Yes</span></td><td><span class="sm">MODERATE</span></td></tr><tr class="blur"><td>Castletroy, Co. Limerick</td><td>+6.9%</td><td>5.4%</td><td>No</td><td><span class="ss">HIGH POTENTIAL</span></td></tr><tr class="blur"><td>Drogheda, Louth</td><td>+7.1%</td><td>5.0%</td><td>⚠ Yes</td><td><span class="ss">HIGH POTENTIAL</span></td></tr></tbody></table><p style="font-size:.78rem;color:var(--t3);margin-top:.75rem;text-align:center">* Sample data — full reports contain all micro-areas per county</p></div></div></section>
 <section class="es" id="snap"><div class="eb fade-in"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Free — No Credit Card</div><h2>Get your free investor snapshot</h2><p style="margin-bottom:1.75rem">A 2-page investment briefing for any Irish county — free, instant, no credit card.</p>
 
@@ -2391,7 +2396,7 @@ hmPaint(); hmRank();
   </div>
 </section>
 <footer>
-  <p>© 2025 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/methodology">Methodology</a> · <a href="/privacy">Privacy Policy</a> · <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a></p>
+  <p>© 2026 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/methodology">Methodology</a> · <a href="/privacy">Privacy Policy</a> · <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a></p>
   <p style="margin-top:.4rem;font-size:.76rem;color:var(--t3)">IrishPropertyInsights provides data analysis based on public records. It is not financial advice. Always consult a qualified advisor before making investment decisions.</p>
 </footer>
 <div class="toast" id="toast"></div>
