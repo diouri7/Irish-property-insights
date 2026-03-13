@@ -1309,6 +1309,51 @@ async function submitExitPopup(){
   </div>
 </div>
 
+<!-- ── TESTIMONIALS ── -->
+<section style="padding:3.5rem 2rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <div style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;">What People Are Saying</div>
+      <h3 style="font-family:var(--fd);font-size:1.4rem;color:var(--t1);">From the Irish property community</h3>
+      <a href="https://www.reddit.com/r/HousingIreland" target="_blank" style="font-size:.78rem;color:var(--t3);text-decoration:none;">via r/HousingIreland</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;">
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"County averages hide a lot of variation. That's partly why I built this tool — to explain patterns that aren't obvious in county-level statistics."</p>
+        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 94 upvotes</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"This is really cool but it's an ad. You need to pay for the full data set." — <em style="color:var(--t2);">Founder replied:</em> "Fair point — most of the underlying datasets are public and free. The tool organises them so patterns across micro-areas are easier to explore."</p>
+        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · community exchange</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"If you leverage with mortgage, the yield can be used significantly?" — <em style="color:var(--t2);">Yes. Leverage can definitely increase the return on equity. The yields shown are gross property yields — financing strategy can amplify or reduce the final return."</em></p>
+        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 64 upvotes</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"Snugborough Rd D15 STRONG BUY" — real user spotting their area in the Dublin data table.</p>
+        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 2 upvotes</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"The goal isn't to predict the exact yield of a specific house, but to compare areas on the same basis to see where patterns appear."</p>
+        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 41 upvotes</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;border-left:3px solid var(--green);">
+        <p style="font-size:.88rem;color:var(--t2);line-height:1.65;margin-bottom:1rem;">"Looking at the data made me realise something interesting — high yield and strong price-growth rarely happen in the same micro-area. Most places seem to be one or the other."</p>
+        <div style="font-size:.75rem;color:var(--t3);">r/HousingIreland · 4 upvotes</div>
+      </div>
+
+    </div>
+    <p style="text-align:center;margin-top:1.5rem;font-size:.78rem;color:var(--t3);">648 views · 24 upvotes · <a href="https://www.reddit.com/r/HousingIreland" target="_blank" style="color:var(--green);text-decoration:none;">Read the full thread on Reddit →</a></p>
+  </div>
+</section>
+
 <!-- ── MICRO-AREA SEARCH ── -->
 <div id="maSearch">
   <div class="mas-inner">
