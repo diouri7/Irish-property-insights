@@ -1203,72 +1203,122 @@ async function submitExitPopup(){
 <nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><span style="font-size:.68rem;color:var(--green);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);padding:.25rem .75rem;border-radius:20px;font-weight:600;margin-left:.5rem;">🗓 RTB: Q2 2025 · PPR: Dec 2025 · Reports: Mar 2026</span><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#compare">Compare Counties</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
 
 <!-- ── HERO ── -->
-<section class="hero" style="padding:7rem 2rem 3rem;">
-  <div class="hc">
+<section class="hero" style="padding:6rem 2rem 3rem;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
 
-    <!-- Data source badge -->
-    <div style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:100px;font-size:0.78rem;font-weight:600;color:var(--green);margin-bottom:2rem;">
-      <span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;"></span>
-      Built on official PPR &amp; RTB data — 727,000 transactions
+    <!-- LEFT: Text content -->
+    <div>
+      <!-- Badge -->
+      <div style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:100px;font-size:0.78rem;font-weight:600;color:var(--green);margin-bottom:1.75rem;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;"></span>
+        Official PPR &amp; RTB data — 727,000 transactions
+      </div>
+
+      <!-- Headline -->
+      <h1 style="font-family:var(--fd);font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:700;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.25rem;text-align:left;">
+        Find the Most Profitable<br>Rental Areas in <em style="font-style:italic;color:var(--green);">Ireland</em>
+      </h1>
+
+      <!-- Sub-headline -->
+      <p style="font-size:1.05rem;color:var(--t2);max-width:460px;margin:0 0 2rem;line-height:1.65;text-align:left;">
+        Every micro-area across all 26 counties ranked by yield, growth &amp; risk — from official government data.
+      </p>
+
+      <!-- CTAs -->
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <a href="#snap" class="bp" style="font-size:1rem;padding:.9rem 2rem;">Get Free Snapshot →</a>
+        <a href="#reports" class="bs" style="padding:.9rem 1.6rem;">Full Report — €29</a>
+      </div>
+      <p style="font-size:0.78rem;color:var(--t3);">No credit card · Based on 727,000+ verified transactions</p>
+
+      <!-- Trust pills -->
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1.75rem;">
+        <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ 500+ micro-areas</span>
+        <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ All 26 counties</span>
+        <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ Official data only</span>
+        <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">🗓 Updated Q2 2025</span>
+      </div>
     </div>
 
-    <!-- Headline -->
-    <h1 style="font-family:var(--fd);font-size:clamp(2.6rem,5.5vw,4.4rem);font-weight:700;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.5rem;">
-      The Data-Driven Map<br>for <em style="font-style:italic;color:var(--green);">Irish Property</em> Investors
-    </h1>
-
-    <!-- Sub-headline — answers "what is this?" in one sentence -->
-    <p class="hs" style="font-size:1.15rem;max-width:580px;margin:0 auto 1rem;">
-      We analyse RTB and Property Price Register data to surface high-yield micro-areas you won't find on Daft.
-    </p>
-    <p style="font-size:0.9rem;color:var(--t3);max-width:480px;margin:0 auto 2.5rem;line-height:1.6;">
-      Every micro-area across all 26 counties ranked by rental yield, 5-year growth, and investment risk — for free.
-    </p>
-
-    <!-- Trust pills -->
-    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;">
-      <div style="display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0.9rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.82rem;color:var(--green);font-weight:500;">
-        ✓ 500+ micro-areas ranked
+    <!-- RIGHT: Blurred report preview -->
+    <div style="position:relative;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5);">
+        <!-- Report header -->
+        <div style="background:var(--bg2);padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:.7rem;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem;">Dublin County Report</div>
+            <div style="font-size:.75rem;color:var(--t3);">Updated with RTB Q2 2025 data</div>
+          </div>
+          <div style="background:var(--green);color:#0b1120;font-size:.65rem;font-weight:800;padding:.25rem .6rem;border-radius:20px;">PDF</div>
+        </div>
+        <!-- Metrics row -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--border);">
+          <div style="padding:.9rem .75rem;text-align:center;border-right:1px solid var(--border);">
+            <div style="font-size:1rem;font-weight:700;color:var(--t1);">€484k</div>
+            <div style="font-size:.62rem;color:var(--t3);">Median Price</div>
+          </div>
+          <div style="padding:.9rem .75rem;text-align:center;border-right:1px solid var(--border);">
+            <div style="font-size:1rem;font-weight:700;color:var(--green);">5.5%</div>
+            <div style="font-size:.62rem;color:var(--t3);">County Yield</div>
+          </div>
+          <div style="padding:.9rem .75rem;text-align:center;border-right:1px solid var(--border);">
+            <div style="font-size:1rem;font-weight:700;color:var(--green);">+5.3%</div>
+            <div style="font-size:.62rem;color:var(--t3);">5yr Growth</div>
+          </div>
+          <div style="padding:.9rem .75rem;text-align:center;">
+            <div style="font-size:1rem;font-weight:700;color:var(--t1);">415</div>
+            <div style="font-size:.62rem;color:var(--t3);">Areas Scored</div>
+          </div>
+        </div>
+        <!-- Top areas preview -->
+        <div style="padding:1rem 1.5rem;">
+          <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:.75rem;">Top Micro-Areas by Yield</div>
+          <div style="display:flex;flex-direction:column;gap:.5rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:.8rem;">
+              <span style="color:var(--t2);">Snugborough Rd D15</span>
+              <span style="color:var(--green);font-weight:700;">13.6%</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:.8rem;">
+              <span style="color:var(--t2);">Ballymun Dublin 11</span>
+              <span style="color:var(--green);font-weight:700;">13.2%</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:.8rem;">
+              <span style="color:var(--t2);">Clondalkin Dublin 22</span>
+              <span style="color:var(--green);font-weight:700;">11.9%</span>
+            </div>
+            <!-- Blurred rows -->
+            <div style="filter:blur(5px);pointer-events:none;display:flex;flex-direction:column;gap:.5rem;">
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:.8rem;">
+                <span style="color:var(--t2);">████████████ D9</span>
+                <span style="color:var(--green);font-weight:700;">11.1%</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:.8rem;">
+                <span style="color:var(--t2);">████████████ D22</span>
+                <span style="color:var(--green);font-weight:700;">10.8%</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:.8rem;">
+                <span style="color:var(--t2);">████████████ D11</span>
+                <span style="color:var(--green);font-weight:700;">10.4%</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:.75rem;padding:.6rem;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:8px;text-align:center;font-size:.72rem;color:var(--green);font-weight:600;">+ 409 more areas in full report</div>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0.9rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.82rem;color:var(--green);font-weight:500;">
-        ✓ All 26 counties
-      </div>
-      <div style="display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0.9rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.82rem;color:var(--green);font-weight:500;">
-        ✓ Official government data only
-      </div>
-      <div style="display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0.9rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.82rem;color:var(--green);font-weight:500;">
-        🗓 Last data refresh: Q2 2025
-      </div>
-    </div>
-
-    <!-- CTAs -->
-    <div class="hctas">
-      <a href="#snap" class="bp" style="font-size:1.05rem;padding:1rem 2.2rem;">Find High-Yield Areas Free →</a>
-      <a href="#reports" class="bs">Full County Report — €29</a>
-    </div>
-    <p style="font-size:0.8rem;color:var(--t3);margin-top:1rem;">No credit card · No signup · Instant download</p>
-
-    <!-- "What you get" quick explainer — the 10-second pitch -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:680px;margin:3.5rem auto 0;text-align:left;">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;border-top:2px solid var(--green);">
-        <div style="font-size:1.2rem;margin-bottom:0.5rem;">📍</div>
-        <div style="font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;">Where to invest</div>
-        <div style="font-size:0.8rem;color:var(--t3);line-height:1.5;">Every micro-area ranked — not vague county averages</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;border-top:2px solid var(--gold);">
-        <div style="font-size:1.2rem;margin-bottom:0.5rem;">💰</div>
-        <div style="font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;">What return to expect</div>
-        <div style="font-size:0.8rem;color:var(--t3);line-height:1.5;">Gross yield calculated from live RTB rent data</div>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;border-top:2px solid var(--blue);">
-        <div style="font-size:1.2rem;margin-bottom:0.5rem;">🛡️</div>
-        <div style="font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;">How risky it is</div>
-        <div style="font-size:0.8rem;color:var(--t3);line-height:1.5;">Risk-scored by price volatility &amp; transaction volume</div>
-      </div>
+      <!-- Floating badge -->
+      <div style="position:absolute;top:-12px;right:-12px;background:var(--green);color:#0b1120;font-size:.7rem;font-weight:800;padding:.4rem .9rem;border-radius:20px;box-shadow:0 4px 12px rgba(16,185,129,.4);">€29 Full Report</div>
     </div>
 
   </div>
 </section>
+<style>
+@media(max-width:768px){
+  section.hero > div[style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr !important;
+  }
+  section.hero > div > div:last-child{display:none;}
+}
+</style>
 
 <!-- ── STATS BAR ── -->
 <div class="cb">
