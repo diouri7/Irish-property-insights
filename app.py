@@ -820,8 +820,17 @@ LANDING_HTML = """<!DOCTYPE html>
   gtag('config', 'G-24NY207Q8J');
 </script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IrishPropertyInsights — Data-Driven Property Investment Intelligence</title>
-<meta name="description" content="15 years of Irish property data, risk-scored and yield-mapped across 26 counties.">
+<title>IrishPropertyInsights — Best Rental Yield Areas Ireland 2025 | Property Investment Intelligence</title>
+<meta name="description" content="Find the highest rental yield micro-areas across all 26 Irish counties. Ranked by yield, 5-year growth & investment risk using 727,000+ PPR transactions and RTB Q2 2025 data. Free county snapshot — no credit card.">
+<meta name="keywords" content="best rental yield ireland 2025, irish property investment, buy to let ireland, property price register analysis, high yield areas ireland, RTB rental data, irish property micro-areas, dublin property investment, cork property yield">
+<meta property="og:title" content="IrishPropertyInsights — Find High-Yield Irish Property Areas">
+<meta property="og:description" content="727,000+ PPR transactions analysed. Every micro-area in all 26 counties ranked by yield, growth & risk. Free snapshot, no credit card.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://irishpropertyinsights.ie">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IrishPropertyInsights — Irish Property Investment Data">
+<meta name="twitter:description" content="Micro-area rankings across all 26 Irish counties. Yield, growth & risk scored from official PPR & RTB data.">
+<link rel="canonical" href="https://irishpropertyinsights.ie">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -1826,7 +1835,11 @@ hmPaint(); hmRank();
         <div class="rp-bar-row"><span class="rp-area">Coolock Dublin 17</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:79%"></div></div><span class="rp-pct">10.7%</span></div>
         <div class="rp-bar-row"><span class="rp-area">Finglas Rd Dublin 11</span><div class="rp-bar-wrap"><div class="rp-bar-fill" style="width:78%"></div></div><span class="rp-pct">10.7%</span></div>
       </div>
-      <div class="rp-section-title" style="margin-top:14px">Micro-Area Ranking Table</div>
+      <div class="rp-section-title" style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+        Micro-Area Ranking Table
+        <button onclick="(function(b,t){var h=document.getElementById('sampleTableWrap');var open=h.style.display!=='none';h.style.display=open?'none':'block';b.textContent=open?'▼ Show sample table':'▲ Hide table';})(this)" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-size:.72rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;cursor:pointer;font-family:var(--fb);">▼ Show sample table</button>
+      </div>
+      <div id="sampleTableWrap" style="display:none;">
       <table class="rp-table">
         <thead><tr><th>#</th><th>Micro-Area</th><th>Median Price</th><th>5yr Growth</th><th>Yield</th><th>Risk</th><th>RPZ</th><th>Signal</th><th>Confidence</th></tr></thead>
         <tbody>
@@ -1838,6 +1851,7 @@ hmPaint(); hmRank();
           <tr class="blur-row"><td>6</td><td>Monastery Rd Dublin 22</td><td>€290,000</td><td>+10.3%</td><td>10.8%</td><td>Low</td><td>⚠ RPZ</td><td><span class="sig sb">HIGH POTENTIAL</span></td><td>★★☆</td></tr>
         </tbody>
       </table>
+      </div>
       <div class="rp-fade"></div>
     </div>
   </div>
