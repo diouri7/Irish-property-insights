@@ -902,7 +902,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .al{list-style:none;display:flex;flex-direction:column;gap:1rem}.al li{display:flex;align-items:flex-start;gap:.75rem;font-size:.93rem;color:var(--t2);line-height:1.6}
 .al .ic{flex-shrink:0;width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;margin-top:2px}
 .fl .ic{background:var(--green-dim);color:var(--green)}.nl2 .ic{background:rgba(239,68,68,.12);color:#EF4444}
-.fq{max-width:800px;margin:3.5rem auto 0;display:flex;flex-direction:column}.fi{padding:1.5rem 0;border-bottom:1px solid var(--border)}.fi:first-child{border-top:1px solid var(--border)}
+.fq{max-width:800px;margin:3.5rem auto 0;display:flex;flex-direction:column;gap:.75rem}.fi{padding:1.25rem 1.5rem;border:1px solid var(--border);border-radius:12px;background:var(--card);transition:border-color .2s;}.fi:hover,.fi.open{border-color:rgba(16,185,129,.35);}
 .fqq{font-weight:600;font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;user-select:none;}
 .fqq::after{content:"+";font-size:1.2rem;font-weight:300;color:var(--t3);flex-shrink:0;transition:transform .25s;}
 .fi.open .fqq::after{transform:rotate(45deg);}
@@ -912,7 +912,31 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--green);color:var(--t1);padding:1rem 2rem;border-radius:12px;font-size:.9rem;font-weight:500;z-index:200;opacity:0;transition:all .4s;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}.fade-in.visible{opacity:1;transform:translateY(0)}
-@media(max-width:768px){.nk{display:none}.cbi{grid-template-columns:repeat(2,1fr)}.pg,.ig,.mg,.ag{grid-template-columns:1fr}.ef,.csw{flex-direction:column}.eb{padding:2.5rem 1.5rem}.sr{gap:1.25rem}.sn{font-size:2.2rem;min-width:40px}}
+@media(max-width:768px){
+  .nk{display:none}
+  .cbi{grid-template-columns:repeat(2,1fr)}
+  .pg,.ig,.mg,.ag{grid-template-columns:1fr}
+  .ef,.csw{flex-direction:column}
+  .eb{padding:2.5rem 1.5rem}
+  .sr{gap:1.25rem}
+  .sn{font-size:2.2rem;min-width:40px}
+  section{padding-top:3.5rem;padding-bottom:3.5rem}
+  .sh{margin-bottom:2rem}
+  .hs{font-size:1rem}
+  p{font-size:.9rem}
+  .hctas{flex-direction:column;gap:.75rem}
+  .hctas a{width:100%;text-align:center;justify-content:center}
+  .bp,.bs{width:100%;text-align:center;justify-content:center;padding:.9rem 1.5rem}
+  .fq{gap:.5rem}
+  .fi{padding:1rem 1.1rem}
+  .fqq{font-size:.88rem}
+  .fqa{font-size:.85rem}
+}
+@media(max-width:480px){
+  h1{font-size:2rem!important}
+  h2{font-size:1.5rem!important}
+  .rp-metrics{grid-template-columns:repeat(2,1fr)!important}
+}
 
 /* Sample Report Preview */
 .rp-wrap{display:flex;justify-content:center;padding:0 1rem}
@@ -1997,6 +2021,42 @@ function masClick(county, areaName){
 <section class="es" id="snap"><div class="eb fade-in"><div class="ol" style="font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem">Free — No Credit Card</div><h2>Get your free investor snapshot</h2><p style="margin-bottom:1.75rem">A 2-page investment briefing for any Irish county — free, instant, no credit card.</p>
 
 <!-- ── PRICING COMPARISON TABLE ── -->
+<!-- Blurred report preview strip -->
+<div style="max-width:560px;margin:0 auto 2rem;position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--border);">
+  <div style="background:var(--card);padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+    <div>
+      <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-bottom:.15rem;">Dublin Full Report</div>
+      <div style="font-size:.7rem;color:var(--t3);">415 micro-areas · Yield · Growth · Risk · RPZ</div>
+    </div>
+    <div style="background:var(--green);color:#0b1120;font-size:.6rem;font-weight:800;padding:.2rem .55rem;border-radius:12px;">PDF</div>
+  </div>
+  <!-- Partial visible rows -->
+  <div style="padding:.75rem 1.25rem;background:var(--bg2);">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);margin-bottom:.5rem;padding-bottom:.4rem;border-bottom:1px solid var(--border);">
+      <span>Micro-Area</span><span style="text-align:center">Yield</span><span style="text-align:center">Growth</span><span style="text-align:center">Signal</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;">
+      <span style="color:var(--t2);">Snugborough Rd D15</span><span style="text-align:center;color:var(--green);font-weight:700;">13.6%</span><span style="text-align:center;color:var(--green);">+6.4%</span><span style="text-align:center;font-size:.62rem;background:rgba(16,185,129,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;border-top:1px solid rgba(255,255,255,.04);">
+      <span style="color:var(--t2);">Ballymun Dublin 11</span><span style="text-align:center;color:var(--green);font-weight:700;">13.2%</span><span style="text-align:center;color:var(--green);">+16.0%</span><span style="text-align:center;font-size:.62rem;background:rgba(16,185,129,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
+    </div>
+    <!-- Blurred remaining rows -->
+    <div style="filter:blur(4px);pointer-events:none;">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;border-top:1px solid rgba(255,255,255,.04);">
+        <span style="color:var(--t2);">████████████ D22</span><span style="text-align:center;color:var(--green);font-weight:700;">11.9%</span><span style="text-align:center;color:var(--green);">+3.9%</span><span style="text-align:center;font-size:.62rem;background:rgba(16,185,129,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;border-top:1px solid rgba(255,255,255,.04);">
+        <span style="color:var(--t2);">████████████ D9</span><span style="text-align:center;color:var(--green);font-weight:700;">11.1%</span><span style="text-align:center;color:var(--green);">+5.2%</span><span style="text-align:center;font-size:.62rem;background:rgba(16,185,129,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;border-top:1px solid rgba(255,255,255,.04);">
+        <span style="color:var(--t2);">████████████ D8</span><span style="text-align:center;color:var(--gold);font-weight:700;">8.7%</span><span style="text-align:center;color:var(--gold);">+4.1%</span><span style="text-align:center;font-size:.62rem;background:rgba(201,168,76,.15);color:var(--gold);border-radius:4px;padding:.15rem .3rem;">HIGH POTENTIAL</span>
+      </div>
+    </div>
+    <!-- Unlock bar -->
+    <div style="margin-top:.6rem;padding:.55rem;background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);border-radius:8px;text-align:center;font-size:.72rem;color:var(--green);font-weight:600;">🔒 + 413 more areas unlocked in Full Report (€29)</div>
+  </div>
+</div>
 <style>
 .pct{width:100%;border-collapse:collapse;margin:0 auto 1.75rem;max-width:560px;font-size:.85rem;}
 .pct thead tr th{padding:.75rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--border);}
@@ -2107,7 +2167,7 @@ function masClick(county, areaName){
 </div>
 </div>
 
-<section id="who"><div class="sh fade-in"><div class="ol">Straight Talk</div><h2>This report is built for serious investors</h2><p>We built this for people who make decisions based on data, not headlines.</p></div><div class="ag fade-in"><div class="ac"><h3><span style="font-size:1.1rem">✅</span> Built for you if…</h3><ul class="al fl"><li><span class="ic">✓</span><span>You're evaluating <strong>buy-to-let opportunities</strong> across Irish counties.</span></li><li><span class="ic">✓</span><span>You're an <strong>existing landlord</strong> exploring where to expand next.</span></li><li><span class="ic">✓</span><span>You're a <strong>mortgage broker or advisor</strong> wanting data-backed talking points.</span></li><li><span class="ic">✓</span><span>You want a <strong>quick shortlist</strong> worth investigating further.</span></li></ul></div><div class="ac"><h3><span style="font-size:1.1rem">✗</span> Probably not for you if…</h3><ul class="al nl2"><li><span class="ic">✗</span><span>You're looking for a <strong>crystal ball</strong>. We analyse trends — we don't predict.</span></li><li><span class="ic">✗</span><span>You expect <strong>individual property valuations</strong>. We score areas, not addresses.</span></li><li><span class="ic">✗</span><span>You need <strong>legal, tax, or planning</strong> advice. This is market data only.</span></li><li><span class="ic">✗</span><span>You're buying a <strong>home to live in</strong>. Signals are optimised for investment returns.</span></li></ul></div></div><div class="fq fade-in"><div class="fi"><div class="fqq">How accurate is the yield estimate?</div><div class="fqa">We use official RTB Q2 2025 rent data cross-referenced with PPR median sale prices, dampened by 0.4× at micro-area level. These are gross estimates — your actual yield depends on vacancy and costs. A reliable first filter, not a final calculation.</div></div><div class="fi"><div class="fqq">Isn't this just historical data?</div><div class="fqa">Yes — and that's the point. Investment patterns are visible in historical data before headlines. We track 5-year compound growth, transaction volumes, and volatility. Combined with current RTB rents, this gives a grounded view of where momentum exists.</div></div><div class="fi"><div class="fqq">Why trust micro-area scoring over my own research?</div><div class="fqa">You shouldn't rely on it alone. The report narrows 500+ areas to a shortlist worth deeper research. It replaces hours of manual PPR browsing, not your judgment.</div></div><div class="fi"><div class="fqq">What about new developments, zoning, local demand?</div><div class="fqa">We analyse transactions and rents — not planning applications or infrastructure. This is the quantitative layer. You bring the local knowledge.</div></div></div></section>
+<section id="who"><div class="sh fade-in"><div class="ol">Straight Talk</div><h2>This report is built for serious investors</h2><p>We built this for people who make decisions based on data, not headlines.</p></div><div class="ag fade-in"><div class="ac"><h3><span style="font-size:1.1rem">✅</span> Built for you if…</h3><ul class="al fl"><li><span class="ic">✓</span><span>You're evaluating <strong>buy-to-let opportunities</strong> across Irish counties.</span></li><li><span class="ic">✓</span><span>You're an <strong>existing landlord</strong> exploring where to expand next.</span></li><li><span class="ic">✓</span><span>You're a <strong>mortgage broker or advisor</strong> wanting data-backed talking points.</span></li><li><span class="ic">✓</span><span>You want a <strong>quick shortlist</strong> worth investigating further.</span></li></ul></div><div class="ac"><h3><span style="font-size:1.1rem">✗</span> Probably not for you if…</h3><ul class="al nl2"><li><span class="ic">✗</span><span>You're looking for a <strong>crystal ball</strong>. We analyse trends — we don't predict.</span></li><li><span class="ic">✗</span><span>You expect <strong>individual property valuations</strong>. We score areas, not addresses.</span></li><li><span class="ic">✗</span><span>You need <strong>legal, tax, or planning</strong> advice. This is market data only.</span></li><li><span class="ic">✗</span><span>You're buying a <strong>home to live in</strong>. Signals are optimised for investment returns.</span></li></ul></div></div><div class="fq fade-in"><div class="fi"><div class="fqq">📊 How accurate is the yield estimate?</div><div class="fqa">We use official RTB Q2 2025 rent data cross-referenced with PPR median sale prices, dampened by 0.4× at micro-area level. These are gross estimates — your actual yield depends on vacancy and costs. A reliable first filter, not a final calculation.</div></div><div class="fi"><div class="fqq">📅 Isn't this just historical data?</div><div class="fqa">Yes — and that's the point. Investment patterns are visible in historical data before headlines. We track 5-year compound growth, transaction volumes, and volatility. Combined with current RTB rents, this gives a grounded view of where momentum exists.</div></div><div class="fi"><div class="fqq">🔍 Why trust micro-area scoring over my own research?</div><div class="fqa">You shouldn't rely on it alone. The report narrows 500+ areas to a shortlist worth deeper research. It replaces hours of manual PPR browsing, not your judgment.</div></div><div class="fi"><div class="fqq">🏗️ What about new developments, zoning, local demand?</div><div class="fqa">We analyse transactions and rents — not planning applications or infrastructure. This is the quantitative layer. You bring the local knowledge.</div></div></div></section>
 <!-- ── FULL REPORT PREVIEW (BLURRED) ── -->
 <section style="padding:5rem 2rem;background:var(--bg);">
   <div style="max-width:1000px;margin:0 auto;">
