@@ -903,7 +903,11 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .al .ic{flex-shrink:0;width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;margin-top:2px}
 .fl .ic{background:var(--green-dim);color:var(--green)}.nl2 .ic{background:rgba(239,68,68,.12);color:#EF4444}
 .fq{max-width:800px;margin:3.5rem auto 0;display:flex;flex-direction:column}.fi{padding:1.5rem 0;border-bottom:1px solid var(--border)}.fi:first-child{border-top:1px solid var(--border)}
-.fqq{font-weight:600;font-size:.95rem;margin-bottom:.5rem}.fqa{font-size:.9rem;color:var(--t2);line-height:1.65}
+.fqq{font-weight:600;font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;user-select:none;}
+.fqq::after{content:"+";font-size:1.2rem;font-weight:300;color:var(--t3);flex-shrink:0;transition:transform .25s;}
+.fi.open .fqq::after{transform:rotate(45deg);}
+.fqa{font-size:.9rem;color:var(--t2);line-height:1.65;max-height:0;overflow:hidden;transition:max-height .3s ease;margin-bottom:0;}
+.fi.open .fqa{max-height:300px;margin-bottom:.5rem;}
 footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}footer p{font-size:.82rem;color:var(--t3)}footer a{color:var(--t2);text-decoration:none}
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--green);color:var(--t1);padding:1rem 2rem;border-radius:12px;font-size:.9rem;font-weight:500;z-index:200;opacity:0;transition:all .4s;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -1090,7 +1094,7 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
   #stickyCTA{padding:.5rem .9rem;gap:.5rem}
   #stickyCTA .sc-msg{font-size:.75rem}
   /* FAQ */
-  .fqq{font-size:.95rem}
+  .fqq{font-size:.95rem;cursor:pointer;}
   .fqa{font-size:.85rem}
   /* Methodology cards */
   .mg{gap:1rem}
@@ -1449,6 +1453,12 @@ async function submitExitPopup(){
     <!-- Header -->
     <div style="text-align:center;margin-bottom:2rem;">
       <div style="display:inline-block;font-size:0.7rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#c9a84c;border:1px solid #c9a84c;padding:0.3rem 0.8rem;border-radius:2px;margin-bottom:1rem;">Interactive Map</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.25rem;">
+        <span style="display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--t2);"><span style="width:12px;height:12px;border-radius:2px;background:#10b981;flex-shrink:0;"></span>Strong Buy</span>
+        <span style="display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--t2);"><span style="width:12px;height:12px;border-radius:2px;background:#3b82f6;flex-shrink:0;"></span>High Potential</span>
+        <span style="display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--t2);"><span style="width:12px;height:12px;border-radius:2px;background:#f59e0b;flex-shrink:0;"></span>Moderate</span>
+        <span style="display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--t2);"><span style="width:12px;height:12px;border-radius:2px;background:#6b7280;flex-shrink:0;"></span>Data Loading</span>
+      </div>
       <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;color:white;line-height:1.1;margin-bottom:0.6rem;">Irish Property Investment Heatmap</h2>
       <p style="color:#9a9690;font-size:0.9rem;font-weight:300;max-width:480px;margin:0 auto;">Click any county to see yield, growth and risk. Full micro-area rankings in the report.</p>
     </div>
@@ -2445,6 +2455,30 @@ function masClick(county, areaName){
     <p style="font-size:.82rem;color:var(--t3);margin-top:1.5rem;text-align:center">All data from <a href="https://www.propertypriceregister.ie" target="_blank" style="color:var(--t2);text-decoration:none">Property Price Register</a> &amp; <a href="https://www.rtb.ie" target="_blank" style="color:var(--t2);text-decoration:none">Residential Tenancies Board</a> — official Irish government sources.</p>
   </div>
 </section>
+<!-- ── FINAL CTA ── -->
+<section style="padding:6rem 2rem;background:linear-gradient(135deg,#0b1120 0%,#0f1a2e 50%,#0b1120 100%);border-top:1px solid var(--border);text-align:center;">
+  <div style="max-width:640px;margin:0 auto;">
+    <div style="font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:1.25rem;">Ready to invest smarter?</div>
+    <h2 style="font-family:var(--fd);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem;color:var(--t1);">Find Ireland's Best Rental<br>Areas — Starting Free</h2>
+    <p style="color:var(--t3);font-size:.95rem;line-height:1.65;max-width:440px;margin:0 auto 2.5rem;">Get your free county snapshot now. Upgrade to the full report when you're ready — 500+ micro-areas, ranked by yield, growth & risk.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;">
+      <a href="#snap" class="bp" style="font-size:1.05rem;padding:1rem 2.4rem;">Get Free Snapshot →</a>
+      <a href="#reports" class="bs" style="padding:1rem 2rem;">Full Report — €29</a>
+    </div>
+    <p style="font-size:.78rem;color:var(--t3);">No credit card · Based on 727,000+ verified transactions · Official government data</p>
+  </div>
+</section>
+<!-- ── END FINAL CTA ── -->
+
+<script>
+document.querySelectorAll('.fqq').forEach(function(q){
+  q.addEventListener('click',function(){
+    var fi=this.closest('.fi');
+    document.querySelectorAll('.fi.open').forEach(function(o){if(o!==fi)o.classList.remove('open');});
+    fi.classList.toggle('open');
+  });
+});
+</script>
 <footer>
   <p>© 2026 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/methodology">Methodology</a> · <a href="/privacy">Privacy Policy</a> · <a href="mailto:hello@irishpropertyinsights.ie">hello@irishpropertyinsights.ie</a></p>
   <p style="margin-top:.4rem;font-size:.76rem;color:var(--t3)">IrishPropertyInsights provides data analysis based on public records. It is not financial advice. Always consult a qualified advisor before making investment decisions.</p>
