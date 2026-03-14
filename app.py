@@ -63,8 +63,8 @@ DATA_PATH = os.environ.get("PPR_DATA_PATH", "PPR-ALL.csv")
 PORT = int(os.environ.get("PORT", 5000))
 
 # ─── COLORS ─────────────────────────────────────────────
-C_DARK = HexColor("#0B1120")
-C_GREEN = HexColor("#10B981")
+C_DARK = HexColor("#0A1F0F")
+C_GREEN = HexColor("#4ADE80")
 C_GREEN_BG = HexColor("#ECFDF5")
 C_GOLD = HexColor("#F59E0B")
 C_GOLD_BG = HexColor("#FFFBEB")
@@ -500,8 +500,8 @@ def make_price_chart(yearly_df, county_name):
     years = yearly_df["year"].values
     prices = yearly_df["median_price"].values
 
-    ax.plot(years, prices, color="#10B981", linewidth=2.5, marker="o", markersize=4, zorder=3)
-    ax.fill_between(years, prices, alpha=0.08, color="#10B981")
+    ax.plot(years, prices, color="#4ADE80", linewidth=2.5, marker="o", markersize=4, zorder=3)
+    ax.fill_between(years, prices, alpha=0.08, color="#4ADE80")
 
     ax.set_title(f"{county_name} — Median Sale Price by Year", fontsize=11, fontweight="bold", color="#1E293B", pad=12)
     ax.set_xlabel("")
@@ -537,7 +537,7 @@ def make_top_areas_chart(micro_df, county_name, top_n=10):
     colors = []
     for s in top["signal"]:
         if s == "HIGH POTENTIAL":
-            colors.append("#10B981")
+            colors.append("#4ADE80")
         elif s == "GOOD PROSPECT":
             colors.append("#3B82F6")
         elif s == "MODERATE":
@@ -868,7 +868,7 @@ LANDING_HTML = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0B1120;--bg2:#111827;--card:#1A2332;--green:#10B981;--green-dim:rgba(16,185,129,.15);--gold:#F59E0B;--gold-dim:rgba(245,158,11,.12);--blue:#3B82F6;--blue-dim:rgba(59,130,246,.12);--t1:#F1F5F9;--t2:#94A3B8;--t3:#64748B;--border:rgba(148,163,184,.1);--fd:'Fraunces',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif}
+:root{--bg:#0A1F0F;--bg2:#0D2818;--card:#122B18;--green:#4ADE80;--green-dim:rgba(74,222,128,.15);--gold:#F59E0B;--gold-dim:rgba(245,158,11,.12);--blue:#3B82F6;--blue-dim:rgba(59,130,246,.12);--t1:#F0FDF4;--t2:#86EFAC;--t3:#4ADE80;--border:rgba(74,222,128,.12);--fd:'Fraunces',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(11,17,32,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
@@ -876,9 +876,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:fl
 .nk{display:flex;gap:2rem;align-items:center;list-style:none}.nk a{color:var(--t2);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}.nk a:hover{color:var(--t1)}
 .nc{background:var(--green)!important;color:var(--bg)!important;padding:.5rem 1.25rem;border-radius:8px;font-weight:600!important}
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8rem 2rem 4rem;position:relative}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(16,185,129,.08) 0%,transparent 70%)}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(74,222,128,.08) 0%,transparent 70%)}
 .hc{max-width:820px;text-align:center;position:relative;z-index:1}
-.hb{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;background:var(--green-dim);border:1px solid rgba(16,185,129,.25);border-radius:100px;font-size:.8rem;font-weight:600;color:var(--green);margin-bottom:2rem}
+.hb{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;background:var(--green-dim);border:1px solid rgba(74,222,128,.25);border-radius:100px;font-size:.8rem;font-weight:600;color:var(--green);margin-bottom:2rem}
 .hb::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .hc h1{font-family:var(--fd);font-size:clamp(2.5rem,5.5vw,4.2rem);font-weight:700;line-height:1.12;letter-spacing:-.03em;margin-bottom:1.5rem}
@@ -886,7 +886,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:fl
 .hs{font-size:1.15rem;color:var(--t2);max-width:600px;margin:0 auto 2.5rem;line-height:1.7}
 .hctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 .bp{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--green);color:var(--bg);border:none;border-radius:10px;font-family:var(--fb);font-size:1rem;font-weight:600;cursor:pointer;transition:all .25s;text-decoration:none}
-.bp:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(16,185,129,.35)}
+.bp:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(74,222,128,.35)}
 .bs{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:0;color:var(--t2);border:1px solid var(--border);border-radius:10px;font-family:var(--fb);font-size:1rem;font-weight:500;cursor:pointer;transition:all .25s;text-decoration:none}
 .bs:hover{border-color:var(--t3);color:var(--t1)}
 .cb{padding:3rem 2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -912,7 +912,7 @@ section{padding:6rem 2rem}
 .ig{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
 .it h3{font-family:var(--fd);font-size:1.6rem;font-weight:600;margin-bottom:1rem}.it p{color:var(--t2);margin-bottom:1.5rem;line-height:1.7}
 .itable{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:.88rem}
-.itable thead{background:rgba(16,185,129,.08)}.itable th{padding:.9rem 1rem;text-align:left;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--t3)}
+.itable thead{background:rgba(74,222,128,.08)}.itable th{padding:.9rem 1rem;text-align:left;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--t3)}
 .itable td{padding:.8rem 1rem;border-top:1px solid var(--border);color:var(--t2)}.itable tbody tr:hover{background:rgba(255,255,255,.02)}
 .ss{display:inline-block;padding:.15rem .6rem;border-radius:6px;font-size:.75rem;font-weight:700;background:var(--green-dim);color:var(--green)}
 .sm{display:inline-block;padding:.15rem .6rem;border-radius:6px;font-size:.75rem;font-weight:700;background:var(--gold-dim);color:var(--gold)}
@@ -935,7 +935,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .al{list-style:none;display:flex;flex-direction:column;gap:1rem}.al li{display:flex;align-items:flex-start;gap:.75rem;font-size:.93rem;color:var(--t2);line-height:1.6}
 .al .ic{flex-shrink:0;width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;margin-top:2px}
 .fl .ic{background:var(--green-dim);color:var(--green)}.nl2 .ic{background:rgba(239,68,68,.12);color:#EF4444}
-.fq{max-width:800px;margin:3.5rem auto 0;display:flex;flex-direction:column;gap:.75rem}.fi{padding:1.25rem 1.5rem;border:1px solid var(--border);border-radius:12px;background:var(--card);transition:border-color .2s;}.fi:hover,.fi.open{border-color:rgba(16,185,129,.35);}
+.fq{max-width:800px;margin:3.5rem auto 0;display:flex;flex-direction:column;gap:.75rem}.fi{padding:1.25rem 1.5rem;border:1px solid var(--border);border-radius:12px;background:var(--card);transition:border-color .2s;}.fi:hover,.fi.open{border-color:rgba(74,222,128,.35);}
 .fqq{font-weight:600;font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;user-select:none;}
 .fqq::after{content:"+";font-size:1.2rem;font-weight:300;color:var(--t3);flex-shrink:0;transition:transform .25s;}
 .fi.open .fqq::after{transform:rotate(45deg);}
@@ -978,13 +978,13 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 .rp-bar span{width:12px;height:12px;border-radius:50%;background:#e5e7eb}
 .rp-bar span:nth-child(1){background:#ef4444}.rp-bar span:nth-child(2){background:#f59e0b}.rp-bar span:nth-child(3){background:#10b981}
 .rp-doc{background:#fff;padding:2rem 2.5rem;color:#1e293b;font-family:'DM Sans',sans-serif;position:relative}
-.rp-header h2{font-size:1.4rem;font-weight:700;color:#0b1120;margin-bottom:.3rem}
+.rp-header h2{font-size:1.4rem;font-weight:700;color:#0A1F0F;margin-bottom:.3rem}
 .rp-header p{font-size:.78rem;color:#64748b;margin-bottom:1rem}
 .rp-rule{height:2px;background:linear-gradient(90deg,#10b981,#3b82f6);border-radius:2px;margin-bottom:1.25rem}
 .rp-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem}
 .rp-m{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.75rem;text-align:center}
-.rp-mv{font-size:1.1rem;font-weight:700;color:#0b1120}.rp-ml{font-size:.68rem;color:#94a3b8;margin-top:.2rem}
-.rp-section-title{font-size:.82rem;font-weight:700;color:#0b1120;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.rp-mv{font-size:1.1rem;font-weight:700;color:#0A1F0F}.rp-ml{font-size:.68rem;color:#94a3b8;margin-top:.2rem}
+.rp-section-title{font-size:.82rem;font-weight:700;color:#0A1F0F;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em}
 .rp-chart{display:flex;flex-direction:column;gap:.45rem}
 .rp-bar-row{display:flex;align-items:center;gap:.75rem}
 .rp-area{font-size:.72rem;color:#475569;width:170px;flex-shrink:0;text-align:right}
@@ -997,11 +997,11 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 .rp-table tr:nth-child(even) td{background:#f8fafc}
 .rp-table .g{color:#10b981;font-weight:600}
 .sig{display:inline-block;padding:.1rem .4rem;border-radius:4px;font-weight:700;font-size:.68rem}
-.sig.sb{background:rgba(16,185,129,.1);color:#10b981}
+.sig.sb{background:rgba(74,222,128,.1);color:#10b981}
 .blur-row td{filter:blur(4px);user-select:none;opacity:.6}
 .rp-fade{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,#fff)}
 
-#stickyCTA{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(11,17,32,.95);backdrop-filter:blur(12px);border-top:1px solid rgba(16,185,129,.25);padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transform:translateY(100%);transition:transform .35s ease;flex-wrap:wrap;}
+#stickyCTA{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(11,17,32,.95);backdrop-filter:blur(12px);border-top:1px solid rgba(74,222,128,.25);padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transform:translateY(100%);transition:transform .35s ease;flex-wrap:wrap;}
 #stickyCTA.visible{transform:translateY(0);}
 #stickyCTA .sc-msg{font-size:.88rem;color:var(--t2);flex:1;min-width:180px;}
 #stickyCTA .sc-msg strong{color:var(--t1);}
@@ -1012,8 +1012,8 @@ footer{padding:3rem 2rem;border-top:1px solid var(--border);text-align:center}fo
 /* ── EXIT INTENT POPUP ── */
 #exitPopup{position:fixed;inset:0;background:rgba(11,17,32,.88);backdrop-filter:blur(10px);z-index:600;display:none;align-items:center;justify-content:center;padding:1rem;}
 #exitPopup.show{display:flex;}
-#exitPopupBox{background:var(--bg2);border:1px solid rgba(16,185,129,.3);border-radius:18px;max-width:480px;width:100%;padding:2.5rem 2rem;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6);text-align:center;}
-#exitPopupBox .ep-badge{display:inline-block;background:rgba(16,185,129,.12);color:var(--green);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;border:1px solid rgba(16,185,129,.25);margin-bottom:1.25rem;}
+#exitPopupBox{background:var(--bg2);border:1px solid rgba(74,222,128,.3);border-radius:18px;max-width:480px;width:100%;padding:2.5rem 2rem;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6);text-align:center;}
+#exitPopupBox .ep-badge{display:inline-block;background:rgba(74,222,128,.12);color:var(--green);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;border:1px solid rgba(74,222,128,.25);margin-bottom:1.25rem;}
 #exitPopupBox h3{font-family:var(--fd);font-size:clamp(1.4rem,3vw,1.8rem);font-weight:700;line-height:1.2;margin-bottom:.75rem;color:var(--t1);}
 #exitPopupBox p{font-size:.9rem;color:var(--t2);margin-bottom:1.5rem;line-height:1.6;}
 #exitPopupBox .ep-preview{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:1.5rem;}
@@ -1261,7 +1261,7 @@ async function submitExitPopup(){
 }
 </script>
 
-<nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><span style="font-size:.68rem;color:var(--green);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);padding:.25rem .75rem;border-radius:20px;font-weight:600;margin-left:.5rem;">🗓 RTB: Q2 2025 · PPR: Dec 2025 · Reports: Mar 2026</span><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#compare">Compare Counties</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
+<nav><a href="#" class="nl">Irish<span>Property</span>Insights</a><span style="font-size:.68rem;color:var(--green);background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);padding:.25rem .75rem;border-radius:20px;font-weight:600;margin-left:.5rem;">🗓 RTB: Q2 2025 · PPR: Dec 2025 · Reports: Mar 2026</span><ul class="nk"><li><a href="#how">How It Works</a></li><li><a href="#who">Who It's For</a></li><li><a href="#compare">Compare Counties</a></li><li><a href="/methodology">Methodology</a></li><li><a href="#reports" class="nc">Get Report</a></li></ul></nav>
 
 <!-- ── HERO ── -->
 <section class="hero" style="padding:6rem 2rem 3rem;">
@@ -1270,7 +1270,7 @@ async function submitExitPopup(){
     <!-- LEFT: Text content -->
     <div>
       <!-- Badge -->
-      <div style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:100px;font-size:0.78rem;font-weight:600;color:var(--green);margin-bottom:1.75rem;">
+      <div style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:100px;font-size:0.78rem;font-weight:600;color:var(--green);margin-bottom:1.75rem;">
         <span style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0;"></span>
         Official PPR &amp; RTB data — 727,000 transactions
       </div>
@@ -1294,10 +1294,10 @@ async function submitExitPopup(){
 
       <!-- Trust pills -->
       <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1.75rem;">
-        <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ 500+ micro-areas</span>
-        <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ All 26 counties</span>
-        <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ Official data only</span>
-        <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">🗓 Updated Q2 2025</span>
+        <span style="padding:.35rem .8rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ 500+ micro-areas</span>
+        <span style="padding:.35rem .8rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ All 26 counties</span>
+        <span style="padding:.35rem .8rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ Official data only</span>
+        <span style="padding:.35rem .8rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">🗓 Updated Q2 2025</span>
       </div>
     </div>
 
@@ -1310,7 +1310,7 @@ async function submitExitPopup(){
             <div style="font-size:.7rem;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem;">Dublin County Report</div>
             <div style="font-size:.75rem;color:var(--t3);">Updated with RTB Q2 2025 data</div>
           </div>
-          <div style="background:var(--green);color:#0b1120;font-size:.65rem;font-weight:800;padding:.25rem .6rem;border-radius:20px;">PDF</div>
+          <div style="background:var(--green);color:#0A1F0F;font-size:.65rem;font-weight:800;padding:.25rem .6rem;border-radius:20px;">PDF</div>
         </div>
         <!-- Metrics row -->
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--border);">
@@ -1363,11 +1363,11 @@ async function submitExitPopup(){
               </div>
             </div>
           </div>
-          <div style="margin-top:.75rem;padding:.6rem;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:8px;text-align:center;font-size:.72rem;color:var(--green);font-weight:600;">+ 409 more areas in full report</div>
+          <div style="margin-top:.75rem;padding:.6rem;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-radius:8px;text-align:center;font-size:.72rem;color:var(--green);font-weight:600;">+ 409 more areas in full report</div>
         </div>
       </div>
       <!-- Floating badge -->
-      <div style="position:absolute;top:-12px;right:-12px;background:var(--green);color:#0b1120;font-size:.7rem;font-weight:800;padding:.4rem .9rem;border-radius:20px;box-shadow:0 4px 12px rgba(16,185,129,.4);">€29 Full Report</div>
+      <div style="position:absolute;top:-12px;right:-12px;background:var(--green);color:#0A1F0F;font-size:.7rem;font-weight:800;padding:.4rem .9rem;border-radius:20px;box-shadow:0 4px 12px rgba(74,222,128,.4);">€29 Full Report</div>
     </div>
 
   </div>
@@ -1784,7 +1784,7 @@ hmPaint(); hmRank();
 </script>
 <!-- ── END HEATMAP SECTION ── -->
 <div style="text-align:center;padding:1.5rem 2rem 2rem;background:#0a0c0f;">
-  <a href="#snap" style="display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;background:var(--green);color:#0b1120;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;">Explore full county insights →</a>
+  <a href="#snap" style="display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;background:var(--green);color:#0A1F0F;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;">Explore full county insights →</a>
 </div>
 <!-- ── DEAL CHECKER SECTION ── -->
 <section style="background:#0f1014;padding:5rem 2rem;">
@@ -2025,7 +2025,7 @@ function masClick(county, areaName){
       </div>
       <div class="rp-section-title" style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
         Micro-Area Ranking Table
-        <button onclick="(function(b,t){var h=document.getElementById('sampleTableWrap');var open=h.style.display!=='none';h.style.display=open?'none':'block';b.textContent=open?'▼ Show sample table':'▲ Hide table';})(this)" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-size:.72rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;cursor:pointer;font-family:var(--fb);">▼ Show sample table</button>
+        <button onclick="(function(b,t){var h=document.getElementById('sampleTableWrap');var open=h.style.display!=='none';h.style.display=open?'none':'block';b.textContent=open?'▼ Show sample table':'▲ Hide table';})(this)" style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:var(--green);font-size:.72rem;font-weight:600;padding:.3rem .8rem;border-radius:20px;cursor:pointer;font-family:var(--fb);">▼ Show sample table</button>
       </div>
       <div id="sampleTableWrap" style="display:none;">
       <table class="rp-table">
@@ -2061,7 +2061,7 @@ function masClick(county, areaName){
       <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-bottom:.15rem;">Dublin Full Report</div>
       <div style="font-size:.7rem;color:var(--t3);">415 micro-areas · Yield · Growth · Risk · RPZ</div>
     </div>
-    <div style="background:var(--green);color:#0b1120;font-size:.6rem;font-weight:800;padding:.2rem .55rem;border-radius:12px;">PDF</div>
+    <div style="background:var(--green);color:#0A1F0F;font-size:.6rem;font-weight:800;padding:.2rem .55rem;border-radius:12px;">PDF</div>
   </div>
   <!-- Partial visible rows -->
   <div style="padding:.75rem 1.25rem;background:var(--bg2);">
@@ -2069,33 +2069,33 @@ function masClick(county, areaName){
       <span>Micro-Area</span><span style="text-align:center">Yield</span><span style="text-align:center">Growth</span><span style="text-align:center">Signal</span>
     </div>
     <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;">
-      <span style="color:var(--t2);">Snugborough Rd D15</span><span style="text-align:center;color:var(--green);font-weight:700;">13.6%</span><span style="text-align:center;color:var(--green);">+6.4%</span><span style="text-align:center;font-size:.62rem;background:rgba(16,185,129,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
+      <span style="color:var(--t2);">Snugborough Rd D15</span><span style="text-align:center;color:var(--green);font-weight:700;">13.6%</span><span style="text-align:center;color:var(--green);">+6.4%</span><span style="text-align:center;font-size:.62rem;background:rgba(74,222,128,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
     </div>
     <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;border-top:1px solid rgba(255,255,255,.04);">
-      <span style="color:var(--t2);">Ballymun Dublin 11</span><span style="text-align:center;color:var(--green);font-weight:700;">13.2%</span><span style="text-align:center;color:var(--green);">+16.0%</span><span style="text-align:center;font-size:.62rem;background:rgba(16,185,129,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
+      <span style="color:var(--t2);">Ballymun Dublin 11</span><span style="text-align:center;color:var(--green);font-weight:700;">13.2%</span><span style="text-align:center;color:var(--green);">+16.0%</span><span style="text-align:center;font-size:.62rem;background:rgba(74,222,128,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
     </div>
     <!-- Blurred remaining rows -->
     <div style="filter:blur(4px);pointer-events:none;">
       <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;border-top:1px solid rgba(255,255,255,.04);">
-        <span style="color:var(--t2);">████████████ D22</span><span style="text-align:center;color:var(--green);font-weight:700;">11.9%</span><span style="text-align:center;color:var(--green);">+3.9%</span><span style="text-align:center;font-size:.62rem;background:rgba(16,185,129,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
+        <span style="color:var(--t2);">████████████ D22</span><span style="text-align:center;color:var(--green);font-weight:700;">11.9%</span><span style="text-align:center;color:var(--green);">+3.9%</span><span style="text-align:center;font-size:.62rem;background:rgba(74,222,128,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
       </div>
       <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;border-top:1px solid rgba(255,255,255,.04);">
-        <span style="color:var(--t2);">████████████ D9</span><span style="text-align:center;color:var(--green);font-weight:700;">11.1%</span><span style="text-align:center;color:var(--green);">+5.2%</span><span style="text-align:center;font-size:.62rem;background:rgba(16,185,129,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
+        <span style="color:var(--t2);">████████████ D9</span><span style="text-align:center;color:var(--green);font-weight:700;">11.1%</span><span style="text-align:center;color:var(--green);">+5.2%</span><span style="text-align:center;font-size:.62rem;background:rgba(74,222,128,.15);color:var(--green);border-radius:4px;padding:.15rem .3rem;">STRONG BUY</span>
       </div>
       <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;font-size:.72rem;padding:.35rem 0;align-items:center;border-top:1px solid rgba(255,255,255,.04);">
         <span style="color:var(--t2);">████████████ D8</span><span style="text-align:center;color:var(--gold);font-weight:700;">8.7%</span><span style="text-align:center;color:var(--gold);">+4.1%</span><span style="text-align:center;font-size:.62rem;background:rgba(201,168,76,.15);color:var(--gold);border-radius:4px;padding:.15rem .3rem;">HIGH POTENTIAL</span>
       </div>
     </div>
     <!-- Unlock bar -->
-    <div style="margin-top:.6rem;padding:.55rem;background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);border-radius:8px;text-align:center;font-size:.72rem;color:var(--green);font-weight:600;">🔒 + 413 more areas unlocked in Full Report (€29)</div>
+    <div style="margin-top:.6rem;padding:.55rem;background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:8px;text-align:center;font-size:.72rem;color:var(--green);font-weight:600;">🔒 + 413 more areas unlocked in Full Report (€29)</div>
   </div>
 </div>
 <style>
 .pct{width:100%;border-collapse:collapse;margin:0 auto 1.75rem;max-width:560px;font-size:.85rem;}
 .pct thead tr th{padding:.75rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--border);}
-.pct thead .pct-free{color:var(--green);background:rgba(16,185,129,.06);border-radius:8px 0 0 0;}
+.pct thead .pct-free{color:var(--green);background:rgba(74,222,128,.06);border-radius:8px 0 0 0;}
 .pct thead .pct-paid{color:var(--gold);background:rgba(201,168,76,.08);border-radius:0 8px 0 0;position:relative;}
-.pct thead .pct-badge{display:inline-block;background:var(--gold);color:#0b1120;font-size:.6rem;font-weight:800;padding:.15rem .45rem;border-radius:20px;margin-left:.4rem;vertical-align:middle;letter-spacing:.05em;}
+.pct thead .pct-badge{display:inline-block;background:var(--gold);color:#0A1F0F;font-size:.6rem;font-weight:800;padding:.15rem .45rem;border-radius:20px;margin-left:.4rem;vertical-align:middle;letter-spacing:.05em;}
 .pct tbody tr td{padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
 .pct tbody tr:last-child td{border-bottom:none;}
 .pct tbody tr:hover td{background:rgba(255,255,255,.02);}
@@ -2104,7 +2104,7 @@ function masClick(county, areaName){
 .pct .pct-yes{color:var(--green);font-size:1.1rem;font-weight:700;}
 .pct .pct-no{color:var(--t3);font-size:1rem;}
 .pct .pct-part{font-size:.72rem;font-weight:600;color:#f59e0b;background:rgba(245,158,11,.12);padding:.15rem .5rem;border-radius:10px;}
-.pct .pct-full{font-size:.72rem;font-weight:600;color:var(--green);background:rgba(16,185,129,.12);padding:.15rem .5rem;border-radius:10px;}
+.pct .pct-full{font-size:.72rem;font-weight:600;color:var(--green);background:rgba(74,222,128,.12);padding:.15rem .5rem;border-radius:10px;}
 .pct tfoot td{padding:.9rem 1rem;border-top:2px solid var(--border);}
 .pct tfoot .pct-free{text-align:center;}
 .pct tfoot .pct-paid{text-align:center;}
@@ -2117,7 +2117,7 @@ function masClick(county, areaName){
     <tr>
       <th class="pct-feature" style="text-align:left;color:var(--t3);">Feature</th>
       <th class="pct-free">Free Snapshot</th>
-      <th class="pct-paid">Full Report <span class="pct-badge">€29</span> <span style="display:inline-block;background:var(--green);color:#0b1120;font-size:.58rem;font-weight:800;padding:.15rem .5rem;border-radius:20px;margin-left:.3rem;vertical-align:middle;letter-spacing:.05em;">★ MOST POPULAR</span></th>
+      <th class="pct-paid">Full Report <span class="pct-badge">€29</span> <span style="display:inline-block;background:var(--green);color:#0A1F0F;font-size:.58rem;font-weight:800;padding:.15rem .5rem;border-radius:20px;margin-left:.3rem;vertical-align:middle;letter-spacing:.05em;">★ MOST POPULAR</span></th>
     </tr>
   </thead>
   <tbody>
@@ -2191,7 +2191,7 @@ function masClick(county, areaName){
 <h3 style="font-family:var(--fd);font-size:1.5rem;font-weight:700;margin-bottom:.5rem">One last step</h3>
 <p style="font-size:.75rem;color:var(--green);font-weight:600;margin-bottom:.5rem;letter-spacing:.04em;">📥 Downloaded by 800+ investors across Ireland</p>
 <p style="color:var(--t2);font-size:.93rem;margin-bottom:.75rem">Enter your email to download the free <strong id="modalCountyName"></strong> snapshot.</p>
-<div style="background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:.7rem 1rem;margin-bottom:1rem;font-size:.82rem;color:var(--t2);text-align:left">💡 <strong>The snapshot shows the top 3 micro-areas.</strong> The <strong style="color:var(--green)">full report (€29)</strong> covers every micro-area with complete yield, growth &amp; risk scores.</div>
+<div style="background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:8px;padding:.7rem 1rem;margin-bottom:1rem;font-size:.82rem;color:var(--t2);text-align:left">💡 <strong>The snapshot shows the top 3 micro-areas.</strong> The <strong style="color:var(--green)">full report (€29)</strong> covers every micro-area with complete yield, growth &amp; risk scores.</div>
 <div style="display:flex;flex-direction:column;gap:.75rem">
 <input type="email" id="snapEmail" placeholder="your@email.com" style="padding:.9rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.95rem;outline:none" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'" />
 <button class="bp" onclick="submitSnapModal()" style="justify-content:center;width:100%;padding:1rem">Download My Free Snapshot →</button>
@@ -2223,12 +2223,12 @@ function masClick(county, areaName){
           <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;"></span>
           <span style="font-size:.6rem;color:#94a3b8;margin-left:.5rem;">Page 1 — Overview</span>
         </div>
-        <div style="padding:1rem;color:#0b1120;font-family:'DM Sans',sans-serif;">
+        <div style="padding:1rem;color:#0A1F0F;font-family:'DM Sans',sans-serif;">
           <div style="font-size:.7rem;font-weight:700;color:#10b981;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em;">Dublin County Report</div>
           <div style="height:2px;background:linear-gradient(90deg,#10b981,#3b82f6);border-radius:2px;margin-bottom:.75rem;"></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:.75rem;">
             <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:.4rem;text-align:center;">
-              <div style="font-size:.85rem;font-weight:700;color:#0b1120;">€484k</div>
+              <div style="font-size:.85rem;font-weight:700;color:#0A1F0F;">€484k</div>
               <div style="font-size:.5rem;color:#94a3b8;">Median Price</div>
             </div>
             <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:.4rem;text-align:center;">
@@ -2236,11 +2236,11 @@ function masClick(county, areaName){
               <div style="font-size:.5rem;color:#94a3b8;">County Yield</div>
             </div>
             <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:.4rem;text-align:center;">
-              <div style="font-size:.85rem;font-weight:700;color:#0b1120;">+5.3%</div>
+              <div style="font-size:.85rem;font-weight:700;color:#0A1F0F;">+5.3%</div>
               <div style="font-size:.5rem;color:#94a3b8;">5yr Growth</div>
             </div>
             <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;padding:.4rem;text-align:center;">
-              <div style="font-size:.85rem;font-weight:700;color:#0b1120;">415</div>
+              <div style="font-size:.85rem;font-weight:700;color:#0A1F0F;">415</div>
               <div style="font-size:.5rem;color:#94a3b8;">Areas Scored</div>
             </div>
           </div>
@@ -2264,7 +2264,7 @@ function masClick(county, areaName){
           <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;"></span>
           <span style="font-size:.6rem;color:#94a3b8;margin-left:.5rem;">Page 2 — Full Rankings</span>
         </div>
-        <div style="padding:.75rem;color:#0b1120;font-family:'DM Sans',sans-serif;">
+        <div style="padding:.75rem;color:#0A1F0F;font-family:'DM Sans',sans-serif;">
           <div style="font-size:.6rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem;">All 415 Micro-Areas Ranked</div>
           <table style="width:100%;border-collapse:collapse;font-size:.52rem;">
             <thead><tr style="background:#0b1120;color:#fff;">
@@ -2298,7 +2298,7 @@ function masClick(county, areaName){
           <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;"></span>
           <span style="font-size:.6rem;color:#94a3b8;margin-left:.5rem;">Page 3 — Methodology</span>
         </div>
-        <div style="padding:.75rem;color:#0b1120;font-family:'DM Sans',sans-serif;">
+        <div style="padding:.75rem;color:#0A1F0F;font-family:'DM Sans',sans-serif;">
           <div style="font-size:.6rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem;">How Each Score is Calculated</div>
           <div style="display:flex;flex-direction:column;gap:.5rem;">
             <div style="padding:.4rem .5rem;background:#f0fdf4;border-left:2px solid #10b981;border-radius:2px;">
@@ -2323,7 +2323,7 @@ function masClick(county, areaName){
     </div>
 
     <!-- What's included checklist -->
-    <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:14px;padding:2rem 2.5rem;max-width:760px;margin:0 auto 2rem;" class="fade-in">
+    <div style="background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.2);border-radius:14px;padding:2rem 2.5rem;max-width:760px;margin:0 auto 2rem;" class="fade-in">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem 2rem;">
         <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>All micro-areas in your county ranked by signal</div>
         <div style="font-size:.85rem;color:var(--t2);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>RPZ flag on every single area</div>
@@ -2354,8 +2354,8 @@ function masClick(county, areaName){
 #compare .cc-selectors{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;}
 #compare .cc-sel{padding:.7rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--t1);font-family:var(--fb);font-size:.92rem;cursor:pointer;flex:1;max-width:220px;}
 #compare .cc-sel:focus{outline:none;border-color:var(--green);}
-#compare .cc-add{background:none;border:1px dashed rgba(16,185,129,.4);color:var(--green);border-radius:10px;padding:.7rem 1.2rem;font-family:var(--fb);font-size:.88rem;cursor:pointer;flex:1;max-width:220px;transition:background .2s;}
-#compare .cc-add:hover{background:rgba(16,185,129,.06);}
+#compare .cc-add{background:none;border:1px dashed rgba(74,222,128,.4);color:var(--green);border-radius:10px;padding:.7rem 1.2rem;font-family:var(--fb);font-size:.88rem;cursor:pointer;flex:1;max-width:220px;transition:background .2s;}
+#compare .cc-add:hover{background:rgba(74,222,128,.06);}
 #compare .cc-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 #compare .cc-table{width:100%;border-collapse:collapse;min-width:500px;}
 #compare .cc-table th{padding:.75rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);text-align:left;border-bottom:1px solid var(--border);}
@@ -2585,7 +2585,7 @@ document.querySelectorAll('.fqq').forEach(function(q){
 <style>
 #btt{position:fixed;bottom:5.5rem;right:1.5rem;z-index:190;width:42px;height:42px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,background .2s,border-color .2s;pointer-events:none;}
 #btt.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
-#btt:hover{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.4);color:var(--green);}
+#btt:hover{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.4);color:var(--green);}
 @media(max-width:480px){#btt{bottom:4.5rem;right:1rem;width:38px;height:38px;}}
 </style>
 <script>
@@ -2620,14 +2620,14 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSnapMod
   </div>
 </div>
 <style>
-#cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:300;padding:.9rem 1.5rem;background:rgba(15,20,35,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(16,185,129,.2);animation:slideUpCookie .35s ease forwards;}
+#cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:300;padding:.9rem 1.5rem;background:rgba(15,20,35,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(74,222,128,.2);animation:slideUpCookie .35s ease forwards;}
 @keyframes slideUpCookie{from{transform:translateY(100%);}to{transform:translateY(0);}}
 #cookieBannerInner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
 #cookieText{flex:1;min-width:220px;font-size:.82rem;color:var(--t2);line-height:1.5;}
 #cookieActions{display:flex;gap:.6rem;flex-shrink:0;}
 #cookieDecline{background:none;border:1px solid var(--border);color:var(--t3);padding:.5rem 1.1rem;border-radius:8px;font-family:var(--fb);font-size:.82rem;cursor:pointer;transition:border-color .2s,color .2s;}
 #cookieDecline:hover{border-color:var(--t2);color:var(--t1);}
-#cookieAccept{background:var(--green);border:none;color:#0b1120;padding:.5rem 1.25rem;border-radius:8px;font-family:var(--fb);font-size:.82rem;font-weight:700;cursor:pointer;transition:opacity .2s;}
+#cookieAccept{background:var(--green);border:none;color:#0A1F0F;padding:.5rem 1.25rem;border-radius:8px;font-family:var(--fb);font-size:.82rem;font-weight:700;cursor:pointer;transition:opacity .2s;}
 #cookieAccept:hover{opacity:.88;}
 @media(max-width:500px){
   #cookieBanner{padding:.75rem 1rem;}
@@ -3037,16 +3037,16 @@ def methodology():
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;background:#0B1120;color:#F1F5F9;line-height:1.7}
+body{font-family:'DM Sans',sans-serif;background:#0A1F0F;color:#F0FDF4;line-height:1.7}
 nav{padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(148,163,184,.1);background:rgba(11,17,32,.9)}
 .nl{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;color:#F1F5F9;text-decoration:none}
-.nl span{color:#10B981}
+.nl span{color:#4ADE80}
 .back{font-size:.85rem;color:#94A3B8;text-decoration:none}
 .back:hover{color:#F1F5F9}
 main{max-width:760px;margin:0 auto;padding:4rem 2rem}
 h1{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:700;margin-bottom:.75rem;line-height:1.15}
 .sub{color:#94A3B8;font-size:1.05rem;margin-bottom:3rem;max-width:560px}
-.section{margin-bottom:2.5rem;padding:2rem;background:#1A2332;border:1px solid rgba(148,163,184,.1);border-radius:12px;border-left:3px solid #10B981}
+.section{margin-bottom:2.5rem;padding:2rem;background:#122B18;border:1px solid rgba(74,222,128,.12);border-radius:12px;border-left:3px solid #4ADE80}
 .section.gold{border-left-color:#F59E0B}
 .section.blue{border-left-color:#3B82F6}
 .section.red{border-left-color:#EF4444}
@@ -3149,11 +3149,11 @@ footer a{color:#64748B;text-decoration:none}
     <strong>Important:</strong> All signals and scores are generated from historical public records for informational purposes only. They do not constitute financial advice. Gross yield estimates do not account for management fees, maintenance, LPT, vacancy, or financing costs. Always conduct independent due diligence and consult a qualified financial advisor before making any investment decision.
   </div>
 
-  <div style="text-align:center;margin-top:3rem;padding:2.5rem;background:#1A2332;border:1px solid rgba(148,163,184,.1);border-radius:16px;">
+  <div style="text-align:center;margin-top:3rem;padding:2.5rem;background:#122B18;border:1px solid rgba(74,222,128,.12);border-radius:16px;">
     <p style="color:#94A3B8;font-size:.95rem;margin-bottom:1.25rem;">Ready to put this into practice?</p>
     <h3 style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:600;margin-bottom:1.5rem;color:#F1F5F9;">See the data for your county</h3>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-      <a href="/#snap" style="display:inline-block;padding:.85rem 1.8rem;background:#10B981;color:#fff;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;">Get Free County Snapshot →</a>
+      <a href="/#snap" style="display:inline-block;padding:.85rem 1.8rem;background:#4ADE80;color:#0A1F0F;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;">Get Free County Snapshot →</a>
       <a href="/#reports" style="display:inline-block;padding:.85rem 1.8rem;background:transparent;color:#CBD5E1;border:1px solid rgba(148,163,184,.2);border-radius:10px;font-weight:500;font-size:.95rem;text-decoration:none;">View Full Reports — €29</a>
     </div>
     <p style="font-size:.78rem;color:#475569;margin-top:1rem;">No credit card required for the free snapshot</p>
@@ -3181,7 +3181,7 @@ def privacy():
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0b1120;--bg2:#111827;--border:rgba(255,255,255,.08);--t1:#f1f5f9;--t2:#94a3b8;--t3:#475569;--green:#10b981;--gold:#c9a84c;--fd:'DM Serif Display',serif;--fb:'DM Sans',sans-serif}
+:root{--bg:#0A1F0F;--bg2:#0D2818;--border:rgba(74,222,128,.12);--t1:#F0FDF4;--t2:#86EFAC;--t3:#4ADE80;--green:#4ADE80;--gold:#c9a84c;--fd:'DM Serif Display',serif;--fb:'DM Sans',sans-serif}
 body{font-family:var(--fb);background:var(--bg);color:var(--t1);line-height:1.7}
 nav{position:sticky;top:0;z-index:100;background:rgba(11,17,32,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
 nav a.logo{font-family:var(--fd);font-size:1.2rem;text-decoration:none;color:var(--t1)}
@@ -3189,7 +3189,7 @@ nav a.logo span{color:var(--green)}
 nav a.back{font-size:.85rem;color:var(--t2);text-decoration:none;transition:color .2s}
 nav a.back:hover{color:var(--green)}
 main{max-width:720px;margin:0 auto;padding:4rem 2rem 6rem}
-.badge{display:inline-block;background:rgba(16,185,129,.1);color:var(--green);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;border:1px solid rgba(16,185,129,.2);margin-bottom:1.5rem}
+.badge{display:inline-block;background:rgba(74,222,128,.1);color:var(--green);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;border:1px solid rgba(74,222,128,.2);margin-bottom:1.5rem}
 h1{font-family:var(--fd);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:1rem;color:var(--t1)}
 .meta{font-size:.82rem;color:var(--t3);margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
 h2{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--t1);margin:2.5rem 0 .75rem}
@@ -3198,7 +3198,7 @@ ul{color:var(--t2);font-size:.95rem;padding-left:1.5rem;margin-bottom:1rem}
 ul li{margin-bottom:.4rem}
 a{color:var(--green);text-decoration:none}
 a:hover{text-decoration:underline}
-.highlight{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:10px;padding:1.25rem 1.5rem;margin:1.5rem 0}
+.highlight{background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-radius:10px;padding:1.25rem 1.5rem;margin:1.5rem 0}
 .highlight p{margin-bottom:0;color:var(--t2)}
 footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--t3)}
 footer a{color:var(--t2)}
