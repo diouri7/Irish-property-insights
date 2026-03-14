@@ -29,6 +29,35 @@ warnings.filterwarnings("ignore")
 
 # ─── CONFIG ─────────────────────────────────────────────
 app = Flask(__name__)
+
+# ─── FAVICON DATA (base64 embedded) ────────────────────
+_FAVICON_ICO = "AAABAAEAEBAAAAAAIAC7AAAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAIJJREFUeJxjZGBgYJCqsvnPQCZgokQzAwMDAxMhBU9bD5NvAEwzPkNwGoCuCZchWA0g5Gy8BuDTjE2OiZACQoYw4ZIg1hC4AdLVtgwMDAwficFQtZheIAdgGBB/pvFb/JnGb0gu4yfJAGQA04zPEBQDkG0mFhBKyh+RaWyuYaQ0NwIAYDY8Yvz1t3MAAAAASUVORK5CYII="
+_FAVICON_32  = "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA90lEQVR4nNWXOxLCIBBAgdLGXq9hac7iPbRwLJJ7eJakzDWS3sZWq80wO3yWBZbJNkwI4T2WTwalGofGFaf79Vcbug7TxjXScMwxrkpJCd0CboeJNwnH0o/tBACeI8EWwFCuBEsgN+1ZAiE4RyxJgAJIlcjeBbkSZIHUkVHbkwS4i47yXVSg5IpPFigBj/XhFSg58lBfToEaaff1GfwbLv34KQE/P7qj712VcyAl9iVwm19f+xlSG0pxMQGAQ4mhXIl9TAFOvahATThJoHZEBd6X58FVigjAynbB8SnpOzVju2O7o7W4nKzDpI39IA1XCk2BlITN+QNZF28/AsNuSgAAAABJRU5ErkJggg=="
+_FAVICON_180 = "iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAFBUlEQVR4nO3dPVJUQRSG4cEyMjEWtmEIa3EfEFgGsA9X4AbIIHQbkJuYYqBThdTM3P453X3Od94ndoZ7T7+07Qwjux0AAAAAAAAAZ85WX8De+fXly+prQJ/nu8flPS27AALWtyLwqV+QiPOaFfeUL0LI2Bsd9tAnJ2QcMyrsdyOedLcjZpw2qg/z7xJCRi3L3dp0hyZmtLDsxixoYkYPq35MgiZmWLDoqDtoYoal3p66giZmjNDTVXPQxIyRWvtqCpqYMUNLZ8PeWAFWqA6a3Rkz1fZWFTQxY4Wa7jhyQEpx0OzOWKm0P3ZoSCkKmt0ZHpR0yA4NKQQNKZtBc9yAJ1s9skNDCkFP8nT7sPoSUiDoCfYxE/V4J4Pm/NzvbcRE3e9Ul+zQAx2Ll6jHIehBtqIl6jEIeoDSWInaHkEbq42UqG0RtKHWOInaDkEb6Y2SqG0QtAFi9IOgO1nGzDdGP4J2hqj7EHSHUfERdTuCbjQ6OqJuQ9ANZsVG1PUIutLsyIi6DkFXWBUXUZcj6EKro1r99aMg6AJeYvJyHZ4R9AZvEXm7Hm8I+gSv8Xi9Lg8I+gjv0Xi/vlUI+oAosUS5zpkI+o1okUS73tEI+pWocUS97hEI+h+i0EDQO42YFe7BQvqglUJQupdWqYNWDEDxnmqkDVp54ZXvbUvKoDMseIZ7PCRd0JkWOtO97qUKOuMCZ7vnVEFnlSnqNEFnWtRDstx/iqCzLOaWDHOQDzrDItZQn4d00OqL10p5LrJBKy+aBdX5SAatuljWFOckF7TiIo2kNi+poNUWB/VkgibmdkqzkwhaaUFWUZlh+KBVFsIDhVmGDlphAbyJPtOwQUcfvGeRZxsy6MgDjyLqjMMFHXXQEUWcdaigIw44umgzDxN0tMEqiTT7EEFHGqiqKGvgPugog8wgwlq4DjrCALPxviZug/Y+uMw8r43boOGb16hdBu11WPifx3VyF7THISEOV0ETczze1sxN0N4Gg3Ke1s5F0J4GgjZe1nB50F4GgX4e1nJp0B4GAFur13RZ0KtvHOOsXNslQROzvlVrPD1oYs5jxVq/n/0FL26uiv/s0+3Dr4GXgkYXN1cfV1/DMctf5QAsETSkEDSkEDSkEDSkEDSkEDSkEDSkEDSkEDSkEDSkEDSkEDSkEDSkEDSkEDSkTP8Bf2++/Pz2u/Yx3z9//TDiWtAv9Q7dEnPP4zBe6qChh6AhJf0ZutWMD4ryIeF67NCOef50tVcE7RxR1yFoSCFoSCFoSCFoSCFoSCFoSCFoSCFoSAn91jc/+om3wu7Q/OgnDgkbNHAIQUMKQUMKQUMKQUMKQUMKQUMKQUMKQUMKQUMKQUMKQUMKQUMKQUMKQUPKyaCf7x7PZl0IUOpUl+zQkELQkELQkLIZtNdzdOuHXV8/rvU57n/cf2p5HPpt9Rj6U98Wn+CufQ7+e1vfOHJASlHQXo8dyKWkQ3ZoSCkOesUuzXnVn1VrUtqf+x3aW9SzfzOVp9+E5W0tDqkKetVZ2tsgZ0VGzH/VdNcU6Pn15UvL44BatZuo+yMHUKMpaF7GwwwtnTXv0ESNkVr76jpyEDVG6Omq+wxN1LDU25PJPwqJGhYsOjJ7lYOo0cOqH9OX7YgaLSy7GRYgb75gy4gNcNgbK+zWOGVUH1OiY7fG3uiNbuouSth5zfobe9mxgLj1rTh2ujnnEnh8/LsJAAAAAADAyh+TgOOhfrPHAgAAAABJRU5ErkJggg=="
+_FAVICON_192 = "iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAFc0lEQVR4nO3dPZIURxCA0UUhS45swTVkorPoHmAoZMA9dAJdAA9MXUP4cuQiAxFBbDA73dX1k1n5ns0yPVX5TfWwy+zDAwAAAADA1p6tvoDHnr96+Wn1NTDWx7cfwszd8gsx8KwMYskDG3pumR3DtAcz9Jw1I4bvRj/Aw4Php82MuRlamMGnl1GnwbATwPDT06h56l6VwWe0nqdB1xPA8DNDzznrFoDhZ6Ze89YlAMPPCj3m7nIAhp+Vrs7fpQAMPxFcmcPmAAw/kbTO45TvBENUTQF49Seilrk8HYDhJ7Kz8+kWiNJOBeDVnwzOzOnhAAw/mRydV7dAlCYASjsUgNsfMjoyt04AShMApd0NwO0Pmd2bXycApQlgsb/fvF99CaUJYKEvwy+CdZ4MwP3/OI+HXgTjPDXHToAFbg27COYTwGT3hlwEcwlgoqPDLYJ5BDDJ2aEWwRwCmKB1mEUwngAGuzrEIhhLAAMZ3vgEMEjP4RfSOAIYYMTAimAMASQigv4E0NnoIRVBXwLoaNZwiqAfAXQyeyhF0IcAOlg1jCK4TgAXrR7C1Y+fnQAuiDJ8Ua4jIwE0ijZ00a4nCwE0iDpsUa8rMgGcFH3Iol9fNAI4IctwZbnOCARwULahyna9qwjggKzDlPW6ZxLAHdmHKPv1jyaAJxie/Qnghp2Gf6fn0psAvmHHgdnxOfUggEd2HpSdn1srAXylwoBUeI5nCOB/lQaj0nO9RwAPNQei4nP+lvIBVB6Eys/9i9IBGABrUDoAPqscQdkAKm/6t1Rdj5IBVN3seyquS7kAKm7yGdXWp1QA1Ta3VaV1KhNApU3tocp6lQigymb2VmHdtg+gwiaOtPv6bR3A7ps3y87ruG0AO28a/WwZgOHvb9c13S6AXTcqgh3XdqsAdtygaHZb420C2G1jIttprbcIYKcNyWKXNU8fwC4bkdEOa586gB02ILvse5A2gOwLv5PMe5EygMwLvquse5IugKwLXUHGvUkVQMYFribbHqUJINvCVpZpr1IEkGlB+SzLnqUIgJwyRBA+gAyLyG3R9y90ANEXj2Mi72PYACIvGvsIGYDh30/UPQ0XQNSF4rqIexsqgIgLRF/R9jhMANEWhnEi7XWIACItCHNE2fPlAURZCOaLsPdLA4iwAKy1egaWBbD6iRPHyln4ftUDv3j9y6k///eb9/8MuhQGePH6lx9XX8MRy98DwEoCoDQBUJoAKE0AlCYAShMApQmA0gRAaQKgNAFQmgAoTQCUJgBKEwClCYDSBEBpAqC0Zf8lMqpf//r935av++Pn337ofS2M5wT4SuvwX/1a1hEApbkF6mjmJyH4lIw+nABJZfnYkegEkJgIrhMApQmA0gRAaQKgNAFQmgAoTQCUJgBKEwClbfOzQH6MmRZbnAB+jJlWWwQArQRAaQKgNAFQmgAoTQCUJgBKEwClCYDSBEBpAqA0AVCaAChNAJQmAEoTAKUJgNKeDODj2w/PZl0IjPLUHDsBKE0AlCYASrsbQIb3AVc+2uTrr73y97z7891PrV/LOPfmd5vPBer1+T4tf4/f1JKXWyBKOxRAhtsgeOzI3DoBKC1NAO6z88i0V4cDiHAbFHVhV/3S6oi/LDvKHh2d11MngAhumz2Mhv+2M3N6eqCfv3r56ezXwExnAjj9HiDCKQC3nJ3PpjfBIiCilrlM869AMEJzAE4BImmdx0sngAiI4MocXr4FEgErXZ2/Lu8BRMAKPeau25tgETBTr3nr+q9AImCGnnM2bGB9x5jeRrzADvs+gNOAnkbN05QhdRrQavQL6ZTvBDsNaDFjbpYMphOBW2a/WC5/ZRYDK+8QlgfwmCD255YYAAAAgLn+A9CjAZIyD+0WAAAAAElFTkSuQmCC"
+
+import base64 as _b64
+
+@app.route("/favicon.ico")
+def favicon_ico():
+    from flask import Response
+    return Response(_b64.b64decode(_FAVICON_ICO), mimetype="image/x-icon")
+
+@app.route("/favicon-32.png")
+def favicon_32():
+    from flask import Response
+    return Response(_b64.b64decode(_FAVICON_32), mimetype="image/png")
+
+@app.route("/apple-touch-icon.png")
+def apple_touch_icon():
+    from flask import Response
+    return Response(_b64.b64decode(_FAVICON_180), mimetype="image/png")
+
+@app.route("/favicon-192.png")
+def favicon_192():
+    from flask import Response
+    return Response(_b64.b64decode(_FAVICON_192), mimetype="image/png")
+
 TMP_DIR = tempfile.gettempdir()
 DATA_PATH = os.environ.get("PPR_DATA_PATH", "PPR-ALL.csv")
 PORT = int(os.environ.get("PORT", 5000))
@@ -819,6 +848,10 @@ LANDING_HTML = """<!DOCTYPE html>
   gtag('js', new Date());
   gtag('config', 'G-24NY207Q8J');
 </script>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IrishPropertyInsights — Best Rental Yield Areas Ireland 2025 | Property Investment Intelligence</title>
 <meta name="description" content="Find the highest rental yield micro-areas across all 26 Irish counties. Ranked by yield, 5-year growth & investment risk using 727,000+ PPR transactions and RTB Q2 2025 data. Free county snapshot — no credit card.">
@@ -2833,6 +2866,10 @@ def deal_checker():
 
     FORM_HTML = f"""<!DOCTYPE html>
 <html><head>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Deal Checker | Irish Property Insights</title>
@@ -2990,6 +3027,10 @@ def methodology():
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Methodology | IrishPropertyInsights</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3129,6 +3170,10 @@ def privacy():
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Privacy Policy — IrishPropertyInsights</title>
