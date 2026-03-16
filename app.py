@@ -2660,7 +2660,7 @@ function cookieRespond(accepted){
   IrishPropertyInsights provides data analysis based on public records. It is not financial advice.<br>
   <a href="/" style="color:#9a9690">Home</a> · <a href="/methodology" style="color:#9a9690">Methodology</a>
 </div>
-" + CHAT_WIDGET_HTML + "
+%CHAT_WIDGET%
 </body></html>"""
 
 
@@ -2672,12 +2672,15 @@ COUNTIES = [
 ]
 
 
+def inject_chat_widget(html):
+    return html.replace("%CHAT_WIDGET%", CHAT_WIDGET_HTML)
+
 def get_landing_html():
     opts = "\n".join(f'<option value="{c}">{c}</option>' for c in COUNTIES)
     full_opts = '<option value="" disabled selected>Select a county...</option>\n' + opts
     html = LANDING_HTML.replace("%COUNTY_OPTIONS%", opts)
     html = html.replace("%COUNTY_OPTIONS_FULL%", full_opts)
-    return html
+    return inject_chat_widget(html)
 
 
 # ─── ROUTES ─────────────────────────────────────────────
@@ -2935,20 +2938,20 @@ input,select{{font-family:'DM Sans',sans-serif;font-size:1rem;padding:0.75rem 1r
     <p class="disclaimer">Not financial advice. Based on PPR data 2010–2024.</p>
   </div>
 </div>
-" + CHAT_WIDGET_HTML + "
+%CHAT_WIDGET%
 </body></html>"""
 
     if request.method == "GET":
-        return FORM_HTML
+        return FORM_HTML.replace("%CHAT_WIDGET%", CHAT_WIDGET_HTML)
 
     # POST — score the property
     if not _model_cache.get("ready"):
         training = _model_cache.get("ready") is None or "model" not in _model_cache
         msg = "Model is still training, please try again in 60 seconds." if training else _model_cache.get("error","Unknown error")
-        return f"""<!DOCTYPE html><html><body style="font-family:sans-serif;padding:2rem;">
+        return inject_chat_widget(f"""<!DOCTYPE html><html><body style="font-family:sans-serif;padding:2rem;">
         <h2>One moment...</h2><p>{msg}</p>
-        <a href="/deal-checker">← Try again</a>" + CHAT_WIDGET_HTML + "
-</body></html>"""
+        <a href="/deal-checker">← Try again</a>%CHAT_WIDGET%
+</body></html>""")
 
     county       = request.form.get("county","").strip().title()
     area         = request.form.get("area","").strip().title()
@@ -2976,7 +2979,7 @@ input,select{{font-family:'DM Sans',sans-serif;font-size:1rem;padding:0.75rem 1r
     elif diff_pct <= 15: verdict,color,bg = "OVERPRICED","#d4821a","#fff8f0"
     else:                verdict,color,bg = "AVOID","#c0392b","#fdf2f2"
 
-    return f"""<!DOCTYPE html>
+    return inject_chat_widget(f"""<!DOCTYPE html>
 <html><head>
 <meta charset="UTF-8"><title>Deal Checker | Irish Property Insights</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -3022,13 +3025,13 @@ nav{{border-bottom:1px solid #ddd8ce;padding:1.2rem 2rem;display:flex;align-item
   </div>
   <a class="try-again" href="/deal-checker">Check another property</a>
 </div>
-" + CHAT_WIDGET_HTML + "
-</body></html>"""
+%CHAT_WIDGET%
+</body></html>""")
 # ── END DEAL CHECKER ───────────────────────────────────────────
 
 @app.route("/methodology")
 def methodology():
-    return """<!DOCTYPE html>
+    _html = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -3164,15 +3167,15 @@ footer a{color:#64748B;text-decoration:none}
   </div>
 </main>
 <footer><p>© 2025 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/">Back to site</a></p></footer>
-" + CHAT_WIDGET_HTML + "
+%CHAT_WIDGET%
 </body>
 </html>"""
-
+    return inject_chat_widget(_html)
 
 
 @app.route("/privacy")
 def privacy():
-    return """<!DOCTYPE html>
+    _html = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -3319,9 +3322,10 @@ footer a{color:var(--t2)}
 <footer>
   <p>© 2025 IrishPropertyInsights · <a href="/">Home</a> · <a href="/methodology">Methodology</a> · <a href="/privacy">Privacy Policy</a></p>
 </footer>
-" + CHAT_WIDGET_HTML + "
+%CHAT_WIDGET%
 </body>
 </html>"""
+    return inject_chat_widget(_html)
 
 
 # ─────────────────────────────────────────────
