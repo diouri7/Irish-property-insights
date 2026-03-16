@@ -3555,29 +3555,27 @@ def chat():
         if not messages:
             return {"reply": "Hi! Ask me anything about Irish property investment."}, 200
 
-        api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+        api_key = os.environ.get("GROQ_API_KEY", "")
         if not api_key:
             return {"reply": "Property advisor is currently unavailable. Please check back shortly."}, 200
 
         headers = {
-            "x-api-key": api_key,
-            "anthropic-version": "2023-06-01",
-            "content-type": "application/json"
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
         }
         payload = {
-            "model": "claude-haiku-4-5-20251001",
+            "model": "llama-3.1-8b-instant",
             "max_tokens": 400,
-            "system": CHATBOT_SYSTEM_PROMPT,
-            "messages": messages[-10:]  # keep last 10 turns to manage context
+            "messages": [{"role": "system", "content": CHATBOT_SYSTEM_PROMPT}] + messages[-10:]
         }
         resp = requests.post(
-            "https://api.anthropic.com/v1/messages",
+            "https://api.groq.com/openai/v1/chat/completions",
             headers=headers,
             json=payload,
             timeout=20
         )
         if resp.status_code == 200:
-            reply = resp.json()["content"][0]["text"]
+            reply = resp.json()["choices"][0]["message"]["content"]
         else:
             reply = "I'm having trouble connecting right now. Please try again in a moment."
         return {"reply": reply}, 200
