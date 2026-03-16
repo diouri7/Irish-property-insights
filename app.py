@@ -2602,7 +2602,7 @@ document.querySelectorAll('.fade-in').forEach(e=>o.observe(e));
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
 const rf=document.getElementById('countyRequestForm');if(rf){rf.addEventListener('submit',async function(e){e.preventDefault();const em=document.getElementById('reqEmail').value;const co=document.getElementById('reqCounty').value;try{const res=await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,county:co,message:'County report request: '+co+' from '+em})});if(res.ok){showToast('✓ Request received! We will email you when '+co+' is ready.');}else{showToast('✓ Request received! We will email you when '+co+' is ready.');}}catch(err){showToast('✓ Request received! We will email you when '+co+' is ready.');}rf.reset();})}\nfunction openSnapModal(){const c=document.getElementById('snapCounty').value;if(!c){showToast('Please select a county first.');return;}document.getElementById('modalCountyName').textContent=c;document.getElementById('snapModal').style.display='flex';document.getElementById('snapEmail').focus();}
 function closeSnapModal(){document.getElementById('snapModal').style.display='none';document.getElementById('snapEmail').value='';}
-async function submitSnapModal(){const em=document.getElementById('snapEmail').value;const co=document.getElementById('snapCounty').value;if(!em||!em.includes('@')){showToast('Please enter a valid email.');return;}try{await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,county:co,type:'snapshot_download',message:'Free snapshot downloaded: '+co+' by '+em})});}catch(e){}closeSnapModal();showToast('✓ Downloading your '+co+' snapshot...');setTimeout(()=>{window.location.href='/snapshot?county='+encodeURIComponent(co);},600);setTimeout(()=>{const reportsEl=document.getElementById('reports');if(reportsEl){const sel=document.getElementById('countyBuySelect');if(sel){for(let i=0;i<sel.options.length;i++){if(sel.options[i].text===co){sel.value=sel.options[i].value;break;}}}showToast('📊 Want all micro-areas for '+co+'? Scroll to Full Reports — €29');reportsEl.scrollIntoView({behavior:'smooth'});}},4000);}
+async function submitSnapModal(){const em=document.getElementById('snapEmail').value;const co=document.getElementById('snapCounty').value;if(!em||!em.includes('@')){showToast('Please enter a valid email.');return;}try{await fetch('https://formspree.io/f/xdalrzrn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,county:co,type:'snapshot_download',message:'Free snapshot downloaded: '+co+' by '+em})});}catch(e){}try{await fetch('/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,county:co})});}catch(e){}closeSnapModal();showToast('✓ Downloading your '+co+' snapshot...');setTimeout(()=>{window.location.href='/snapshot?county='+encodeURIComponent(co);},600);setTimeout(()=>{const reportsEl=document.getElementById('reports');if(reportsEl){const sel=document.getElementById('countyBuySelect');if(sel){for(let i=0;i<sel.options.length;i++){if(sel.options[i].text===co){sel.value=sel.options[i].value;break;}}}showToast('📊 Want all micro-areas for '+co+'? Scroll to Full Reports — €29');reportsEl.scrollIntoView({behavior:'smooth'});}},4000);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSnapModal();});
 </script>
 
@@ -3326,6 +3326,44 @@ footer a{color:var(--t2)}
 </body>
 </html>"""
     return inject_chat_widget(_html)
+
+
+# ─────────────────────────────────────────────
+# BREVO SUBSCRIBE ROUTE
+# ─────────────────────────────────────────────
+
+@app.route("/subscribe", methods=["POST"])
+def subscribe():
+    try:
+        data = request.get_json(force=True)
+        email = data.get("email", "").strip()
+        county = data.get("county", "").strip()
+        if not email or "@" not in email:
+            return {"ok": False}, 400
+
+        brevo_key = os.environ.get("BREVO_API_KEY", "")
+        if not brevo_key:
+            return {"ok": True}, 200  # fail silently if key not set
+
+        payload = {
+            "email": email,
+            "listIds": [6],
+            "attributes": {"COUNTY": county},
+            "updateEnabled": True
+        }
+        headers = {
+            "api-key": brevo_key,
+            "Content-Type": "application/json"
+        }
+        requests.post(
+            "https://api.brevo.com/v3/contacts",
+            json=payload,
+            headers=headers,
+            timeout=5
+        )
+        return {"ok": True}, 200
+    except Exception:
+        return {"ok": True}, 200  # always succeed to not break UX
 
 
 # ─────────────────────────────────────────────
