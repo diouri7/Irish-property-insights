@@ -2660,6 +2660,7 @@ function cookieRespond(accepted){
   IrishPropertyInsights provides data analysis based on public records. It is not financial advice.<br>
   <a href="/" style="color:#9a9690">Home</a> · <a href="/methodology" style="color:#9a9690">Methodology</a>
 </div>
+" + CHAT_WIDGET_HTML + "
 </body></html>"""
 
 
@@ -2934,6 +2935,7 @@ input,select{{font-family:'DM Sans',sans-serif;font-size:1rem;padding:0.75rem 1r
     <p class="disclaimer">Not financial advice. Based on PPR data 2010–2024.</p>
   </div>
 </div>
+" + CHAT_WIDGET_HTML + "
 </body></html>"""
 
     if request.method == "GET":
@@ -2945,7 +2947,8 @@ input,select{{font-family:'DM Sans',sans-serif;font-size:1rem;padding:0.75rem 1r
         msg = "Model is still training, please try again in 60 seconds." if training else _model_cache.get("error","Unknown error")
         return f"""<!DOCTYPE html><html><body style="font-family:sans-serif;padding:2rem;">
         <h2>One moment...</h2><p>{msg}</p>
-        <a href="/deal-checker">← Try again</a></body></html>"""
+        <a href="/deal-checker">← Try again</a>" + CHAT_WIDGET_HTML + "
+</body></html>"""
 
     county       = request.form.get("county","").strip().title()
     area         = request.form.get("area","").strip().title()
@@ -3019,6 +3022,7 @@ nav{{border-bottom:1px solid #ddd8ce;padding:1.2rem 2rem;display:flex;align-item
   </div>
   <a class="try-again" href="/deal-checker">Check another property</a>
 </div>
+" + CHAT_WIDGET_HTML + "
 </body></html>"""
 # ── END DEAL CHECKER ───────────────────────────────────────────
 
@@ -3160,6 +3164,7 @@ footer a{color:#64748B;text-decoration:none}
   </div>
 </main>
 <footer><p>© 2025 IrishPropertyInsights · Data: <a href="https://www.propertypriceregister.ie" target="_blank">PPR</a> &amp; <a href="https://www.rtb.ie" target="_blank">RTB</a> · <a href="/">Back to site</a></p></footer>
+" + CHAT_WIDGET_HTML + "
 </body>
 </html>"""
 
@@ -3314,8 +3319,266 @@ footer a{color:var(--t2)}
 <footer>
   <p>© 2025 IrishPropertyInsights · <a href="/">Home</a> · <a href="/methodology">Methodology</a> · <a href="/privacy">Privacy Policy</a></p>
 </footer>
+" + CHAT_WIDGET_HTML + "
 </body>
 </html>"""
+
+
+# ─────────────────────────────────────────────
+# CHATBOT ROUTE — IrishPropertyInsights AI Advisor
+# ─────────────────────────────────────────────
+
+CHATBOT_SYSTEM_PROMPT = """You are the IrishPropertyInsights property advisor — a knowledgeable, data-driven assistant helping Irish property investors make better decisions. You have access to micro-area investment data for all 26 counties in the Republic of Ireland, updated with RTB Q2 2025 rental data and PPR transaction data.
+
+## YOUR ROLE
+Help visitors understand Irish property investment opportunities. Answer questions about yields, investment signals, specific counties and micro-areas. Naturally guide interested users toward purchasing the relevant €29 county report from Gumroad. Never give personal financial advice — always frame insights as data-driven observations and recommend professional advice for investment decisions.
+
+## HOW YOU WORK
+- Be concise and direct. Investors are busy.
+- Use specific numbers from the data below — this is what sets IrishPropertyInsights apart.
+- Every 3rd message or when a user shows buying intent, mention the relevant county report.
+- Never fabricate data. If you don't have data for something, say so.
+- Keep responses under 150 words unless a detailed breakdown is explicitly requested.
+
+## INVESTMENT SIGNAL DEFINITIONS
+- **STRONG BUY**: High yield + positive growth + acceptable risk. Best opportunities.
+- **BUY**: Good fundamentals across yield, growth, risk.
+- **MODERATE**: Mixed signals — some strength but one or more weak dimensions.
+- **HOLD**: Flat or declining growth despite reasonable yield.
+- **AVOID**: Poor fundamentals across multiple dimensions.
+
+## YIELD FORMULA
+Gross yield = (Annual RTB Rent × 0.4 dampening factor) / Median Sale Price × 100
+These are gross estimates. Net yields depend on vacancy, management costs, purchase price.
+
+## REPORTS & PRICING
+All reports: €29 each on Gumroad.
+- Dublin: https://diourielouafi.gumroad.com/l/dqfeno
+- Cork: https://diourielouafi.gumroad.com/l/nsofqi
+- Galway: https://diourielouafi.gumroad.com/l/khbhp
+- Kildare: https://diourielouafi.gumroad.com/l/qzexsg
+- Kerry: https://diourielouafi.gumroad.com/l/pqllej
+- Meath: https://diourielouafi.gumroad.com/l/jlixrl
+- Wicklow: https://diourielouafi.gumroad.com/l/qjecas
+Other counties (Limerick, Wexford, Westmeath, and 15+ more) — coming soon.
+
+## COMPLETE COUNTY DATA (RTB Q2 2025)
+
+### DUBLIN — Median €484,581 | Yield 5.5% | Growth 5.3% | 415 micro-areas
+Top STRONG BUY: Snugborough Rd 13.6%, Ballymun D11 13.2%, Clondalkin 11.9%
+
+### CORK — Median €357,000 | Yield 5.2% | Growth 7.0% | 196 micro-areas
+Top STRONG BUY: Doneraile 11.9%, Enniskeane 11.1%, Beara 9.8%
+
+### GALWAY — Median €368,234 | Yield 4.5% | Growth 8.5% | 75 micro-areas
+Top STRONG BUY: Peterswell 18%, Ballymoe 14%, Clonbur 10.8%
+
+### KILDARE — Median €411,846 | Yield 5.0% | Growth 6.3% | 72 micro-areas
+Top STRONG BUY: Athy 9.6%, Aughamore 8.5%
+
+### KERRY — Median €300,000 | Yield 4.6% | Growth 9.6% | 56 micro-areas
+Top STRONG BUY: Ballylongford €120K 15.5% (+36.6%), Milltown €175K 9.3%, Abbeydorney €183K 8.8%, Caherciveen €190K 8.4%, Ballyduff €193K 8.2%, Lisselton €217.5K 7.0%, Lixnaw €231K 6.5%, Valentia Island €237K 6.3%, Listowel €255K 5.7%
+
+### MEATH — Median €400,500 | Yield 5.1% | Growth 7.6% | 64 micro-areas
+Top STRONG BUY: Drumconrath €235K 10.4%, Kinnegad €307.5K 7.3%, Kilmessan €310K 7.2%, Oldcastle €312.8K 7.1%, Beamore Road €312.8K 7.1%, Slane €315.5K 7.0%, Colpe €321.5K 6.8%, Athboy €340K 6.4%, Kildalkey €355K 6.0%, Navan €374.4K 5.6%
+
+### WICKLOW — Median €438,324 | Yield 4.5% | Growth 3.3% | 47 micro-areas
+Top STRONG BUY: Manor Kilbride 18.8%, Carnew 10.5%
+
+### LIMERICK — Median €300,000 | Yield 5.8% | Growth 8.4% | 82 micro-areas
+Top STRONG BUY: Tournafulla 28.9%, Oola 17.5%, Dock Rd 16.3%
+
+### WEXFORD — Median €295,154 | Yield 4.9% | Growth 7.6% | 62 micro-areas
+Top STRONG BUY: New Ross 6.8%, Courtown 6.6%
+
+### WESTMEATH — Median €330,000 | Yield 4.4% | Growth 10.5% | 28 micro-areas
+Top STRONG BUY: Rathowen 15.2%
+
+### OFFALY — Median €280,000 | Yield 4.7% | Growth 9.2% | 28 micro-areas
+Top STRONG BUY: Ballycumber €145K 11.2% (+13.5%), Clara €146K 11.1%, Shinrone €190K 7.8%, Edenderry €243K 5.7%
+
+### ROSCOMMON — Median €210,000 | Yield 5.4% | Growth 10.1% | 38 micro-areas
+Top STRONG BUY: Ballintubber €117.5K 11.7%, Castlerea €129.8K 10.2%, Tarmonbarry €175K 6.9%, Lanesborough €175.8K 6.8%, Boyle €178.5K 6.7%, Carrick On Shannon €179K 6.7%, Ballaghadereen €180K 6.6%, Strokestown €180K 6.6%
+
+### SLIGO — Median €250,000 | Yield 5.3% | Growth 10.9% | 42 micro-areas
+Top STRONG BUY: Curry €97.5K 18.4% (+37.5%), Ballinode €123.5K 13.4%, Ballytivnan €135K 11.9%, Mill Park €138K 11.6%, Ballymote €162K 9.3%, Gurteen €174.5K 8.5%, Ballisodare €178.5K 8.2%
+
+### TIPPERARY — Median €270,000 | Yield 4.7% | Growth 10.2% | 40 micro-areas
+Top STRONG BUY: Borrisokane €142.5K 10.8% (+13.7%), Emly €170K 8.6%, Ballyporeen €200K 6.9%, Clogheen €210K 6.5%, Templemore €225.3K 5.9%, Cloughjordan €233K 5.7%, Thurles €233.5K 5.6%, Tipperary Town €245K 5.3%
+
+### WATERFORD — Median €280,500 | Yield 5.3% | Growth 9.0% | 51 micro-areas
+Top STRONG BUY: Inner Ring Rd €140K 13.4%, Tallow €183.8K 9.3%, Old Tramore Rd €222K 7.3%, Cappoquin €235K 6.7%, Woodstown €237.4K 6.6%, Carrick On Suir €242.5K 6.5%, Portlaw €250K 6.2%, Waterford City €255K 6.1%
+
+### CARLOW — Median €277,533 | Yield 5.2% | Growth 7.9% | 21 micro-areas
+Top STRONG BUY: Hacketstown €230K 6.6% (+14.2%), Bagenalstown €242.5K 6.2%, Tullow €273K 5.3%
+
+### CAVAN — Median €242,303 | Yield 5.2% | Growth 9.3% | 28 micro-areas
+Top STRONG BUY: Bawnboy €148.8K 9.9% (+32%), Blacklion €150K 9.8%, Arva €165K 8.6%, Belturbet €167K 8.5%, Killeshandra €180.7K 7.6%, Ballyconnell €200K 6.7%, Cavan Town €202.3K 6.6%
+
+### CLARE — Median €273,128 | Yield 5.2% | Growth 7.5% | 52 micro-areas
+Top STRONG BUY: Bodyke €75K 29.2% (+10.7%), Kilkishen €95K 21.1%, Kildysart €142.3K 12.3%, Mullagh €182.5K 8.8%, Doolin €202.5K 7.7%, Lisdoonvarna €207.5K 7.4%, Kilrush €250K 5.8%, Shannon €273.1K 5.2%
+
+### DONEGAL — Median €230,000 | Yield 5.0% | Growth 12.1% | 73 micro-areas
+Top STRONG BUY: Bunbeg €85K 18.6%, Killygordon €129.8K 10.5%, Lettermacaward €130K 10.5%, Annagry €130K 10.5%, Inishowen €139K 9.6%, Carrick €145K 9.1%, Convoy €149K 8.8%, Kilcar €150K 8.7%, Glenties €150K 8.7%
+
+### KILKENNY — Median €299,780 | Yield 4.8% | Growth 6.9% | 47 micro-areas
+Top STRONG BUY: Knocktopher €225K 7.0% (+19.3%), Ballyragget €230K 6.8%, Castlecomer €256K 5.9%, Fiddown €261K 5.8%, Waterford area €276.3K 5.3%, Johnstown €280.5K 5.2%
+
+### LAOIS — Median €330,396 | Yield 4.2% | Growth 11.1% | 36 micro-areas
+Top STRONG BUY: Rathdowney €146.7K 12.2% (+29.3%), Laois €220K 7.1%, Clonaslee €237.5K 6.4%, Ballylynan €243K 6.2%, Mountrath €248K 6.1%, Ballacolla €250K 6.0%, Mountmellick €266K 5.5%
+
+### LEITRIM — Median €242,000 | Yield 4.5% | Growth 13.2% | 24 micro-areas
+Top STRONG BUY: Drumkeeran €100K 14.4% (+14.1%), Drumsna €175K 6.8%, Leitrim Village €188K 6.2%, Rossinver €195K 5.9%, Mohill €195K 5.9%, Ballinamore €200K 5.7%, Dromahair €220K 5.1%
+
+### LONGFORD — Median €210,000 | Yield 5.4% | Growth 10.9% | 23 micro-areas
+Top STRONG BUY: Newtownforbes €112K 12.4% (Low risk), Moydow €160K 7.7%, Killoe €160.8K 7.7%, Kenagh €172.5K 7.0%, Ballinalee €175K 6.9%, Ballinamuck €184K 6.4%, Longford Town €195K 6.0%, Ballymahon €198K 5.9%
+
+### LOUTH — Median €348,017 | Yield 5.0% | Growth 9.6% | 30 micro-areas
+Top STRONG BUY: Armagh Rd €201K 10.3%, Omeath €280K 6.6%, Louth €297.5K 6.1%, Seafield Road €299.6K 6.1%, Louth Village €304K 6.0%, Carlingford €332.5K 5.3%, Dundalk €330.4K 5.3%, Clogherhead €340K 5.2%
+
+### MAYO — Median €216,250 | Yield 5.8% | Growth 7.6% | 36 micro-areas
+Top STRONG BUY: Main St €128K 11.6%, Hollymount €129K 11.5%, Kilkelly €140K 10.3%, Kiltimagh €147.5K 9.6%, Foxford €154K 9.1% (Low risk), Bohola €175K 7.7%, Knock €187.5K 7.0%, Ballina €197.5K 6.6% (Low risk), Ballinrobe €200K 6.5%, Belmullet €202K 6.4%
+
+### MONAGHAN — Median €163,000 | Yield 7.4% | Growth 1.7% | 16 micro-areas
+Top STRONG BUY: Clones €86K 17.1% (+11.4%), Scotstown €88.5K 16.5% (+28%), Newbliss €103.7K 13.3%, Ballybay €160K 7.5%, Emyvale €188K 6.1%, Scotshouse €210K 5.3%, Monaghan Town €217.5K 5.1%
+Note: Monaghan has highest county yield (7.4%) but lowest growth (1.7%) — best for income-focused investors.
+
+## QUICK COUNTY COMPARISON (for investors asking "where should I invest?")
+- Highest yield: Monaghan 7.4%, Mayo 5.8%, Limerick 5.8%, Dublin 5.5%
+- Fastest growing: Leitrim 13.2%, Donegal 12.1%, Donegal 12.1%, Westmeath 10.5%
+- Best value entry (low median price): Monaghan €163K, Longford €210K, Roscommon €210K, Mayo €216.3K
+- Best balanced (yield + growth): Roscommon, Sligo, Longford, Mayo, Cavan
+
+## RPZ (RENT PRESSURE ZONE) NOTE
+Some areas are designated Rent Pressure Zones by the RTB, limiting annual rent increases to 2%. RPZ status is flagged in the full county reports. This affects yield growth projections in those areas.
+
+## WHAT'S IN A REPORT (€29)
+- Full micro-area ranking table (all areas in the county)
+- Investment signal per area (STRONG BUY / BUY / MODERATE / HOLD / AVOID)
+- Median price, 5yr growth, gross yield, risk rating, transaction volume
+- Price trend chart (2010–2026)
+- Top 10 micro-areas bar chart
+- RPZ indicator per area
+- Methodology page
+- Instant PDF download via Gumroad
+
+## DISCLAIMER
+Always end responses involving specific investment recommendations with: "This is data-driven analysis, not financial advice. Always conduct your own due diligence."
+"""
+
+CHAT_WIDGET_HTML = """
+<div id="ipi-chat-bubble" onclick="toggleIpiChat()" title="Ask our property advisor">
+  💬
+  <span id="ipi-chat-badge" style="display:none;">1</span>
+</div>
+<div id="ipi-chat-window">
+  <div id="ipi-chat-header">
+    <span>🏠 IPI Property Advisor</span>
+    <button onclick="toggleIpiChat()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;padding:0;">✕</button>
+  </div>
+  <div id="ipi-chat-messages">
+    <div class="ipi-msg ipi-bot">Hi! I'm your IrishPropertyInsights advisor. Ask me about yields, investment signals, or any county — I have data on all 26 counties. 🏠</div>
+  </div>
+  <div id="ipi-chat-input-row">
+    <input id="ipi-chat-input" type="text" placeholder="e.g. best yields in Mayo?" onkeydown="if(event.key==='Enter')sendIpiMessage()" />
+    <button onclick="sendIpiMessage()">➤</button>
+  </div>
+</div>
+<style>
+#ipi-chat-bubble{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#1a6b3a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.25);z-index:9999;transition:transform .2s;}
+#ipi-chat-bubble:hover{transform:scale(1.1);}
+#ipi-chat-badge{position:absolute;top:-4px;right:-4px;background:#e74c3c;color:white;border-radius:50%;width:18px;height:18px;font-size:11px;display:flex;align-items:center;justify-content:center;}
+#ipi-chat-window{position:fixed;bottom:90px;right:24px;width:340px;height:480px;background:white;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.18);display:none;flex-direction:column;z-index:9998;overflow:hidden;font-family:system-ui,sans-serif;}
+#ipi-chat-header{background:#1a6b3a;color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px;}
+#ipi-chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.ipi-msg{max-width:85%;padding:10px 13px;border-radius:12px;font-size:13px;line-height:1.5;}
+.ipi-bot{background:#f0f4f0;color:#222;align-self:flex-start;border-bottom-left-radius:3px;}
+.ipi-user{background:#1a6b3a;color:white;align-self:flex-end;border-bottom-right-radius:3px;}
+.ipi-typing{background:#f0f4f0;color:#888;align-self:flex-start;font-style:italic;font-size:12px;padding:8px 13px;border-radius:12px;}
+#ipi-chat-input-row{display:flex;padding:10px;border-top:1px solid #eee;gap:8px;}
+#ipi-chat-input{flex:1;border:1px solid #ddd;border-radius:20px;padding:8px 14px;font-size:13px;outline:none;}
+#ipi-chat-input:focus{border-color:#1a6b3a;}
+#ipi-chat-input-row button{background:#1a6b3a;color:white;border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+@media(max-width:400px){#ipi-chat-window{width:calc(100vw - 32px);right:16px;}}
+</style>
+<script>
+var ipiChatOpen=false;
+var ipiHistory=[];
+function toggleIpiChat(){
+  ipiChatOpen=!ipiChatOpen;
+  document.getElementById('ipi-chat-window').style.display=ipiChatOpen?'flex':'none';
+  document.getElementById('ipi-chat-badge').style.display='none';
+  if(ipiChatOpen)document.getElementById('ipi-chat-input').focus();
+}
+function appendIpiMsg(text,cls){
+  var msgs=document.getElementById('ipi-chat-messages');
+  var div=document.createElement('div');
+  div.className='ipi-msg '+cls;
+  div.innerHTML=text.replace(/\\n/g,'<br>').replace(/\\*\\*(.*?)\\*\\*/g,'<strong>$1</strong>').replace(/\\[(.*?)\\]\\((.*?)\\)/g,'<a href="$2" target="_blank" style="color:#1a6b3a;">$1</a>');
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+async function sendIpiMessage(){
+  var input=document.getElementById('ipi-chat-input');
+  var text=input.value.trim();
+  if(!text)return;
+  input.value='';
+  appendIpiMsg(text,'ipi-user');
+  ipiHistory.push({role:'user',content:text});
+  var typing=appendIpiMsg('Thinking...','ipi-typing');
+  try{
+    var res=await fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:ipiHistory})});
+    var data=await res.json();
+    typing.remove();
+    var reply=data.reply||'Sorry, I could not get a response right now.';
+    appendIpiMsg(reply,'ipi-bot');
+    ipiHistory.push({role:'assistant',content:reply});
+  }catch(e){
+    typing.remove();
+    appendIpiMsg('Something went wrong. Please try again.','ipi-bot');
+  }
+}
+</script>
+"""
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    import json as _json
+    try:
+        data = request.get_json(force=True)
+        messages = data.get("messages", [])
+        if not messages:
+            return {"reply": "Hi! Ask me anything about Irish property investment."}, 200
+
+        api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+        if not api_key:
+            return {"reply": "Property advisor is currently unavailable. Please check back shortly."}, 200
+
+        headers = {
+            "x-api-key": api_key,
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json"
+        }
+        payload = {
+            "model": "claude-haiku-4-5-20251001",
+            "max_tokens": 400,
+            "system": CHATBOT_SYSTEM_PROMPT,
+            "messages": messages[-10:]  # keep last 10 turns to manage context
+        }
+        resp = requests.post(
+            "https://api.anthropic.com/v1/messages",
+            headers=headers,
+            json=payload,
+            timeout=20
+        )
+        if resp.status_code == 200:
+            reply = resp.json()["content"][0]["text"]
+        else:
+            reply = "I'm having trouble connecting right now. Please try again in a moment."
+        return {"reply": reply}, 200
+    except Exception as e:
+        return {"reply": "Something went wrong on my end. Please try again."}, 200
 
 
 if __name__ == "__main__":
