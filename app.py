@@ -1255,6 +1255,7 @@ async function submitExitPopup(){
       headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({email:em,county:co,type:'exit_intent_snapshot',message:'Exit intent snapshot: '+co+' by '+em})});
   }catch(e){}
+  try{await fetch('/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,county:co})});}catch(e){}
   closeExitPopup();
   showToast('✓ Downloading your '+co+' snapshot...');
   setTimeout(function(){window.location.href='/snapshot?county='+encodeURIComponent(co);},600);
