@@ -657,7 +657,228 @@ def build_pdf_report(analysis, is_snapshot=False):
     chart_h = max(7, display_n * 0.85) * cm
     elements.append(Image(areas_chart_buf, width=16 * cm, height=chart_h))
 
-    # ── PAGE 2: Ranking Table ──
+    # ── PAGE 2: DECISION PAGE (Top 5 Investment Picks) ──
+    if not is_snapshot:
+        elements.append(PageBreak())
+        elements.append(Paragraph(
+            f"Where to Invest in {county} — {datetime.date.today().strftime('%B %Y')}",
+            s_title
+        ))
+        elements.append(HRFlowable(width="100%", thickness=2, color=C_GREEN, spaceAfter=12))
+        elements.append(Paragraph(
+            f"Based on analysis of {analysis['num_areas']} micro-areas using 15 years of PPR transactions "
+            f"and RTB Q2 2025 rental data, these are the top investment picks in {county} right now.",
+            s_body
+        ))
+        elements.append(Spacer(1, 8))
+
+        # Top 5 decision table
+        top5 = micro_df.head(5)
+        decision_header = ["Rank", "Area", "Yield", "Growth", "Risk", "Action"]
+        decision_rows = [decision_header]
+        for i, (_, row) in enumerate(top5.iterrows(), 1):
+            sig = row["signal"]
+            if sig in ("HIGH POTENTIAL", "GOOD PROSPECT"):
+                action = "BUY"
+            elif sig == "MODERATE POTENTIAL":
+                action = "WATCH"
+            else:
+                action = "HOLD"
+            decision_rows.append([
+                str(i),
+                str(row["area"])[:28],
+                f"{row['gross_yield']:.1f}%",
+                f"{row['growth_5yr']:+.1f}%",
+                row["risk"],
+                action,
+            ])
+
+        dec_col_w = [1.0*cm, 5.0*cm, 2.2*cm, 2.2*cm, 2.2*cm, 3.4*cm]
+        dec_tbl = Table(decision_rows, colWidths=dec_col_w, repeatRows=1)
+
+        dec_style = [
+            ("BACKGROUND", (0, 0), (-1, 0), C_DARK),
+            ("TEXTCOLOR", (0, 0), (-1, 0), C_WHITE),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, 0), 9),
+            ("FONTSIZE", (0, 1), (-1, -1), 9),
+            ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
+            ("TOPPADDING", (0, 0), (-1, -1), 8),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ("LEFTPADDING", (0, 0), (-1, -1), 6),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+            ("GRID", (0, 0), (-1, -1), 0.5, C_BORDER),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("ALIGN", (0, 0), (0, -1), "CENTER"),
+            ("ALIGN", (2, 0), (4, -1), "CENTER"),
+            ("ALIGN", (5, 0), (5, -1), "CENTER"),
+            ("ROWBACKGROUNDS", (0, 1), (-1, -1), [C_WHITE, C_LIGHT]),
+        ]
+
+        # Color-code the Action column
+        for i, row in enumerate(decision_rows[1:], start=1):
+            action = row[5]
+            if action == "BUY":
+                dec_style.append(("TEXTCOLOR", (5, i), (5, i), C_GREEN))
+                dec_style.append(("FONTNAME", (5, i), (5, i), "Helvetica-Bold"))
+            elif action == "WATCH":
+                dec_style.append(("TEXTCOLOR", (5, i), (5, i), C_GOLD))
+                dec_style.append(("FONTNAME", (5, i), (5, i), "Helvetica-Bold"))
+            elif action == "HOLD":
+                dec_style.append(("TEXTCOLOR", (5, i), (5, i), C_GRAY))
+
+        dec_tbl.setStyle(TableStyle(dec_style))
+        elements.append(dec_tbl)
+        elements.append(Spacer(1, 16))
+
+        # ── WHY THESE AREAS (explanations for top 5) ──
+        elements.append(Paragraph("Why These Areas Stand Out", s_h2))
+        elements.append(HRFlowable(width="100%", thickness=1, color=C_BORDER, spaceAfter=10))
+
+        for i, (_, row) in enumerate(top5.iterrows(), 1):
+            area_name = str(row["area"])
+            yld = row["gross_yield"]
+            growth = row["growth_5yr"]
+            risk = row["risk"]
+            price = row["median_price"]
+            txns = row["transactions"]
+            sig = row["signal"]
+            rpz = is_rpz(area_name)
+
+            elements.append(Paragraph(f"{i}. {area_name}", s_h3))
+
+            # Build explanation dynamically based on data
+            reasons = []
+            if yld >= 10:
+                reasons.append(f"Exceptionally high estimated yield of {yld:.1f}%, well above the county average of {analysis['county_yield']:.1f}%")
+            elif yld >= 7:
+                reasons.append(f"Strong estimated yield of {yld:.1f}%, significantly above the county average of {analysis['county_yield']:.1f}%")
+            elif yld >= 5:
+                reasons.append(f"Solid estimated yield of {yld:.1f}%, above the county average of {analysis['county_yield']:.1f}%")
+
+            if growth >= 10:
+                reasons.append(f"Exceptional 5-year growth of {growth:+.1f}%, indicating strong upward momentum")
+            elif growth >= 5:
+                reasons.append(f"Healthy 5-year growth of {growth:+.1f}%, showing consistent price appreciation")
+            elif growth >= 0:
+                reasons.append(f"Modest 5-year growth of {growth:+.1f}%, suggesting price stability")
+
+            if risk == "Low":
+                reasons.append("Low risk profile — stable transaction volumes and consistent pricing")
+            elif risk == "Medium":
+                reasons.append("Medium risk profile — some price variation but adequate transaction volume")
+
+            if price < analysis["latest_median"] * 0.7:
+                reasons.append(f"Affordable entry point at €{price:,.0f} — significantly below the county median of €{analysis['latest_median']:,.0f}")
+
+            if rpz:
+                reasons.append("Located in a Rent Pressure Zone (RPZ) — annual rent increases capped at 2%")
+
+            if txns >= 100:
+                reasons.append(f"High transaction volume ({txns} sales) — liquid market with reliable data")
+
+            for reason in reasons:
+                elements.append(Paragraph(f"•  {reason}", s_body))
+
+            # Investor take
+            if sig in ("HIGH POTENTIAL", "GOOD PROSPECT") and risk == "Low":
+                take = f"One of the strongest combinations of yield and stability in {county}. Suitable for investors seeking reliable cash flow with lower risk."
+            elif sig in ("HIGH POTENTIAL", "GOOD PROSPECT") and growth >= 10:
+                take = f"Strong growth momentum combined with attractive yield. Higher risk tolerance required, but upside potential is significant."
+            elif sig in ("HIGH POTENTIAL", "GOOD PROSPECT"):
+                take = f"Solid investment fundamentals across yield, growth, and risk. Worth prioritising for further due diligence."
+            else:
+                take = f"Shows promise on key metrics. Consider alongside local market conditions and personal investment criteria."
+
+            elements.append(Spacer(1, 4))
+            elements.append(Paragraph(
+                f'<b>Investor take:</b> <i>{take}</i>',
+                ParagraphStyle("Take", parent=s_body, fontSize=9, textColor=HexColor("#1E293B"), leading=13)
+            ))
+            elements.append(Spacer(1, 10))
+
+        # ── AREAS TO AVOID ──
+        elements.append(PageBreak())
+        elements.append(Paragraph("Areas to Approach with Caution", s_h2))
+        elements.append(HRFlowable(width="100%", thickness=1, color=C_BORDER, spaceAfter=10))
+        elements.append(Paragraph(
+            f"Not every micro-area in {county} is suitable for investment. Based on our analysis, "
+            f"these areas show warning signs that investors should be aware of.",
+            s_body
+        ))
+        elements.append(Spacer(1, 8))
+
+        # Find bottom areas (CAUTION/HOLD signals, or negative growth + high risk)
+        avoid_df = micro_df[micro_df["signal"].isin(["CAUTION", "HOLD"])].head(5)
+        if len(avoid_df) == 0:
+            avoid_df = micro_df.tail(5)
+
+        avoid_header = ["Area", "Yield", "Growth", "Risk", "Signal", "Concern"]
+        avoid_rows = [avoid_header]
+        for _, row in avoid_df.iterrows():
+            concerns = []
+            if row["growth_5yr"] < -5:
+                concerns.append("Sharp price decline")
+            elif row["growth_5yr"] < 0:
+                concerns.append("Negative growth")
+            if row["risk"] == "High":
+                concerns.append("High volatility")
+            if row["transactions"] < 10:
+                concerns.append("Thin market")
+            if row["gross_yield"] < 3 and row["median_price"] > analysis["latest_median"] * 1.5:
+                concerns.append("Low yield, premium price")
+            if not concerns:
+                concerns.append("Weak fundamentals")
+
+            avoid_rows.append([
+                str(row["area"])[:25],
+                f"{row['gross_yield']:.1f}%",
+                f"{row['growth_5yr']:+.1f}%",
+                row["risk"],
+                row["signal"],
+                "; ".join(concerns[:2]),
+            ])
+
+        avoid_col_w = [3.8*cm, 1.6*cm, 1.8*cm, 1.6*cm, 2.8*cm, 4.4*cm]
+        avoid_tbl = Table(avoid_rows, colWidths=avoid_col_w, repeatRows=1)
+
+        avoid_style = [
+            ("BACKGROUND", (0, 0), (-1, 0), HexColor("#7F1D1D")),
+            ("TEXTCOLOR", (0, 0), (-1, 0), C_WHITE),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, 0), 8),
+            ("FONTSIZE", (0, 1), (-1, -1), 8),
+            ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
+            ("TOPPADDING", (0, 0), (-1, -1), 6),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+            ("LEFTPADDING", (0, 0), (-1, -1), 4),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+            ("GRID", (0, 0), (-1, -1), 0.5, C_BORDER),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("ALIGN", (1, 0), (-1, -1), "CENTER"),
+            ("ALIGN", (0, 0), (0, -1), "LEFT"),
+            ("ALIGN", (5, 0), (5, -1), "LEFT"),
+            ("ROWBACKGROUNDS", (0, 1), (-1, -1), [C_WHITE, HexColor("#FEF2F2")]),
+        ]
+        avoid_tbl.setStyle(TableStyle(avoid_style))
+        elements.append(avoid_tbl)
+
+        elements.append(Spacer(1, 14))
+        elements.append(Paragraph(
+            "<b>Why these areas score poorly:</b> A combination of negative price growth, high price volatility, "
+            "thin transaction volumes, or low rental yield relative to purchase price. These factors increase "
+            "investment risk and reduce the likelihood of strong returns.",
+            s_body
+        ))
+        elements.append(Spacer(1, 10))
+        elements.append(Paragraph(
+            "<b>Important:</b> A caution signal does not mean an area will never be a good investment. "
+            "Local knowledge, upcoming developments, or personal circumstances may change the picture. "
+            "Use this as a starting filter, not a final verdict.",
+            ParagraphStyle("Caveat", parent=s_body, fontSize=8.5, textColor=C_GRAY, leading=12)
+        ))
+
+    # ── RANKING TABLE PAGE ──
     elements.append(PageBreak())
     elements.append(Paragraph("Micro-Area Ranking Table", s_h2))
 
@@ -1278,7 +1499,7 @@ async function submitExitPopup(){
 
       <!-- Headline -->
       <h1 style="font-family:var(--fd);font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:700;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.25rem;text-align:left;">
-        Find the Most Profitable<br>Rental Areas in <em style="font-style:italic;color:var(--green);">Ireland</em>
+        Where to Invest in Irish Property —<br>Backed by <em style="font-style:italic;color:var(--green);">Real Data</em>
       </h1>
 
       <!-- Sub-headline -->
