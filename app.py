@@ -1504,15 +1504,15 @@ async function submitExitPopup(){
 
       <!-- Sub-headline -->
       <p style="font-size:1.05rem;color:var(--t2);max-width:460px;margin:0 0 2rem;line-height:1.65;text-align:left;">
-        Every micro-area across all 26 counties ranked by yield, growth &amp; risk — from official government data.
+        Discover the strongest rental investment areas across Ireland — ranked by yield, growth, and risk.
       </p>
 
       <!-- CTAs -->
       <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
-        <a href="#snap" class="bp" style="font-size:1rem;padding:.9rem 2rem;">Get Free Snapshot →</a>
-        <a href="#reports" class="bs" style="padding:.9rem 1.6rem;">Full Report — €29</a>
+        <a href="#snap" class="bp" style="font-size:1rem;padding:.9rem 2rem;">See Best Areas Now →</a>
+        <a href="#reports" class="bs" style="padding:.9rem 1.6rem;">Unlock Full Report — €29</a>
       </div>
-      <p style="font-size:0.78rem;color:var(--t3);">No credit card · Based on 727,000+ verified transactions</p>
+      <p style="font-size:0.78rem;color:var(--t3);">No credit card for snapshot • Built from 727,000+ real transactions</p>
 
       <!-- Trust pills -->
       <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1.75rem;">
@@ -1520,6 +1520,12 @@ async function submitExitPopup(){
         <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ All 26 counties</span>
         <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">✓ Official data only</span>
         <span style="padding:.35rem .8rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:6px;font-size:0.78rem;color:var(--green);font-weight:500;">🗓 Updated Q2 2025</span>
+      </div>
+
+      <!-- Decision strip -->
+      <div style="margin-top:1.5rem;padding:.7rem 1rem;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:10px;text-align:left;">
+        <p style="font-size:.72rem;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:.35rem;">Top Dublin areas right now</p>
+        <p style="font-size:.88rem;color:var(--t1);font-weight:500;">Snugborough Rd <span style="color:var(--green);font-weight:700;">13.6%</span> &nbsp;•&nbsp; Ballymun <span style="color:var(--green);font-weight:700;">13.2%</span> &nbsp;•&nbsp; Clondalkin <span style="color:var(--green);font-weight:700;">11.9%</span> &nbsp;<span style="font-size:.75rem;color:var(--t3);">est. gross yield</span></p>
       </div>
     </div>
 
